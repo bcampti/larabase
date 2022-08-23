@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Bcampti\Larabase\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LarabaseCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'larabase';
 
     public $description = 'My command';
 
