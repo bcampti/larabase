@@ -1,0 +1,8 @@
+Route::prefix('{{ prefix }}')->group(function(){
+    Route::match(['get','post'], '/', [{{ model }}Controller::class, 'index'])->name('{{ routeModelName }}.index');
+    Route::get('cadastrar', [{{ model }}Controller::class, 'create'])->name('{{ routeModelName }}.create');
+    Route::post('salvar', [{{ model }}Controller::class, 'store'])->name('{{ routeModelName }}.store');
+    Route::get('alterar/{id}', [{{ model }}Controller::class, 'edit'])->name('{{ routeModelName }}.edit');
+    Route::put('update/{id}', [{{ model }}Controller::class, 'update'])->name('{{ routeModelName }}.update');
+    Route::delete('excluir/{id}', [{{ model }}Controller::class, 'destroy'])->name('{{ routeModelName }}.destroy');
+});

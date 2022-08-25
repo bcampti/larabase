@@ -1,0 +1,89 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Enums\StatusEnum;
+use App\Exceptions\GenericMessage;
+use {{ namespacedModel }};
+use {{ rootNamespace }}Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use {{ repositoryNamespace }};
+use {{ requestNamespace }};
+
+class {{ class }} extends Controller
+{
+    private ${{ modelVariable }}Manager;
+	
+	public function __construct()
+	{
+		$this->{{ modelVariable }}Manager = new {{ model }}Manager();
+	}
+	
+	public function index(Request $request)
+    {
+		$filtro = $this->{{ modelVariable }}Manager->paginate($request);
+
+		return view("{{ modelVariable }}.listar", compact("filtro"));
+	}
+
+	public function formulario( {{ model }} ${{ modelVariable }})
+    {
+		if( old() ){
+		    ${{ modelVariable }}->fill(old());
+		}
+		return view("{{ modelVariable }}.formulario", compact("{{ modelVariable }}"));
+	}
+
+	public function create()
+	{
+		${{ modelVariable }} = new {{ model }}();
+		${{ modelVariable }}->status = StatusEnum::ATIVO;
+
+		return $this->formulario(${{ modelVariable }});
+	}
+
+	public function store({{ model }}Request $request)
+    {
+		${{ modelVariable }} = new {{ model }}($request->validated());
+		
+		${{ modelVariable }} = $this->{{ modelVariable }}Manager->salvar(${{ modelVariable }});
+		
+		return redirect(route("{{ routeModelName }}.edit", [${{ modelVariable }}->id]))->with(GenericMessage::INSERT_SUCCESS);
+	}
+
+	public function edit( $id )
+	{
+		${{ modelVariable }} = $this->{{ modelVariable }}Manager->findOrFail($id);
+		
+		return $this->formulario(${{ modelVariable }});
+	}
+
+	public function update({{ model }}Request $request, $id)
+    {
+		${{ modelVariable }} = new {{ model }}();
+		${{ modelVariable }} = $this->{{ modelVariable }}Manager->findOrFail($id);
+		${{ modelVariable }}->fill($request->validated());
+
+		${{ modelVariable }} = $this->{{ modelVariable }}Manager->salvar(${{ modelVariable }});
+		
+		return redirect(route("{{ routeModelName }}.edit", [${{ modelVariable }}->id]))->with(GenericMessage::UPDATE_SUCCESS);
+	}
+	
+	public function destroy($id)
+    {
+		if( !request()->has("password") || is_empty(request("password")) ){
+			return back()->with(GenericMessage::PASSWORD_REQUIRED);
+		}
+		if( !Hash::check(request("password"), auth()->user()->password) ){
+			return back()->with(GenericMessage::PASSWORD_BAD);
+		}
+		
+		${{ modelVariable }} = $this->{{ modelVariable }}Manager->findOrFail($id);
+		
+		$this->{{ modelVariable }}Manager->excluir(${{ modelVariable }}->id);
+
+		return redirect(route("{{ routeModelName }}.index"))->with(GenericMessage::DELETE_SUCCESS);
+	}
+
+}

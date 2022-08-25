@@ -1,0 +1,75 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+use {{ namespacedFormStore }};
+use {{ namespacedFormUpdate }};
+use App\Utils\Permissao\PacoteCollection;
+use Tests\TestCase;
+
+class {{ class }} extends TestCase
+{
+    public function test_model_{{ snakeModelName }}_can_be_instantiated()
+    {
+        ${{ modelVariable }} = {{ model }}::factory()->make(["nome"=>"Informe um valor"]);
+
+        $this->assertNotEmpty(${{ modelVariable }}->nome);
+    }
+
+    public function test_check_if_model_{{ snakeModelName }}_fillable_columns_is_match()
+    {
+        ${{ modelVariable }} = new {{ model }}();
+        $expected = [
+            "nome",
+            "status",
+        ];
+        $this->assertFillable($expected, ${{ modelVariable }}->getFillable());
+    }
+
+    public function test_check_if_form_request_store_{{ snakeModelName }}_fillable_columns_is_match()
+    {
+        ${{ modelVariable }} = new {{ model }}();
+        $expected = ${{ modelVariable }}->getFillable();
+
+        $form = new {{ formStore }}();
+        $actual = array_keys($form->rules());
+
+        $this->assertFillable($expected, $actual);
+    }
+
+    public function test_check_if_form_request_update_{{ snakeModelName }}_fillable_columns_is_match()
+    {
+        ${{ modelVariable }} = new {{ model }}();
+        $expected = ${{ modelVariable }}->getFillable();
+
+        $form = new {{ formUpdate }}();
+        $actual = array_keys($form->rules());
+
+        $this->assertFillable($expected, $actual);
+    }
+
+    public function test_check_if_{{ snakeModelName }}_has_permissions_assigned()
+    {
+        $permissoesModulo = PacoteCollection::getPermissoesModel("{{ routeModelName }}");
+
+        $permissoes = [
+            "{{ routeModelName }}",
+            "{{ routeModelName }}.create",
+            "{{ routeModelName }}.edit",
+            "{{ routeModelName }}.destroy",
+        ];
+
+        $arrayCompared = array_diff($permissoesModulo, $permissoes);
+        $this->assertEquals(0, count($arrayCompared), "O numero de permissoes não confere <> [".implode(", ",$arrayCompared)."]");
+
+        $arrayCompared = array_diff($permissoes, $permissoesModulo);
+        $this->assertEquals(0, count($arrayCompared), "O numero de permissoes não confere <> [".implode(", ",$arrayCompared)."]");
+
+        $this->assertContains("{{ routeModelName }}", $permissoesModulo);
+        $this->assertContains("{{ routeModelName }}.create", $permissoes);
+        $this->assertContains("{{ routeModelName }}.edit", $permissoes);
+        $this->assertContains("{{ routeModelName }}.destroy", $permissoes);
+    }
+
+}

@@ -1,0 +1,38 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Enums\StatusEnum;
+use App\Models\TenantModel;
+use App\Traits\HasOrganizacao;
+use App\Traits\HasUsuarioAlteracao;
+use App\Traits\HasUsuarioCriacao;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class {{ class }} extends TenantModel
+{
+	use HasOrganizacao;
+	use HasUsuarioCriacao;
+	use HasUsuarioAlteracao;
+	use HasFactory;
+
+    protected $table = "{{ table }}";
+
+    protected $fillable = [
+		"nome",
+		"status",
+	];
+
+	protected $casts = [
+		"nome"=>"string",
+		
+		"status"=>StatusEnum::class,
+		"id_organizacao"=>"integer",
+		"created_at"=>"datetime",
+		"id_usuario_criacao"=>"integer",
+		"updated_at"=>"datetime",
+		"id_usuario_alteracao"=>"integer",
+	];
+
+}

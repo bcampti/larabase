@@ -1,0 +1,167 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Enums\StatusEnum;
+use App\Exceptions\GenericMessage;
+use {{ namespacedModel }};
+use Illuminate\Http\Response;
+use Tests\TenantTestCase;
+
+class {{ class }} extends TenantTestCase
+{
+    public function test_unauthenticated_user_cannot_access_{{ snakeModelName }}_controller()
+    {
+        $response = $this->get(route("{{ routeModelName }}.index"));
+        $response->assertRedirect("/login")
+                ->assertStatus(Response::HTTP_FOUND);
+
+        $response = $this->post(route("{{ routeModelName }}.index"));
+        $response->assertRedirect("/login")
+                ->assertStatus(Response::HTTP_FOUND);
+
+        $response = $this->get(route("{{ routeModelName }}.create"));
+        $response->assertRedirect("/login")
+                ->assertStatus(Response::HTTP_FOUND);
+
+        $response = $this->post(route("{{ routeModelName }}.store"));
+        $response->assertRedirect("/login")
+                ->assertStatus(Response::HTTP_FOUND);
+
+        $response = $this->get(route("{{ routeModelName }}.edit", 1));
+        $response->assertRedirect("/login")
+                ->assertStatus(Response::HTTP_FOUND);
+
+        $response = $this->put(route("{{ routeModelName }}.update", 1));
+        $response->assertRedirect("/login")
+                ->assertStatus(Response::HTTP_FOUND);
+
+        $response = $this->delete(route("{{ routeModelName }}.destroy", 1));
+        $response->assertRedirect("/login")
+                ->assertStatus(Response::HTTP_FOUND);
+    }
+
+/** UTILIZADO PARA TESTAR ACESSO EM AREA RESTRITA PRA USUARIOS SUPORTE
+    public function test_authenticated_cliente_user_cannot_access_{{ snakeModelName }}_controller()
+    {
+        $this->loginUserCliente();
+
+        $response = $this->actingAs($this->user)->get(route("{{ routeModelName }}.index"));
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+
+        $response = $this->actingAs($this->user)->post(route("{{ routeModelName }}.index"), ["{{ modelVariable }}[status]"=>StatusEnum::ATIVO]);
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+
+        $response = $this->actingAs($this->user)->post(route("{{ routeModelName }}.store"));
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+
+        $response = $this->actingAs($this->user)->get(route("{{ routeModelName }}.edit", 1));
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+
+        $response = $this->actingAs($this->user)->put(route("{{ routeModelName }}.update", 1));
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+
+        $response = $this->actingAs($this->user)->delete(route("{{ routeModelName }}.destroy", 1));
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED);
+    }
+**/
+
+    public function test_can_cliente_user_access_{{ snakeModelName }}_controller_index()
+    {
+        $this->loginUserCliente();
+
+        $response = $this->actingAs($this->user)->get(route("{{ routeModelName }}.index"));
+        $response->assertStatus(Response::HTTP_OK);
+
+        $response = $this->actingAs($this->user)->post(route("{{ routeModelName }}.index"), ["{{ modelVariable }}[status]"=>StatusEnum::ATIVO]);
+        $response->assertStatus(Response::HTTP_OK);
+    }
+
+    public function test_can_cliente_user_access_{{ snakeModelName }}_controller_create()
+    {
+        $this->loginUserCliente();
+
+        $response = $this->actingAs($this->user)->get(route("{{ routeModelName }}.create"));
+        $response->assertStatus(Response::HTTP_OK);
+    }
+
+    public function test_can_cliente_user_access_{{ snakeModelName }}_controller_store()
+    {
+        $this->loginUserCliente();
+
+        $response = $this->actingAs($this->user)
+                        ->post(route("{{ routeModelName }}.store"),
+                        [
+                            "nome"=>"Nome {{ model }}",
+                            "status"=>StatusEnum::ATIVO
+                        ]);
+
+        $response->assertSessionHasNoErrors();
+        $response->assertSessionHas("mensagem.tipo", GenericMessage::TIPO_SUCESSO);
+
+        $this->assertDatabaseHas("tb_{{ snakeModelName }}", ["nome"=>"Nome {{ model }}"],"tenant");
+    }
+    
+    public function test_can_cliente_user_access_{{ snakeModelName }}_controller_edit()
+    {
+        $this->loginUserCliente();
+
+        //${{ modelVariable }} = {{ model }}::forceCreate(["nome"=>"{{ model }} Edit","status"=>StatusEnum::ATIVO,"id_usuario_criacao"=>$this->user->id]);
+        ${{ modelVariable }} = {{ model }}::first();
+        $this->assertNotNull(${{ modelVariable }});
+        
+        $response = $this->actingAs($this->user)
+                        ->get(route("{{ routeModelName }}.edit", ${{ modelVariable }}->id));
+
+        $response->assertSessionHasNoErrors()
+                    ->assertSessionMissing("mensagem")
+                    ->assertStatus(Response::HTTP_OK);
+    }
+    
+    public function test_can_cliente_user_access_{{ snakeModelName }}_controller_update()
+    {
+        $this->loginUserCliente();
+
+        //${{ modelVariable }} = {{ model }}::forceCreate(["nome"=>"{{ model }} Update","status"=>StatusEnum::ATIVO,"id_usuario_criacao"=>$this->user->id]);
+        ${{ modelVariable }} = {{ model }}::first();
+        $this->assertNotNull(${{ modelVariable }});
+
+        $dados = array_filter(${{ modelVariable }}->toArray(), function($value){
+                    return !is_null($value);
+                });
+
+        $dados = array_merge($dados, [
+                    "nome"=>"{{ model }} Updated",
+                ]);
+        $response = $this->actingAs($this->user)
+                        ->put(route("{{ routeModelName }}.update", ${{ modelVariable }}->id), $dados);
+
+        $response->assertSessionHasNoErrors();
+        $response->assertSessionHas("mensagem.tipo", GenericMessage::TIPO_SUCESSO);
+        
+        $this->assertDatabaseHas("tb_{{ snakeModelName }}", [
+            "id" => ${{ modelVariable }}->id,
+            "nome" => "{{ model }} Updated",
+        ], "tenant");
+    }
+        
+    public function test_can_cliente_user_access_{{ snakeModelName }}_controller_destroy()
+    {
+        $this->loginUserCliente();
+
+        //${{ modelVariable }} = {{ model }}::forceCreate(["nome"=>"{{ model }} Destroy","status"=>StatusEnum::ATIVO,"id_usuario_criacao"=>$this->user->id]);
+        ${{ modelVariable }} = {{ model }}::first();
+        $this->assertNotNull(${{ modelVariable }});
+
+        $response = $this->actingAs($this->user)
+                        ->delete(route("{{ routeModelName }}.destroy", ${{ modelVariable }}->id), ["password"=>"password"]);
+
+        $response->assertSessionHasNoErrors()
+                ->assertSessionHas("mensagem.tipo", GenericMessage::TIPO_SUCESSO)
+                ->assertStatus(Response::HTTP_FOUND)
+                ->assertRedirect(route("{{ routeModelName }}.index"));
+                
+        $this->assertDeleted(${{ modelVariable }},[],"tenant");
+    }
+    
+}
