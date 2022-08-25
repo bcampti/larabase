@@ -33,7 +33,10 @@
         "psr-4": {
             "Bcampti\\Larabase\\": "src",
             "Bcampti\\Larabase\\Database\\Factories\\": "database/factories"
-        }
+        },
+		"files": [
+			"src/Utils/helpers.php"
+		]
     },
     "autoload-dev": {
         "psr-4": {
