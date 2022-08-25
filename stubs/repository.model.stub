@@ -1,0 +1,45 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+use {{ rootNamespace }}Repositories\Core\PaginateInterface;
+use {{ rootNamespace }}Repositories\Core\TenantManager;
+use {{ filtroNamespace }};
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+class {{ class }} extends TenantManager implements PaginateInterface
+{
+	protected $class_model = {{ model }}::class;
+
+	public function paginate(Request $request)
+	{
+	    $filtro = new {{ model }}Filtro($request);
+	    
+		$query = $this->getQuery($filtro->{{ modelVariable }});
+		
+		$query->when($filtro->search, function ($query) use ($filtro) {
+			$query->where(function($q) use ($filtro) {
+				$q->whereRaw("lower(nome) like '".Str::lower($filtro->search)."%'");
+					//->orWhere("status", "like", Str::lower($filtro->search)."%");
+			});
+		});
+		
+		$filtro->setTotal($query->count());
+		
+		if( !empty($filtro->orderBy) ){
+			$query->orderBy( $filtro->orderBy, $filtro->direcao );
+		}
+		if( $filtro->orderBy != "id" ){
+		    $query->orderBy("id");
+		}
+		$query->offset($filtro->inicio)->limit( $filtro->limit )
+				->select($this->newInstance()->getTable().".*");
+		
+		$filtro->setItems($query->get());
+		
+		return $filtro;
+	}
+
+}

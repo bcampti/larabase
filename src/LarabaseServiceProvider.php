@@ -4,7 +4,6 @@ namespace Bcampti\Larabase;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Bcampti\Larabase\Commands\LarabaseCommand;
 use Bcampti\Larabase\Commands\LarabaseHelpCommand;
 use Bcampti\Larabase\Commands\LarabaseMakerCommand;
 use Bcampti\Larabase\Commands\Make\LarabaseAllMakeCommand;
@@ -52,4 +51,16 @@ class LarabaseServiceProvider extends PackageServiceProvider
             //->hasAssets()
             //->hasRoute('web')
     }
+
+    public function boot()
+    {
+        parent::boot();
+
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                $this->package->basePath('/../stubs') => base_path("stubs"),
+            ], "{$this->package->shortName()}-stubs");
+        }
+    }
+
 }
