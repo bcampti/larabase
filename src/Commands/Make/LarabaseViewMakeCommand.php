@@ -14,7 +14,7 @@ class LarabaseViewMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'larabase:view';
+    protected $name = 'larabase:view {name}';
 
     /**
      * The console command description.

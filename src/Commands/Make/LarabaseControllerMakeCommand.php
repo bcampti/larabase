@@ -12,7 +12,7 @@ class LarabaseControllerMakeCommand extends ConsoleControllerMakeCommand
      *
      * @var string
      */
-    protected $name = 'larabase:controller';
+    protected $name = 'larabase:controller {name}';
 
     
     /**
