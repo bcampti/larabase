@@ -6,9 +6,9 @@ use Illuminate\Console\Command;
 
 class LarabaseCommand extends Command
 {
-    public $signature = 'larabase';
+    public $signature = 'larabase:install';
 
-    public $description = 'My command';
+    public $description = 'Instala a configuração inicial e de login para multi-tenancy';
 
     public function handle(): int
     {

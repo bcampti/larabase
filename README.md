@@ -20,6 +20,15 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 
 ## Installation
 
+Adicionar no composer.json o repositorio do pacote.
+```bash
+"repositories": [
+    {
+        "type": "vcs",
+        "url":  "git@github.com:bcampti/larabase.git"
+    }
+]
+```
 You can install the package via composer:
 
 ```bash
