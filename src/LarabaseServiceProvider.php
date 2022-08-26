@@ -5,6 +5,7 @@ namespace Bcampti\Larabase;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Bcampti\Larabase\Commands\LarabaseHelpCommand;
+use Bcampti\Larabase\Commands\LarabaseInstallerCommand;
 use Bcampti\Larabase\Commands\LarabaseMakerCommand;
 use Bcampti\Larabase\Commands\Make\LarabaseAllMakeCommand;
 use Bcampti\Larabase\Commands\Make\LarabaseControllerMakeCommand;
@@ -31,17 +32,18 @@ class LarabaseServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasMigration('create_larabase_table')
             ->hasCommands([
+                LarabaseInstallerCommand::class,
                 LarabaseHelpCommand::class,
                 LarabaseMakerCommand::class,
-                LarabaseAllMakeCommand::class,
-                LarabaseControllerMakeCommand::class,
-                LarabaseFiltroMakeCommand::class,
                 LarabaseModelMakeCommand::class,
+                LarabaseFiltroMakeCommand::class,
                 LarabaseRepositoryMakeCommand::class,
-                LarabaseRequestMakeCommand::class,
                 LarabaseRouteMakeCommand::class,
-                LarabaseTestMakeCommand::class,
+                LarabaseControllerMakeCommand::class,
+                LarabaseRequestMakeCommand::class,
                 LarabaseViewMakeCommand::class,
+                LarabaseTestMakeCommand::class,
+                LarabaseAllMakeCommand::class,
             ]);
 
             //->hasViewComponent('spatie', Alert::class)
