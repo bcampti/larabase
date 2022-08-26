@@ -3,12 +3,14 @@
 namespace Bcampti\Larabase\Commands;
 
 use Bcampti\Larabase\Presets\Traits\AuthTrait;
+use Bcampti\Larabase\Presets\Traits\ScopeTrait;
 use Bcampti\Larabase\Presets\Traits\StubTrait;
 use Illuminate\Console\Command;
 
 class LarabaseInstallerCommand extends Command
 {
     use AuthTrait;
+    use ScopeTrait;
     use StubTrait;
     
     public $signature = 'larabase:install';
