@@ -19,12 +19,12 @@ trait ScopeTrait
             'app/Scopes/OrganizacaoScope.php',
         ];
 
-        $this->publishFiles($controllers);
+        $this->publishFilesScopes($controllers);
 
         return $this;
     }
 
-    protected function publishFiles(array $files): void
+    protected function publishFilesScopes(array $files): void
     {
         foreach ($files as $file) {
             $publishPath = base_path($file);
