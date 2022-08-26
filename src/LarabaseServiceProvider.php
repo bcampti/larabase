@@ -58,7 +58,7 @@ class LarabaseServiceProvider extends PackageServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                $this->package->basePath('/../stubs') => base_path("stubs"),
+                $this->package->basePath('/../stubs/stubs') => base_path("stubs"),
             ], "{$this->package->shortName()}-stubs");
         }
     }
