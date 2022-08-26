@@ -13,7 +13,7 @@ class LarabaseRequestMakeCommand extends ConsoleRequestMakeCommand
      *
      * @var string
      */
-    protected $name = 'larabase:request';
+    protected $name = 'larabase:request {name}';
 
     /**
      * The console command description.

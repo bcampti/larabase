@@ -14,14 +14,14 @@ class LarabaseViewMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'larabase:view';
+    protected $name = 'larabase:view {name}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create views. Ex.: php artisan larabase:view BladeName --model=Locale/Pais - Default BladeName=[listar,formulario,index,form]';
+    protected $description = 'Create views. Default BladeName=[listar,formulario]. Ex.: php artisan larabase:view listar --model=Locale/Pais, php artisan larabase:view formulario --model=Locale/Pais';
 
     /**
      * The type of class being generated.

@@ -13,7 +13,7 @@ class LarabaseModelMakeCommand extends ConsoleModelMakeCommand
      *
      * @var string
      */
-    protected $name = 'larabase:model';
+    protected $name = 'larabase:model {name}';
     
     /**
      * Build the class with the given name.

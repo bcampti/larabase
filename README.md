@@ -1,22 +1,6 @@
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
-
-# This is my package larabase
-
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/bcampti/larabase.svg?style=flat-square)](https://packagist.org/packages/bcampti/larabase)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/bcampti/larabase/run-tests?label=tests)](https://github.com/bcampti/larabase/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/bcampti/larabase/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/bcampti/larabase/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/bcampti/larabase.svg?style=flat-square)](https://packagist.org/packages/bcampti/larabase)
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/larabase.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/larabase)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+# Pacote Larabase
+O pacote [Larabase](https://github.com/bcampti/larabase) fornece comandos para criação dos arquivos necessários para a implementação de recursos no sistema. Segue um padrão pré estabelecido para padronização do desenvomento.
 
 ## Installation
 
@@ -29,44 +13,74 @@ Adicionar no composer.json o repositorio do pacote.
     }
 ]
 ```
-You can install the package via composer:
+Instala o pacote via composer:
 
 ```bash
 composer require bcampti/larabase
 ```
 
-You can publish and run the migrations with:
+Publica os migrations:
 
 ```bash
 php artisan vendor:publish --tag="larabase-migrations"
 php artisan migrate
 ```
 
-You can publish the config file with:
+Publica o arquivo de config:
 
 ```bash
 php artisan vendor:publish --tag="larabase-config"
 ```
 
-This is the contents of the published config file:
+Este é o conteúdo do arquivo de configuração:
 
 ```php
 return [
 ];
 ```
 
-Optionally, you can publish the views using
+Publica os arquivos modelos 'stubs':
+
+```bash
+php artisan vendor:publish --tag="larabase-stubs"
+```
+
+Publica os arquivos de errors:
+
+```bash
+php artisan vendor:publish --tag="laravel-errors"
+```
+
+Opcionalmente, você pode publicar as views:
 
 ```bash
 php artisan vendor:publish --tag="larabase-views"
 ```
 
-## Usage
-
-```php
-$larabase = new Bcampti\Larabase();
-echo $larabase->echoPhrase('Hello, Bcampti!');
+# Comandos artisan Larabase
+```bash
+php artisan larabase:make Locale/Pais
 ```
+ > Imprime no console todos os commandos artisan para o model informado:
+ ```bash
+php artisan larabase:model Locale/Pais
+php artisan make:factory Locale/PaisFactory  --model=Locale/Pais
+php artisan make:migration create_pais_table --create=pais
+php artisan larabase:filtro Locale/PaisFiltro --model=Locale/Pais
+php artisan larabase:repository Locale/PaisManager --model=Locale/Pais
+php artisan larabase:route Locale/Pais --model=Locale/Pais
+php artisan larabase:controller Locale/PaisController --model=Locale/Pais
+php artisan larabase:view listar --model=Locale/Pais
+php artisan larabase:view formulario --model=Locale/Pais
+php artisan larabase:request Locale/PaisRequest --model=Locale/Pais
+php artisan larabase:test Locale/PaisControllerTest --model=Locale/Pais
+php artisan larabase:test Locale/PaisTest --model=Locale/Pais --unit
+```
+
+```bash
+php artisan larabase:all Locale/Pais
+```
+ > Este comando executará todos os comando do [Larabase](https://github.com/bcampti/larabase) para o model informado. [ Model, Factory, Migration, Filtro, Manager, Routes, Controller, FormRequest, Blades(listar, formulario) e Testes.
 
 ## Testing
 
