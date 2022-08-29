@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Scopes;
+namespace Bcampti\Larabase\Scopes;
 
 use App\Exceptions\GenericMessage;
 use Illuminate\Database\Eloquent\Builder;

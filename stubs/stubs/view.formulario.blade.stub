@@ -56,7 +56,7 @@
 								<span class="required">Situação</span>
 							</label>
 							<select class="form-select form-select-sm" data-control="select2" name="status">
-								@foreach ( \App\Enums\StatusEnum::cases() as $status )
+								@foreach ( \Bcampti\Larabase\Enums::cases() as $status )
 									<option value="{{ $status->value }}" {{ optional(${{ modelVariable }}->status)->value!=$status->value?:'selected' }}>{{ $status->value }}</option>
 								@endforeach
 							</select>

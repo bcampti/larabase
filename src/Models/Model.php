@@ -1,15 +1,12 @@
 <?php
 
-namespace Bcampti\Larabase\Models\Core;
+namespace Bcampti\Larabase\Models;
 
 use Illuminate\Support\Str;
 use Normalizer;
 
 class Model extends Model
 {
-	const STATUS_ATIVO = 'Ativo';
-	const STATUS_INATIVO = 'Inativo';
-
 	/**
      * Indicates if the model should be timestamped.
      * @var bool

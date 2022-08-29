@@ -2,15 +2,16 @@
 
 namespace Bcampti\Larabase\Presets\Traits;
 
-/* use Qirolab\Theme\Enums\CssFramework;
-use Qirolab\Theme\Enums\JsFramework;
-use Qirolab\Theme\Theme; */
-
-trait ScopesTrait
+trait ModelTrait
 {
     use HandleFiles;
     use StubTrait;
 
+    public function exportModelScaffolding(): void
+    {
+        $this->exportScopes();
+    }
+    
     public function exportScopes(): self
     {
         $this->ensureDirectoryExists(app_path('Scopes'));
