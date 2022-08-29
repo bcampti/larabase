@@ -11,7 +11,7 @@ trait ExceptionsTrait
     use HandleFiles;
     use StubTrait;
 
-    public function exportScopes(): self
+    public function exportExceptions(): self
     {
         $this->ensureDirectoryExists(app_path('Scopes'));
 
