@@ -1,8 +1,8 @@
 <?php
 
-namespace Bcampti\Larabase\Models\Core;
+namespace Bcampti\Larabase\Traits;
 
-use App\Models\Sistema\Usuario;
+use App\Models\Usuario;
 
 trait HasUsuarioAlteracao
 {

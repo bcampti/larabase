@@ -1,9 +1,9 @@
 <?php
 
-namespace Bcampti\Larabase\Models\Core;
+namespace Bcampti\Larabase\Traits;
 
-use App\Models\Sistema\Organizacao;
-use App\Scopes\OrganizacaoScope;
+use App\Models\Organizacao;
+use Bcampti\Larabase\Scopes\OrganizacaoScope;
 use Illuminate\Validation\ValidationException;
 
 trait HasOrganizacao

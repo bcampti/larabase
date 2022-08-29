@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use App\Enums\StatusEnum;
+use Bcampti\Larabase\Enums;
 use App\Models\TenantModel;
 use App\Traits\HasOrganizacao;
 use App\Traits\HasUsuarioAlteracao;

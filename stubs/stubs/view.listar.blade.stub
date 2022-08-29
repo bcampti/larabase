@@ -45,7 +45,7 @@
 							<div class="d-flex w-md-100px">
 								<select class="form-select form-select-sm" data-control="select2" name="{{ modelVariable }}[status]">
 									<option value="" {{ is_empty($filtro->{{ modelVariable }}->status)?'selected':'' }}>Todas</option>
-									@foreach ( \App\Enums\StatusEnum::cases() as $status )
+									@foreach ( \Bcampti\Larabase\Enums::cases() as $status )
 										<option value="{{ $status->value }}" {{ optional($filtro->{{ modelVariable }}->status)->value!=$status->value?:'selected' }}>{{ $status->value }}</option>
 									@endforeach
 								</select>

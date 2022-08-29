@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcampti\Larabase\Models\Core;
+namespace Bcampti\Larabase\Traits;
 
 trait HasStatus
 {

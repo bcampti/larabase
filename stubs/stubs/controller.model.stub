@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use App\Enums\StatusEnum;
+use Bcampti\Larabase\Enums;
 use App\Exceptions\GenericMessage;
 use {{ namespacedModel }};
 use {{ rootNamespace }}Http\Controllers\Controller;
