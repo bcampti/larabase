@@ -6,7 +6,7 @@ namespace Bcampti\Larabase\Presets\Traits;
 use Qirolab\Theme\Enums\JsFramework;
 use Qirolab\Theme\Theme; */
 
-trait ScopeTrait
+trait ScopesTrait
 {
     use HandleFiles;
     use StubTrait;
