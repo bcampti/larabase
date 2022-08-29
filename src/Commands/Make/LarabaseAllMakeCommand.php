@@ -12,7 +12,7 @@ class LarabaseAllMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $signature = 'larabase:all';
+    protected $signature = 'larabase:all {name}';
 
     /**
      * The console command description.

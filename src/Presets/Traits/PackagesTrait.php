@@ -67,7 +67,18 @@ trait PackagesTrait
             $params['--force'] = true;
         }
 
-       $this->call('vendor:publish', $params);
+        $this->call('vendor:publish', $params);
+
+        $params = [
+            '--provider' => "Spatie\Multitenancy\MultitenancyServiceProvider",
+            '--tag' => "multitenancy-migrations"
+        ];
+
+        if ($forcePublish === true) {
+            $params['--force'] = true;
+        }
+
+        $this->call('vendor:publish', $params);
     }
 
     private function publishAudit($forcePublish = false)
@@ -81,7 +92,18 @@ trait PackagesTrait
             $params['--force'] = true;
         }
 
-       $this->call('vendor:publish', $params);
+        $this->call('vendor:publish', $params);
+
+        $params = [
+            '--provider' => "OwenIt\Auditing\AuditingServiceProvider",
+            '--tag' => "migrations"
+        ];
+
+        if ($forcePublish === true) {
+            $params['--force'] = true;
+        }
+
+        $this->call('vendor:publish', $params);
     }
     
 }
