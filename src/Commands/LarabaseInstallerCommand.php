@@ -21,6 +21,7 @@ class LarabaseInstallerCommand extends Command
     public function handle(): void
     {
         $this->exportScopes();
+        $this->exportExceptions();
 
         /* $authScaffolding = $this->askAuthScaffolding();
 
