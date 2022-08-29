@@ -2,7 +2,7 @@
 # Pacote Larabase
 O pacote [Larabase](https://github.com/bcampti/larabase) fornece comandos para criação dos arquivos necessários para a implementação de recursos no sistema. Segue um padrão pré estabelecido para padronização do desenvomento.
 
-## Installation
+## Instalação
 
 Adicionar no composer.json o repositorio do pacote.
 ```bash
@@ -56,6 +56,35 @@ Opcionalmente, você pode publicar as views:
 ```bash
 php artisan vendor:publish --tag="larabase-views"
 ```
+
+## Instalação de dependencias e configurações adicionais
+
+Executar o comando para instalar as dependencias do pacote.
+```bash
+php artisan larabase:install 
+```
+Serão instalados o pacote a seguir, após a instalação verifique as configuração e se necessários realize ajustes.
+### 1. [Laravel Auditing](https://github.com/owen-it/laravel-auditing)
+
+Verificar na [documentação](https://github.com/owen-it/laravel-auditing-doc/blob/main/documentation.md) em caso de duvidas.
+### 2. [Laravel-multitenancy](https://github.com/spatie/laravel-multitenancy)
+Incluir configuracao de connections no arquivo `config/database.php`, tenant para a base principal e landlord para a base de clientes.
+
+Verificar na [documentação](https://spatie.be/docs/laravel-multitenancy/v2/introduction) em caso de duvidas.
+
+```bash
+'connections' => [
+    'tenant' => [
+        'driver' => 'mysql',
+        ...
+    ],
+
+    'landlord' => [
+        'driver' => 'mysql',
+        ...
+    ],
+```
+
 
 # Comandos artisan Larabase
 ```bash
