@@ -1,0 +1,28 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Enums\StatusEnum;
+use {{ namespacedModel }};
+use {{ rootNamespace }}Filtro\Core\AbstractFiltro;
+
+class {{ class }} extends AbstractFiltro
+{
+	public ${{ modelVariable }};
+	
+    public function init()
+	{
+		$this->{{ modelVariable }} = new {{ model }}();
+		$this->{{ modelVariable }}->status = StatusEnum::ATIVO;
+	}
+
+	public function getOrderBy()
+	{
+		return 'nome';
+	}
+	
+	public function getDirecao()
+	{
+		return 'asc';
+	}
+}

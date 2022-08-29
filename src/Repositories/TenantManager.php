@@ -1,4 +1,4 @@
-<?php namespace Bcampti\Larabase\Repositories\Core;
+<?php namespace Bcampti\Larabase\Repositories;
 
 use Bcampti\Larabase\Scopes\OrganizacaoScope;
 use Illuminate\Database\Eloquent\Builder;

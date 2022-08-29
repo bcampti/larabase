@@ -1,0 +1,38 @@
+<?php
+
+namespace {{ factoryNamespace }};
+
+use App\Enums\StatusEnum;
+use Database\Factories\HasOrganizacaoFactory;
+use Database\Factories\HasUsuarioAlteracaoFactory;
+use Database\Factories\HasUsuarioCriacaoFactory;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use {{ namespacedModel }};
+
+class {{ factory }}Factory extends Factory
+{
+    use HasOrganizacaoFactory;
+    use HasUsuarioCriacaoFactory;
+    use HasUsuarioAlteracaoFactory;
+
+    /**
+     * The name of the factory"s corresponding model.
+     *
+     * @var string
+     */
+    protected $model = {{ model }}::class;
+
+    /**
+     * Define the model"s default state.
+     * DADOS FAKER https://faker.readthedocs.io/en/master/locales/pt_BR.html
+     * @return array
+     */
+    public function definition()
+    {
+        $faker = \Faker\Factory::create("pt_BR");
+        return [
+            "nome" => $faker->unique()->name(),
+            "status" => StatusEnum::ATIVO->value,
+        ];
+    }
+}
