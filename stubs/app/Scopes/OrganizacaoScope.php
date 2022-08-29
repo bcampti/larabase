@@ -2,11 +2,10 @@
 
 namespace App\Scopes;
 
-use App\Exceptions\GenericException;
+use App\Exceptions\GenericMessage;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
-use Illuminate\Validation\ValidationException;
 
 class OrganizacaoScope implements Scope
 {
@@ -26,7 +25,7 @@ class OrganizacaoScope implements Scope
             if( !session()->has("id_organizacao") )
             {
                 info(__CLASS__." - Model: ".$model::class);
-                throw new GenericException("Organização não identificada, recarregue e tente novamente");
+                throw new GenericMessage("Organização não identificada, recarregue e tente novamente");
             }
             $builder->where($model->getTable().'.id_organizacao', session("id_organizacao"));
         }
