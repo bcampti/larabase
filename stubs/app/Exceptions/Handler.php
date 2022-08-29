@@ -74,7 +74,7 @@ class Handler extends ExceptionHandler
     		}
 			else
 			{
-				$request->sesion()->put('mensagem.tipo', GenericException::TIPO_ERRO);
+				$request->sesion()->put('mensagem.tipo', GenericMessage::TIPO_ERRO);
 				$request->sesion()->put('mensagem.titulo', 'Atenção');
 				$request->sesion()->put('mensagem.mensagem', $exception->getMessage());
     	    
