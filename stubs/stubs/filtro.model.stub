@@ -2,9 +2,9 @@
 
 namespace {{ namespace }};
 
-use App\Enums\StatusEnum;
+use Bcampti\Larabase\Enums\StatusEnum;
 use {{ namespacedModel }};
-use {{ rootNamespace }}Filtro\Core\AbstractFiltro;
+use Bcampti\Larabase\Filtro\AbstractFiltro;
 
 class {{ class }} extends AbstractFiltro
 {

@@ -14,7 +14,7 @@ class LarabaseTestMakeCommand extends ConsoleTestMakeCommand
      *
      * @var string
      */
-    protected $name = 'larabase:test {name}';
+    protected $name = 'larabase:test';
 
     /**
      * The console command description.

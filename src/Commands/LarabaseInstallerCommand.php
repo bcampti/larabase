@@ -4,12 +4,14 @@ namespace Bcampti\Larabase\Commands;
 
 use Bcampti\Larabase\Presets\Traits\ExceptionsTrait;
 use Bcampti\Larabase\Presets\Traits\ModelTrait;
+use Bcampti\Larabase\Presets\Traits\PackagesTrait;
 use Bcampti\Larabase\Presets\Traits\StubTrait;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 
 class LarabaseInstallerCommand extends Command
 {
-    use ExceptionsTrait, ModelTrait;
+    use PackagesTrait, ExceptionsTrait, ModelTrait;
     //use AuthTrait;
     use StubTrait;
     
@@ -19,13 +21,6 @@ class LarabaseInstallerCommand extends Command
 
     public function handle(): void
     {
-        $this->exportExceptions();
-        $this->exportModelScaffolding();
-
-        //php artisan vendor:publish --provider="Spatie\Multitenancy\MultitenancyServiceProvider" --tag="multitenancy-config"
-        //php artisan vendor:publish --provider "OwenIt\Auditing\AuditingServiceProvider" --tag="config"
-
-
         /* $authScaffolding = $this->askAuthScaffolding();
 
         $this->exportAuthScaffolding($authScaffolding);
@@ -33,7 +28,12 @@ class LarabaseInstallerCommand extends Command
         $this->line("<options=bold>Auth Scaffolding:</options=bold> {$authScaffolding}");
         $this->line(''); */
 
-        $this->info("Larabase scaffolding installed successfully.\n");
+        $this->publishPackages();
+        
+        $this->exportExceptions();
+        $this->exportModelScaffolding();
+
+        $this->info('Installed Larabase package');
     }
 
     public function askAuthScaffolding()

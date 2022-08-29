@@ -2,11 +2,12 @@
 
 namespace Bcampti\Larabase\Models;
 
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;
 use Normalizer;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class Model extends Model implements Auditable
+class Model extends EloquentModel implements Auditable
 {
 	use \OwenIt\Auditing\Auditable;
 
