@@ -152,28 +152,5 @@ Route::get('/home', function () {
 
         return $this;
     }
-
-    protected function publishFiles(array $files): void
-    {
-        foreach ($files as $file) {
-            $publishPath = base_path($file);
-
-            $overwrite = false;
-
-            if (file_exists($publishPath)) {
-                $overwrite = $this->confirm(
-                    "<fg=red>{$file} already exists.</fg=red>\n ".
-                    'Do you want to overwrite?',
-                    false
-                );
-            }
-
-            if (! file_exists($publishPath) || $overwrite) {
-                copy(
-                    __DIR__.'/../../../stubs/'.$file,
-                    $publishPath
-                );
-            }
-        }
-    }
+    
 }
