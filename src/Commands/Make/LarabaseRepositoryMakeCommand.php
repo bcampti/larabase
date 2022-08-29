@@ -13,7 +13,7 @@ class LarabaseRepositoryMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'larabase:repository {name}';
+    protected $name = 'larabase:repository';
 
     /**
      * The console command description.

@@ -1,5 +1,5 @@
 <?php
-namespace Bcampti\Larabase\Enums\StatusEnum;
+namespace Bcampti\Larabase\Enums;
 
 enum StatusEnum:string
 {

@@ -13,7 +13,7 @@ class LarabaseFiltroMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'larabase:filtro {name}';
+    protected $name = 'larabase:filtro';
 
     /**
      * The console command description.

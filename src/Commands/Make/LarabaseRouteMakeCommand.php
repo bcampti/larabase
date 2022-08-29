@@ -14,7 +14,7 @@ class LarabaseRouteMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'larabase:route {name}';
+    protected $name = 'larabase:route';
 
     /**
      * The console command description.
