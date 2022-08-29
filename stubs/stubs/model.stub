@@ -2,15 +2,14 @@
 
 namespace {{ namespace }};
 
-use Bcampti\Larabase\Enums;
-use App\Models\TenantModel;
-use App\Traits\HasOrganizacao;
-use App\Traits\HasUsuarioAlteracao;
-use App\Traits\HasUsuarioCriacao;
+use Bcampti\Larabase\Enums\StatusEnum;
+use Bcampti\Larabase\Models\Model;
+use Bcampti\Larabase\Traits\HasOrganizacao;
+use Bcampti\Larabase\Traits\HasUsuarioAlteracao;
+use Bcampti\Larabase\Traits\HasUsuarioCriacao;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class {{ class }} extends TenantModel
+class {{ class }} extends Model
 {
 	use HasOrganizacao;
 	use HasUsuarioCriacao;

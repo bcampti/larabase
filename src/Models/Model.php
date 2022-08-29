@@ -4,9 +4,17 @@ namespace Bcampti\Larabase\Models;
 
 use Illuminate\Support\Str;
 use Normalizer;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Model extends Model
+class Model extends Model implements Auditable
 {
+	use \OwenIt\Auditing\Auditable;
+
+	/** campos que não serão auditados */
+	protected $auditExclude = ['id_usuario_criacao','id_usuario_alteracao','data_criacao','data_alteracao'];
+	/** quais eventos serão registrados */
+	protected $auditEvents = ['created', 'updated', 'deleted', 'restored',];
+
 	/**
      * Indicates if the model should be timestamped.
      * @var bool

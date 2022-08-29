@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcampti\Larabase\Repositories\Core;
+namespace Bcampti\Larabase\Repositories;
 
 use Illuminate\Http\Request;
 
