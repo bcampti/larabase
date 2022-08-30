@@ -5,7 +5,6 @@ namespace Bcampti\Larabase\Presets\Traits;
 trait ModelTrait
 {
     use HandleFiles;
-    use StubTrait;
 
     public function exportModelScaffolding(): void
     {

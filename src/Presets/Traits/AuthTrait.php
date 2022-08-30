@@ -5,7 +5,6 @@ namespace Bcampti\Larabase\Presets\Traits;
 trait AuthTrait
 {
     use HandleFiles;
-    use StubTrait;
 
     public function exportAuthTrait(string $authTrait = 'Views Only'): void
     {

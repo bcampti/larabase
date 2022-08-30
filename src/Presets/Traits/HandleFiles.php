@@ -45,4 +45,42 @@ trait HandleFiles
     {
         return file_exists($path);
     }
+
+    private function shouldOverwriteFile($fileName)
+    {
+        return $this->confirm(
+            '{$fileName} file already exists. Do you want to overwrite it?',
+            false
+        );
+    }
+
+    public function publishFiles(array $files)
+    {
+        foreach ($files as $file) {
+            $publishPath = base_path($file);
+
+            $overwrite = false;
+
+            if (file_exists($publishPath)) {
+                $overwrite = $this->confirm(
+                    "<fg=red>{$file} already exists.</fg=red>\n ".
+                    'Do you want to overwrite?',
+                    false
+                );
+            }
+
+            if (! file_exists($publishPath) || $overwrite) {
+                $this->copyOrOverwreteFile($file);
+            }
+        }
+    }
+
+    public function copyOrOverwreteFile($file)
+    {
+        $publishPath = base_path($file);
+        copy(__DIR__.'/../../../stubs/'.$file,
+            $publishPath
+        );
+    }
+
 }
