@@ -1,5 +1,5 @@
 <?php 
-namespace Bcampti\Larabase\Utils\Database;
+namespace Bcampti\Larabase\Utils;
 
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;

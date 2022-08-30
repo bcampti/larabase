@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcampti\Larabase\Console\Commands\Multitenancy;
+namespace Bcampti\Larabase\Commands\Multitenancy;
 
 use Bcampti\Larabase\Utils\Database\Database;
 use Illuminate\Console\Command;
