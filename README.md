@@ -23,7 +23,6 @@ Publica os migrations:
 
 ```bash
 php artisan vendor:publish --tag="larabase-migrations"
-php artisan migrate
 ```
 
 Publica o arquivo de config:
@@ -85,6 +84,26 @@ Verificar na [documentação](https://spatie.be/docs/laravel-multitenancy/v2/int
     ],
 ```
 
+Adicionar configuração de conexão no arquivo `config/multitenancy.php`.
+
+```bash
+    /*
+     * The connection name to reach the tenant database.
+     *
+     * Set to `null` to use the default connection.
+     */
+    'tenant_database_connection_name' => 'tenant',
+
+    /*
+     * The connection name to reach the landlord database
+     */
+    'landlord_database_connection_name' => 'landlord',
+```
+
+Executar migração de banco de dados.
+```bash
+php artisan migrate
+```
 
 # Comandos artisan Larabase
 ```bash
