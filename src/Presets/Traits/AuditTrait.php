@@ -6,36 +6,37 @@ trait AuditTrait
 {
     use HandleFiles;
     
-    private function publishAudit($forcePublish = true):self
+    private function publishAudit():self
     {
         $params = [
             '--provider' => "OwenIt\Auditing\AuditingServiceProvider",
             '--tag' => "config"
         ];
 
-        if ($forcePublish === true) {
-            $params['--force'] = true;
+        $execute = true;
+        $fileName = 'audit.php';
+        if( $this->exists(config_path($fileName)) ){
+            if( $this->shouldOverwriteFile($fileName) ){
+                $params['--force'] = true;
+            } else {
+                $execute = false;
+            }
         }
 
-        $this->call('vendor:publish', $params);
+        if( $execute == true ){
+            $this->call('vendor:publish', $params);
+
+            $this->copyOrOverwreteFile('config/audit.php');
+        }
 
         $params = [
             '--provider' => "OwenIt\Auditing\AuditingServiceProvider",
             '--tag' => "migrations"
         ];
 
-        if ($forcePublish === true) {
-            $params['--force'] = true;
-        }
-
         $this->call('vendor:publish', $params);
 
-        $files = [
-            'config/audit.php',
-        ];
-
-        $this->publishFiles($files);
-
+        
         return $this;
     }
     

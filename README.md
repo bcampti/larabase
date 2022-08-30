@@ -63,16 +63,16 @@ php artisan larabase:install
 ```
 
 Os pacote abaixo serão instalado e pré configurados.
-### 1. [Laravel Auditing](https://github.com/owen-it/laravel-auditing)
+### 1. [pt-br-validator: Validações brasileiras para Laravel.](https://github.com/LaravelLegends/pt-br-validator)
+Esta biblioteca adiciona validações brasileira ao Laravel, para serem utilizadas nos `FormRequest`, `Rules` como CPF, CNPJ, Placa de Carro, CEP, Telefone, Celular e afins.
+
+### 2. [Laravel Auditing](https://github.com/owen-it/laravel-auditing)
 Verificar na [documentação](https://github.com/owen-it/laravel-auditing-doc/blob/main/documentation.md) em caso de duvidas.
 
-### 2. [Laravel-multitenancy](https://github.com/spatie/laravel-multitenancy)
+### 3. [Laravel-multitenancy](https://github.com/spatie/laravel-multitenancy)
 As configurações padrão para o funcionamento do pacote serão adicionadas:
 * `config/database.php`, connections `landlord` para o schema principal e `tenant` para o schema de clientes.
 * `config/multitenancy.php`, `'tenant_database_connection_name' => 'tenant', 'landlord_database_connection_name' => 'landlord',`.
-
-### 3. [pt-br-validator: Validações brasileiras para Laravel.](https://github.com/LaravelLegends/pt-br-validator)
-Esta biblioteca adiciona validações brasileira ao Laravel, para serem utilizadas nos `FormRequest`, `Rules` como CPF, CNPJ, Placa de Carro, CEP, Telefone, Celular e afins.
 
 Executar migração de banco de dados.
 ```bash
@@ -81,7 +81,7 @@ php artisan migrate
 
 Os pacote abaixo são dependencias que devem ser instalados separadamente devido a possíveis conflitos.
 ### 4. [Laravel-pt-BR-localization](https://github.com/lucascudo/laravel-pt-BR-localization)
-Módulo de linguagem pt-BR (português brasileiro) para Laravel
+Módulo de linguagem pt-BR (português brasileiro) para Laravel, adiciona arquivos de trandução para Portugues do Brasil.
 
 
 

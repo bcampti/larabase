@@ -46,6 +46,14 @@ trait HandleFiles
         return file_exists($path);
     }
 
+    private function shouldOverwriteFile($fileName)
+    {
+        return $this->confirm(
+            '{$fileName} file already exists. Do you want to overwrite it?',
+            false
+        );
+    }
+
     public function publishFiles(array $files)
     {
         foreach ($files as $file) {
@@ -62,11 +70,17 @@ trait HandleFiles
             }
 
             if (! file_exists($publishPath) || $overwrite) {
-                copy(
-                    __DIR__.'/../../../stubs/'.$file,
-                    $publishPath
-                );
+                $this->copyOrOverwreteFile($file);
             }
         }
     }
+
+    public function copyOrOverwreteFile($file)
+    {
+        $publishPath = base_path($file);
+        copy(__DIR__.'/../../../stubs/'.$file,
+            $publishPath
+        );
+    }
+
 }

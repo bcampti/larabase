@@ -6,27 +6,33 @@ trait MultitenancyTrait
 {
     use HandleFiles;
 
-    private function publishMultitenancy($forcePublish = true):self
+    private function publishMultitenancy():self
     {
         $params = [
             '--provider' => "Spatie\Multitenancy\MultitenancyServiceProvider",
             '--tag' => "multitenancy-config"
         ];
 
-        if ($forcePublish === true) {
-            $params['--force'] = true;
+        $execute = true;
+        $fileName = 'multitenancy.php';
+        if( $this->exists(config_path($fileName)) ){
+            if( $this->shouldOverwriteFile($fileName) ){
+                $params['--force'] = true;
+            } else {
+                $execute = false;
+            }
         }
 
-        $this->call('vendor:publish', $params);
+        if( $execute == true ){
+            $this->call('vendor:publish', $params);
+
+            $this->copyOrOverwreteFile('config/multitenancy.php');
+        }
 
         $params = [
             '--provider' => "Spatie\Multitenancy\MultitenancyServiceProvider",
             '--tag' => "multitenancy-migrations"
         ];
-
-        if ($forcePublish === true) {
-            $params['--force'] = true;
-        }
 
         $this->call('vendor:publish', $params);
 
