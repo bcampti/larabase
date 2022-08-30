@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcampti\Larabase\Console\Commands\Multitenancy;
+namespace Bcampti\Larabase\Commands\Multitenancy;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
