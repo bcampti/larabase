@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\File;
 trait PackagesTrait
 {
     use HandleFiles;
-    use StubTrait;
 
     public function publishPackages(): self
     {

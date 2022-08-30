@@ -5,7 +5,6 @@ namespace Bcampti\Larabase\Presets\Traits;
 trait ExceptionsTrait
 {
     use HandleFiles;
-    use StubTrait;
 
     public function exportExceptions(): self
     {

@@ -57,53 +57,33 @@ php artisan vendor:publish --tag="larabase-views"
 ```
 
 ## Instalação de dependencias e configurações adicionais
-
-Executar o comando para instalar as dependencias do pacote.
+Executar o comando abaixo para instalar as dependencias do pacote.
 ```bash
 php artisan larabase:install 
 ```
-Serão instalados o pacote a seguir, após a instalação verifique as configuração e se necessários realize ajustes.
+
+Os pacote abaixo serão instalado e pré configurados.
 ### 1. [Laravel Auditing](https://github.com/owen-it/laravel-auditing)
-
 Verificar na [documentação](https://github.com/owen-it/laravel-auditing-doc/blob/main/documentation.md) em caso de duvidas.
+
 ### 2. [Laravel-multitenancy](https://github.com/spatie/laravel-multitenancy)
-Incluir configuracao de connections no arquivo `config/database.php`, tenant para a base principal e landlord para a base de clientes.
+As configurações padrão para o funcionamento do pacote serão adicionadas:
+* `config/database.php`, connections `landlord` para o schema principal e `tenant` para o schema de clientes.
+* `config/multitenancy.php`, `'tenant_database_connection_name' => 'tenant', 'landlord_database_connection_name' => 'landlord',`.
 
-Verificar na [documentação](https://spatie.be/docs/laravel-multitenancy/v2/introduction) em caso de duvidas.
-
-```bash
-'connections' => [
-    'tenant' => [
-        'driver' => 'mysql',
-        ...
-    ],
-
-    'landlord' => [
-        'driver' => 'mysql',
-        ...
-    ],
-```
-
-Adicionar configuração de conexão no arquivo `config/multitenancy.php`.
-
-```bash
-    /*
-     * The connection name to reach the tenant database.
-     *
-     * Set to `null` to use the default connection.
-     */
-    'tenant_database_connection_name' => 'tenant',
-
-    /*
-     * The connection name to reach the landlord database
-     */
-    'landlord_database_connection_name' => 'landlord',
-```
+### 3. [pt-br-validator: Validações brasileiras para Laravel.](https://github.com/LaravelLegends/pt-br-validator)
+Esta biblioteca adiciona validações brasileira ao Laravel, para serem utilizadas nos `FormRequest`, `Rules` como CPF, CNPJ, Placa de Carro, CEP, Telefone, Celular e afins.
 
 Executar migração de banco de dados.
 ```bash
 php artisan migrate
 ```
+
+Os pacote abaixo são dependencias que devem ser instalados separadamente devido a possíveis conflitos.
+### 4. [Laravel-pt-BR-localization](https://github.com/lucascudo/laravel-pt-BR-localization)
+Módulo de linguagem pt-BR (português brasileiro) para Laravel
+
+
 
 # Comandos artisan Larabase
 ```bash
