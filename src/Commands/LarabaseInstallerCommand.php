@@ -3,17 +3,16 @@
 namespace Bcampti\Larabase\Commands;
 
 use Bcampti\Larabase\Presets\Traits\AuditTrait;
-use Bcampti\Larabase\Presets\Traits\ExceptionsTrait;
+use Bcampti\Larabase\Presets\Traits\HandleFiles;
 use Bcampti\Larabase\Presets\Traits\MultitenancyTrait;
-use Bcampti\Larabase\Presets\Traits\StubTrait;
 use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
 
 class LarabaseInstallerCommand extends Command
 {
-    use ExceptionsTrait;
     use AuditTrait;
     use MultitenancyTrait;
-    use StubTrait;
+    use HandleFiles;
     
     public $signature = 'larabase:install';
 
@@ -24,7 +23,16 @@ class LarabaseInstallerCommand extends Command
         $this->publishAudit()
             ->publishMultitenancy();
         
-        $this->exportExceptions();
+        $this->ensureDirectoryExists(app_path('Exceptions'));
+        $this->ensureDirectoryExists(app_path('Http'));
+
+        $scopes = [
+            'app/Exceptions/Handler.php',
+            'app/Http/Kernel.php',
+            'app/Providers/AppServiceProvider.php',
+            'config/app.php',
+        ];
+        $this->publishFiles($scopes);
 
         $this->info('Installed Larabase package');
     }

@@ -23,10 +23,14 @@ trait MultitenancyTrait
             }
         }
 
+        $this->ensureDirectoryExists(app_path('Multitenancy/Tasks'));
+
         if( $execute == true ){
             $this->call('vendor:publish', $params);
 
+            $this->copyOrOverwreteFile('config/database.php');
             $this->copyOrOverwreteFile('config/multitenancy.php');
+            $this->copyOrOverwreteFile('app/Multitenancy/Tasks/SwitchTenantDatabaseTask.php');
         }
 
         $params = [
