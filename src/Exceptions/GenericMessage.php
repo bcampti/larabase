@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Exceptions;
+namespace Bcampti\Larabase\Exceptions;
 
 use Exception;
 

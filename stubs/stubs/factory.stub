@@ -2,10 +2,10 @@
 
 namespace {{ factoryNamespace }};
 
-use App\Enums\StatusEnum;
-use Database\Factories\HasOrganizacaoFactory;
-use Database\Factories\HasUsuarioAlteracaoFactory;
-use Database\Factories\HasUsuarioCriacaoFactory;
+use Bcampti\Larabase\Enums\StatusEnum;
+use Bcampti\Larabase\Factories\HasOrganizacaoFactory;
+use Bcampti\Larabase\Factories\HasUsuarioAlteracaoFactory;
+use Bcampti\Larabase\Factories\HasUsuarioCriacaoFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use {{ namespacedModel }};
 

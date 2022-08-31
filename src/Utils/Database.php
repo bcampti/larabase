@@ -9,6 +9,11 @@ class Database
 
     protected $connection = "landlord";
 
+    public function connection($connection):self{
+        $this->connection = $connection;
+        return $this;
+    }
+
     /**
      * Check to see if a table exists within a schema
      *

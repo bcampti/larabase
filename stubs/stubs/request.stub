@@ -2,9 +2,9 @@
 
 namespace {{ namespace }};
 
-use App\Enums\StatusEnum;
+use Bcampti\Larabase\Enums\StatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\UniqueToOrg;
+use Bcampti\Larabase\Rules\UniqueToOrg;
 use {{ namespacedModel }};
 use Illuminate\Validation\Rules\Enum;
 

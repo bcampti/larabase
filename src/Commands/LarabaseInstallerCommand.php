@@ -4,16 +4,13 @@ namespace Bcampti\Larabase\Commands;
 
 use Bcampti\Larabase\Presets\Traits\AuditTrait;
 use Bcampti\Larabase\Presets\Traits\ExceptionsTrait;
-use Bcampti\Larabase\Presets\Traits\ModelTrait;
 use Bcampti\Larabase\Presets\Traits\MultitenancyTrait;
 use Bcampti\Larabase\Presets\Traits\StubTrait;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
 
 class LarabaseInstallerCommand extends Command
 {
     use ExceptionsTrait;
-    use ModelTrait;
     use AuditTrait;
     use MultitenancyTrait;
     //use AuthTrait;
@@ -36,7 +33,6 @@ class LarabaseInstallerCommand extends Command
             ->publishMultitenancy();
         
         $this->exportExceptions();
-        $this->exportModelScaffolding();
 
         $this->info('Installed Larabase package');
     }

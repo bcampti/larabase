@@ -2,7 +2,7 @@
 
 namespace Bcampti\Larabase\Scopes;
 
-use App\Exceptions\GenericMessage;
+use Bcampti\Larabase\Exceptions\GenericMessage;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
