@@ -2,150 +2,129 @@
 
 namespace Bcampti\Larabase\Presets\Traits;
 
-trait AuthTrait
+use Illuminate\Filesystem\Filesystem;
+use Symfony\Component\Process\Process;
+
+trait InstallCommand
 {
-    use HandleFiles;
-
-    public function exportAuthTrait(string $authTrait = 'Views Only'): void
+    public function publishAuth()
     {
-        if ($authTrait == 'Controllers & Views') {
-            $this->exportControllers()
-                ->exportComponents()
-                ->exportRequests()
-                ->exportViews()
-                ->exportRoutes()
-                ->exportTests();
-        }
+        $this->php_version = 'php';
+        
+        $this->requireComposerPackages('laravel/ui:^4.0');
+        shell_exec("{$this->php_version} artisan ui bootstrap --auth");
 
-        if ($authTrait == 'Views Only') {
-            $this->exportViews();
-        }
-    }
-
-    public function exportControllers(): self
-    {
-        $this->ensureDirectoryExists(app_path('Http/Controllers/Auth'));
-
-        $controllers = [
-            'app/Http/Controllers/Auth/AuthenticatedSessionController.php',
-            'app/Http/Controllers/Auth/ConfirmablePasswordController.php',
-            'app/Http/Controllers/Auth/EmailVerificationNotificationController.php',
-            'app/Http/Controllers/Auth/EmailVerificationPromptController.php',
-            'app/Http/Controllers/Auth/NewPasswordController.php',
-            'app/Http/Controllers/Auth/PasswordResetLinkController.php',
-            'app/Http/Controllers/Auth/RegisteredUserController.php',
-            'app/Http/Controllers/Auth/VerifyEmailController.php',
-        ];
-
-        $this->publishFiles($controllers);
-
-        return $this;
-    }
-
-    public function exportComponents(): self
-    {
-        $this->ensureDirectoryExists(app_path('View/Components'));
-
-        $components = [
-            'app/View/Components/AppLayout.php',
-            'app/View/Components/GuestLayout.php',
-        ];
-
-        $this->publishFiles($components);
-
-        return $this;
-    }
-
-    protected function exportRequests(): self
-    {
-        $this->ensureDirectoryExists(app_path('Http/Requests/Auth'));
-
-        $files = [
-            'app/Http/Requests/Auth/LoginRequest.php',
-        ];
-
-        $this->publishFiles($files);
-
-        return $this;
-    }
-
-    public function exportViews(): self
-    {
-        $this->ensureDirectoryExists(resource_path('views'));
-
-        $this->copyDirectory(
-            __DIR__."/../../../stubs/resources/{$this->cssFramework}/views",
-            resource_path('views')
+        file_put_contents(
+            base_path('routes/web.php'),
+            file_get_contents(__DIR__ . '/../../../stubs/routes.stub'),
+            FILE_APPEND
         );
 
-        $themePath = $this->relativeThemePath($this->theme);
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../../stubs/controllers', app_path('Http/Controllers/'));
 
-        /* $cssPath = $themePath.($this->cssFramework === CssFramework::Bootstrap ? '/sass/app.scss' : '/css/app.css');
-        $jsPath = $themePath.'/js/app.js';
-        $viteConfig = "@vite(['".$cssPath."', '".$jsPath."'])";
+        (new Filesystem)->ensureDirectoryExists(app_path('Http/Requests'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../../stubs/requests', app_path('Http/Requests/'));
 
-        if ($this->jsFramework === JsFramework::React) {
-            $viteConfig = '@viteReactRefresh'."\n    ".$viteConfig;
-        }
+        copy(__DIR__ . '/../../../stubs/ui/AppServiceProvider.php', app_path('Providers/AppServiceProvider.php'));
+        copy(__DIR__ . '/../../../stubs/ui/vite.config.js', base_path('vite.config.js'));
 
-        $this->replaceInFile('%vite%', $viteConfig, Theme::path('views/layouts/app.blade.php', $this->theme));
-        $this->replaceInFile('%vite%', $viteConfig, Theme::path('views/layouts/guest.blade.php', $this->theme));
- */
-        return $this;
+        return $this->replaceWithCoreUITheme();
     }
 
-    public function exportRoutes(): self
+    protected function replaceWithCoreUITheme()
     {
-        $routeFile = 'routes/auth.php';
+        // NPM Packages...
+        $this->updateNodePackages(function ($packages) {
+            return [
+                'resolve-url-loader' => '^4.0.0',
+                'bootstrap' => '~5.1.3',
+            ] + $packages;
+        });
 
-        $overwrite = false;
+        // Views...
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/auth/passwords'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('sass'));
 
-        if (file_exists(base_path($routeFile))) {
-            $overwrite = $this->confirm(
-                "<fg=red>{$routeFile} already exists.</fg=red>\n ".
-                    'Do you want to overwrite?',
-                false
-            );
-        }
+        /* (new Filesystem)->copyDirectory(__DIR__ . '/../../../stubs/ui/metronic/views/auth', resource_path('views/auth'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../../stubs/ui/metronic/views/auth/passwords', resource_path('views/auth/passwords'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../../stubs/ui/metronic/views/layouts', resource_path('views/layouts'));
 
-        if (! file_exists(base_path($routeFile)) || $overwrite) {
-            copy(__DIR__.'/../../../stubs/routes/auth.php', base_path('routes/auth.php'));
+        // Assets
+        (new Filesystem)->ensureDirectoryExists(public_path('icons'));
+        (new Filesystem)->ensureDirectoryExists(public_path('js'));
 
-            $homeRoute = "
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../../stubs/ui/metronic/icons', public_path('icons'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../../stubs/ui/metronic/sass', resource_path('sass'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../../stubs/ui/metronic/js', public_path('js'));
 
-Route::get('/home', function () {
-    return view('home');
-})->middleware(['auth'])->name('home');
+        copy(__DIR__ . '/../../../stubs/ui/metronic/views/home.blade.php', resource_path('views/home.blade.php'));
+        copy(__DIR__ . '/../../../stubs/ui/metronic/views/about.blade.php', resource_path('views/about.blade.php'));
 
-";
-            $requireAuth = "require __DIR__.'/auth.php';";
+        // Demo table
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/users'));
+        copy(__DIR__ . '/../../../stubs/ui/metronic/views/users/index.blade.php', resource_path('views/users/index.blade.php')); */
 
-            if (! exec('grep '.escapeshellarg($requireAuth).' '.base_path('routes/web.php'))) {
-                $this->append(
-                    base_path('routes/web.php'),
-                    $homeRoute.$requireAuth
-                );
-            }
-        }
-
-        return $this;
+        $this->components->info('Laravel UI scaffolding replaced successfully.');
+        $this->components->warn('Please execute the "npm install && npm run dev" command to build your assets.');
     }
 
-    public function exportTests(): self
+    /**
+     * Installs the given Composer Packages into the application.
+     * Taken from https://github.com/laravel/breeze/blob/1.x/src/Console/InstallCommand.php
+     *
+     * @param mixed $packages
+     * @return void
+     */
+    protected function requireComposerPackages($packages)
     {
-        $this->ensureDirectoryExists(base_path('tests/Feature'));
+        $composer = $this->option('composer');
 
-        $testFiles = [
-            'tests/Feature/AuthenticationTest.php',
-            'tests/Feature/EmailVerificationTest.php',
-            'tests/Feature/PasswordConfirmationTest.php',
-            'tests/Feature/PasswordResetTest.php',
-            'tests/Feature/RegistrationTest.php',
-        ];
+        if ($composer !== 'global') {
+            $command = ['php', $composer, 'require'];
+        }
 
-        $this->publishFiles($testFiles);
+        $command = array_merge(
+            $command ?? ['composer', 'require'],
+            is_array($packages) ? $packages : func_get_args()
+        );
 
-        return $this;
+        (new Process($command, base_path(), ['COMPOSER_MEMORY_LIMIT' => '-1']))
+            ->setTimeout(null)
+            ->run(function ($type, $output) {
+                $this->output->write($output);
+            });
     }
-    
+
+    /**
+     * Update the "package.json" file.
+     * Taken from https://github.com/laravel/breeze/blob/1.x/src/Console/InstallCommand.php
+     *
+     * @param callable $callback
+     * @param bool $dev
+     * @return void
+     */
+    protected static function updateNodePackages(callable $callback, $dev = true)
+    {
+        if (!file_exists(base_path('package.json'))) {
+            return;
+        }
+
+        $configurationKey = $dev ? 'devDependencies' : 'dependencies';
+
+        $packages = json_decode(file_get_contents(base_path('package.json')), true);
+
+        $packages[$configurationKey] = $callback(
+            array_key_exists($configurationKey, $packages) ? $packages[$configurationKey] : [],
+            $configurationKey
+        );
+
+        ksort($packages[$configurationKey]);
+
+        file_put_contents(
+            base_path('package.json'),
+            json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL
+        );
+    }
 }

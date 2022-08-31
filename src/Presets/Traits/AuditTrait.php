@@ -36,7 +36,6 @@ trait AuditTrait
 
         $this->call('vendor:publish', $params);
 
-        
         return $this;
     }
     
