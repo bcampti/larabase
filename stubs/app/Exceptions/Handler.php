@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Bcampti\Larabase\Exceptions\GenericMessage;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -25,8 +26,7 @@ class Handler extends ExceptionHandler
      * @var array<int, class-string<\Throwable>>
      */
     protected $dontReport = [
-        \App\Exceptions\GenericMessage::class,
-		\App\Exceptions\HotspotException::class,
+        \Bcampti\Larabase\Exceptions\GenericMessage::class,
     ];
     
 	/**

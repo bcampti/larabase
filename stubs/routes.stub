@@ -1,9 +1,34 @@
 
-Route::middleware('auth')->group(function () {
-    Route::view('about', 'about')->name('about');
+Route::middleware(['auth','verified'])->group(function()
+{
+    Route::match( ['get','post'], 'accounts', [\App\Http\Controllers\Auth\LoginController::class, 'accounts'] )->name('auth.account.index');
+    Route::get(	'/account/select/{id}', [\App\Http\Controllers\Auth\LoginController::class, 'accountSelect'] )->name('auth.account.select');
 
-    Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+    Route::get('/nova/conta', [\App\Http\Controllers\Auth\LoginController::class, 'accountNoDatabase'])->name('auth.account.no.database');
+    
+    // Utilizado para limpar da sessao o filtro aplicado na consulta das listagens
+    Route::get('/limpar/filtro', function(){
+        session()->forget('filtro');
+        return Redirect::back();
+    })->name('limpar.filtro');
+    
+    /*
+    |--------------------------------------------------------------------------
+    |	ROTAS QUE NECESSITAM DE CONEXAO / COMPANHIA
+    |--------------------------------------------------------------------------
+    */
+    Route::middleware(['tenant'])->group(function()
+    {
+        Route::prefix('organizacao')->group(function(){
+            Route::match(['get','post'], '/', [LoginController::class,"listarOrganizacoes"] )->name('auth.organizacao.index');
+            Route::get(	'acessar/{id_organizacao}', [LoginController::class, "selecionarOrganizacao"] )->name('auth.organizacao.selecionar');
+        });
+        
+        Route::middleware(['checkOrganizacao'])->group(function()
+        {
+            Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+        });
 
-    Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
-    Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+    });
+
 });

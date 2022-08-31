@@ -49,7 +49,7 @@ trait HandleFiles
     private function shouldOverwriteFile($fileName)
     {
         return $this->confirm(
-            '{$fileName} file already exists. Do you want to overwrite it?',
+            "'{$fileName}' file already exists. Do you want to overwrite it?",
             false
         );
     }

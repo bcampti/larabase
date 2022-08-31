@@ -13,11 +13,11 @@ class CheckTenantConnection
     public function handle($request, Closure $next)
     {
         if( !$this->getTenantModel()::checkCurrent()) {
-			return redirect(route('auth.tenant.listar'));
+			return redirect(route('auth.account.index'));
 		}
 		$tenant = $this->getTenantModel()::current();
 		if( !(new Database())->schemaExists($tenant->getDatabaseName()) ){
-			return redirect(route("auth.tenant.no.database"));
+			return redirect(route("auth.account.no.database"));
 		}
 		$tenant->makeCurrent();
 

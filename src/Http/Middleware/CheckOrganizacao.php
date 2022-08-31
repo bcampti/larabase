@@ -16,7 +16,7 @@ class CheckOrganizacao
 	public function handle($request, Closure $next)
 	{
 		if( !$request->session()->has('id_organizacao') || !$request->session()->has("organizacao") ){
-			return redirect(route('auth.organizacao.listar'));
+			return redirect(route('auth.organizacao.index'));
 		}
 		return $next($request);
 	}
