@@ -8,13 +8,13 @@
     
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="/assets/metronic/media/logos/favicon.ico" />
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     
-    <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/metronic/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/metronic/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/metronic/css/custom.css') }}" rel="stylesheet" type="text/css" />
 
     @yield('css')
 
@@ -62,9 +62,9 @@
 
     </div>
 
-    <script type="text/javascript" src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/plugins/maskMoney/jquery.maskMoney.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/metronic/plugins/global/plugins.bundle.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/metronic/js/scripts.bundle.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/metronic/plugins/maskMoney/jquery.maskMoney.min.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('components/app-base.js') }}"></script>
     <script type="text/javascript" src="{{ asset('components/app-mensagem.js') }}"></script>
