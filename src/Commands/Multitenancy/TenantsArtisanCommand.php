@@ -2,7 +2,7 @@
 
 namespace Bcampti\Larabase\Commands\Multitenancy;
 
-use Bcampti\Larabase\Utils\Database\Database;
+use Bcampti\Larabase\Utils\Database;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Spatie\Multitenancy\Commands\Concerns\TenantAware;

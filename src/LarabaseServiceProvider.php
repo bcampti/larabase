@@ -16,6 +16,10 @@ use Bcampti\Larabase\Commands\Make\LarabaseRequestMakeCommand;
 use Bcampti\Larabase\Commands\Make\LarabaseRouteMakeCommand;
 use Bcampti\Larabase\Commands\Make\LarabaseTestMakeCommand;
 use Bcampti\Larabase\Commands\Make\LarabaseViewMakeCommand;
+use Bcampti\Larabase\Commands\Multitenancy\AppMigrationCommand;
+use Bcampti\Larabase\Commands\Multitenancy\AppRollbackMigrationCommand;
+use Bcampti\Larabase\Commands\Multitenancy\TenantMigrationCommand;
+use Bcampti\Larabase\Commands\Multitenancy\TenantRollbackMigrationCommand;
 
 class LarabaseServiceProvider extends PackageServiceProvider
 {
@@ -44,6 +48,11 @@ class LarabaseServiceProvider extends PackageServiceProvider
                 LarabaseViewMakeCommand::class,
                 LarabaseTestMakeCommand::class,
                 LarabaseAllMakeCommand::class,
+
+                AppMigrationCommand::class,
+                AppRollbackMigrationCommand::class,
+                TenantMigrationCommand::class,
+                TenantRollbackMigrationCommand::class,
             ]);
 
             //->hasViewComponent('spatie', Alert::class)

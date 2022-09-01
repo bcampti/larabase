@@ -1,6 +1,9 @@
 
+Route::get('sair', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('sair');
+
 Route::middleware(['auth','verified'])->group(function()
 {
+    Route hasSuporte
     Route::match( ['get','post'], 'account/tenant', [\App\Http\Controllers\Auth\LoginController::class, 'tenants'] )->name('auth.account.tenant.index');
     Route::get(	'/account/tenant/select/{id}', [\App\Http\Controllers\Auth\LoginController::class, 'tenantSelect'] )->name('auth.account.tenant.select');
 
