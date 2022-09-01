@@ -5,7 +5,7 @@ namespace Bcampti\Larabase\Presets\Traits;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 
-trait InstallCommand
+trait AuthCommandTrait
 {
     public function publishAuth()
     {

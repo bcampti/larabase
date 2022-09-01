@@ -74,14 +74,20 @@ As configurações padrão para o funcionamento do pacote serão adicionadas:
 * `config/database.php`, connections `landlord` para o schema principal e `tenant` para o schema de clientes.
 * `config/multitenancy.php`, `'tenant_database_connection_name' => 'tenant', 'landlord_database_connection_name' => 'landlord',`.
 
-Executar migração de banco de dados.
+> Verificar a necessidade de criar o `schema` padrão com o nome `default_app`. Este `schema` será o utilizado para autenticação dos usuários e liberação de acesso a base correta de cadas cliente.
+
+Executar migração de banco de dados padrão. Este comando executará a migração para a base padrão do sistema.
 ```bash
 php artisan migrate
 ```
+ou
+```bash
+php artisan migrate:app
+```
 
-Os pacote abaixo são dependencias que devem ser instalados separadamente devido a possíveis conflitos.
 ### 4. [Laravel-pt-BR-localization](https://github.com/lucascudo/laravel-pt-BR-localization)
 Módulo de linguagem pt-BR (português brasileiro) para Laravel, adiciona arquivos de trandução para Portugues do Brasil.
+> Este pacote deve ser instalado separadamente devido a possíveis conflitos nas traduções.
 
 
 

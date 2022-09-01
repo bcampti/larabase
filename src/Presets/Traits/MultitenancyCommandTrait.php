@@ -2,7 +2,7 @@
 
 namespace Bcampti\Larabase\Presets\Traits;
 
-trait MultitenancyTrait
+trait MultitenancyCommandTrait
 {
     use HandleFiles;
 

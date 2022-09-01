@@ -151,7 +151,7 @@
 
 					<div class="row">
 					
-						@include('paginacao.default')
+						@include('pagination.default')
 					
 					</div>
 

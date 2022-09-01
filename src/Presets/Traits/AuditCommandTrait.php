@@ -2,7 +2,7 @@
 
 namespace Bcampti\Larabase\Presets\Traits;
 
-trait AuditTrait
+trait AuditCommandTrait
 {
     use HandleFiles;
     

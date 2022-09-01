@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware\App;
+namespace Bcampti\Larabase\Http\Middleware;
 
 use App\Models\User;
 use Closure;
@@ -18,7 +18,7 @@ class EnsureUserHasSuporte
      */
     public function handle(Request $request, Closure $next)
     {
-        if( $request->user()->tipo !== User::TIPO_SUPORTE ) {
+        if( auth()->user()->tipo !== User::TIPO_SUPORTE ) {
             abort(Response::HTTP_UNAUTHORIZED);
         }
         return $next($request);
