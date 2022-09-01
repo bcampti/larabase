@@ -23,6 +23,8 @@ class LarabaseInstallerCommand extends Command
         $this->publishAudit()
             ->publishMultitenancy();
         
+        shell_exec("php artisan ui bootstrap --auth");
+
         $this->ensureDirectoryExists(app_path('Exceptions'));
         $this->ensureDirectoryExists(app_path('Http'));
 
@@ -36,14 +38,24 @@ class LarabaseInstallerCommand extends Command
 
         file_put_contents(
             base_path('routes/web.php'),
-            file_get_contents(__DIR__ . '/../../../stubs/routes/web.stub'),
+            file_get_contents(__DIR__ . '/../../stubs/routes/web.stub'),
             FILE_APPEND
         );
+
+        /* (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/controllers', app_path('Http/Controllers/'));
+
+        (new Filesystem)->ensureDirectoryExists(app_path('Http/Requests'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/requests', app_path('Http/Requests/'));
+
+        copy(__DIR__ . '/../../resources/stubs/ui/AppServiceProvider.php', app_path('Providers/AppServiceProvider.php'));
+        copy(__DIR__ . '/../../resources/stubs/ui/vite.config.js', base_path('vite.config.js'));
+
+        $this->replaceWithMetronicTheme(); */
 
         $this->info('Installed Larabase package');
     }
 
-    /* protected function replaceWithCoreUITheme()
+    /* protected function replaceWithMetronicTheme()
     {
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
