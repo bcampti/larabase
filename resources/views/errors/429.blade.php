@@ -10,7 +10,7 @@
             <!--begin::Logo-->
             <div class="mb-13">
                 <a href="{{route('home')}}">
-                    <img alt="Logo" src="/assets/media/logos/custom-2.svg" class="h-40px" />
+                    <img alt="Logo" src="/assets/metronic/media/logos/custom-2.svg" class="h-40px" />
                 </a>
             </div>
             <!--end::Logo-->
@@ -24,8 +24,8 @@
             <!--end::Text-->
             <!--begin::Illustration-->
             <div class="mb-2">
-                <img src="/assets/media/illustrations/dozzy-1/19.png" class="mw-100 mh-300px theme-light-show" alt="" />
-                <img src="/assets/media/illustrations/dozzy-1/19.png" class="mw-100 mh-300px theme-dark-show" alt="" />
+                <img src="/assets/metronic/media/illustrations/dozzy-1/19.png" class="mw-100 mh-300px theme-light-show" alt="" />
+                <img src="/assets/metronic/media/illustrations/dozzy-1/19.png" class="mw-100 mh-300px theme-dark-show" alt="" />
             </div>
             <!--end::Illustration-->
             <!--begin::Link-->

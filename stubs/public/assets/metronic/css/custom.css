@@ -1,0 +1,11 @@
+.dropdown-menu>.active>a,
+.dropdown-menu>.active>a:focus,
+.dropdown-menu>.active>a:hover {
+  color: shade-color(#181C32, 10%);
+  background-color: #bcc9d6;
+}
+.form-control:disabled, .form-control[readonly] {
+  color: var(--kt-input-disabled-color)!important;
+  background-color: var(--kt-input-disabled-bg)!important;
+  border-color: var(--kt-input-disabled-border-color)!important;
+}
