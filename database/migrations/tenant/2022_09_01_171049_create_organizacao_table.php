@@ -28,7 +28,7 @@ return new class extends Migration
             $table->text("telefone");
             $table->text("status")->default(StatusEnum::ATIVO->value);
             $table->timestamp("created_at")->useCurrent();
-            $table->foreignId('id_usuario_criacao')->nullable()->constrained('users');
+            $table->foreignId('id_usuario_criacao')->constrained('users');
             $table->timestamp("updated_at")->nullable();
             $table->foreignId('id_usuario_alteracao')->nullable()->constrained('users');
             $table->bigInteger("id_organizacao_migration");

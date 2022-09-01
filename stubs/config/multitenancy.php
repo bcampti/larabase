@@ -1,5 +1,6 @@
 <?php
 
+use Bcampti\Larabase\Models\Account;
 use Illuminate\Broadcasting\BroadcastEvent;
 use Illuminate\Events\CallQueuedListener;
 use Illuminate\Mail\SendQueuedMailable;
@@ -8,7 +9,6 @@ use Spatie\Multitenancy\Actions\ForgetCurrentTenantAction;
 use Spatie\Multitenancy\Actions\MakeQueueTenantAwareAction;
 use Spatie\Multitenancy\Actions\MakeTenantCurrentAction;
 use Spatie\Multitenancy\Actions\MigrateTenantAction;
-use Spatie\Multitenancy\Models\Tenant;
 
 return [
     /*
@@ -41,7 +41,7 @@ return [
      *
      * It must be or extend `Spatie\Multitenancy\Models\Tenant::class`
      */
-    'tenant_model' => Tenant::class,
+    'tenant_model' => Account::class,
 
     /*
      * If there is a current tenant when dispatching a job, the id of the current tenant

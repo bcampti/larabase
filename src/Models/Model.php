@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Illuminate\Support\Str;
 use Normalizer;
 use OwenIt\Auditing\Contracts\Auditable;
-use OwenIt\Auditing\Redactors\RightRedactor;
 
 class Model extends EloquentModel implements Auditable
 {
@@ -40,8 +39,8 @@ class Model extends EloquentModel implements Auditable
      */
     //protected $dateFormat = 'U';
 
-	/* const CREATED_AT = 'data_criacao';
-    const UPDATED_AT = 'data_alteracao'; */
+	/* const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at'; */
 		
 	/**
 	 * normalizeFields

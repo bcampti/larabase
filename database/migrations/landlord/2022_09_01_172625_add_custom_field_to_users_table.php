@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('tipo');
-            $table->foreignId('id_tenant')->nullable()->constrained('tenants');
+            $table->foreignId('id_account')->nullable()->constrained('accounts');
         });
     }
 
@@ -28,7 +28,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('tipo');
-            $table->dropColumn('id_tenant');
+            $table->dropColumn('id_account');
         });
     }
 };

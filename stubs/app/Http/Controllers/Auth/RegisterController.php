@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Bcampti\Larabase\Models\Account;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -54,7 +56,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'terms' => ['accepted'],
+            'terms' => ['required', 'accepted'],
         ],
         [
             'terms.accepted' => 'Você deve aceitar os Termos e Políticas de Privacidade',
@@ -69,11 +71,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'tipo' => User::TIPO_CLIENTE,
-        ]);
+        $user = DB::transaction( function() use ($data)
+        {
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'tipo' => User::TIPO_CLIENTE,
+            ]);
+
+            $account = Account::create([
+                'name' => $data['empresa'],
+                'domain' => $data['empresa'],
+                'id_usuario_criacao' => $user->id
+            ]);
+
+            $user->id_account = $account->id;
+            $user->save();
+        });
+
+        //CreateCompanhiaDatabase::dispatch($userCompanhia);
+
+        return $user;
     }
 }
