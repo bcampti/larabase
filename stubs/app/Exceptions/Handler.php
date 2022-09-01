@@ -74,9 +74,9 @@ class Handler extends ExceptionHandler
     		}
 			else
 			{
-				$request->sesion()->put('mensagem.tipo', GenericMessage::TIPO_ERRO);
-				$request->sesion()->put('mensagem.titulo', 'Atenção');
-				$request->sesion()->put('mensagem.mensagem', $exception->getMessage());
+				$request->session()->put('mensagem.tipo', GenericMessage::TIPO_ERRO);
+				$request->session()->put('mensagem.titulo', 'Atenção');
+				$request->session()->put('mensagem.mensagem', $exception->getMessage());
     	    
 				return back()->with('retorno_handler',$request->except($this->dontFlash));
 			}
@@ -102,9 +102,9 @@ class Handler extends ExceptionHandler
             }
 			else
 			{
-                $request->sesion()->put('mensagem.tipo', 'erro');
-                $request->sesion()->put('mensagem.titulo', 'Atenção');
-                $request->sesion()->put('mensagem.mensagem', 'Não foi possível localizar o registro solicitado, verifique os parametros e tente novamente.');
+                $request->session()->put('mensagem.tipo', 'erro');
+                $request->session()->put('mensagem.titulo', 'Atenção');
+                $request->session()->put('mensagem.mensagem', 'Não foi possível localizar o registro solicitado, verifique os parametros e tente novamente.');
                 return back();
             }
         }
@@ -133,24 +133,24 @@ class Handler extends ExceptionHandler
 				if( str_contains($exception->getMessage(), "Foreign key violation") )
 				{
 					$mensagem = "Este registro não pode ser excluido, ele está vinculado a outros registros do sistema.";
-					$request->sesion()->put('mensagem.tipo', 'erro');
-					$request->sesion()->put('mensagem.titulo', 'Atenção');
-					$request->sesion()->put('mensagem.mensagem', $mensagem);
+					$request->session()->put('mensagem.tipo', 'erro');
+					$request->session()->put('mensagem.titulo', 'Atenção');
+					$request->session()->put('mensagem.mensagem', $mensagem);
 
 					return back();
 				}
 				if( str_contains($exception->getMessage(), "duplicate key value violates unique constraint") )
 				{
 					$mensagem = "Já existe um registro com estes dados.";
-					$request->sesion()->put('mensagem.tipo', 'erro');
-					$request->sesion()->put('mensagem.titulo', 'Atenção');
-					$request->sesion()->put('mensagem.mensagem', $mensagem);
+					$request->session()->put('mensagem.tipo', 'erro');
+					$request->session()->put('mensagem.titulo', 'Atenção');
+					$request->session()->put('mensagem.mensagem', $mensagem);
 
 					return back();
 				}
-    			$request->sesion()->put('mensagem.tipo', 'erro');
-    			$request->sesion()->put('mensagem.titulo', '<p>Ocorreu um erro inesperado, recarregue a página e tente novamente!</p><p>Caso o problema persista, entre em contate com o suporte.</p>');
-    			$request->sesion()->put('mensagem.mensagem', '<p>Ocorreu um erro inesperado, recarregue a página e tente novamente!</p><p>Caso o problema persista, entre em contate com o suporte.</p>');
+    			$request->session()->put('mensagem.tipo', 'erro');
+    			$request->session()->put('mensagem.titulo', '<p>Ocorreu um erro inesperado, recarregue a página e tente novamente!</p><p>Caso o problema persista, entre em contate com o suporte.</p>');
+    			$request->session()->put('mensagem.mensagem', '<p>Ocorreu um erro inesperado, recarregue a página e tente novamente!</p><p>Caso o problema persista, entre em contate com o suporte.</p>');
     			
     			return response(view('errors.erro'));
     		}
