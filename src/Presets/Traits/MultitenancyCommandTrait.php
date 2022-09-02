@@ -32,7 +32,6 @@ trait MultitenancyCommandTrait
             $this->publishFiles([
                 'config/database.php',
                 'config/multitenancy.php',
-                'app/Multitenancy/Tasks/SwitchTenantDatabaseTask.php'
             ]);
         }
 

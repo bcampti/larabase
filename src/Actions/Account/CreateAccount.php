@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcampti\Larabase\Actions;
+namespace Bcampti\Larabase\Actions\Account;
 
 use App\Models\User;
 use Bcampti\Larabase\Repositories\AccountManager;

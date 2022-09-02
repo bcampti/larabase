@@ -1,6 +1,12 @@
 
 Route::get('sair', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('sair');
 
+Route::get('/email/verify/{id}/{hash}', function (Illuminate\Foundation\Auth\EmailVerificationRequest $request) {
+    $request->fulfill();
+    (new Bcampti\Larabase\Actions\Account\ActiveAccount)->execute($request->user());
+    return redirect(route('home'));
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
 Route::middleware(['auth','verified'])->group(function()
 {
     Route::prefix('auth')->middleware(['hasSuporte','verified'])->group(function(){

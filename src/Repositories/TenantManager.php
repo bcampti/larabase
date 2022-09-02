@@ -2,9 +2,12 @@
 
 use Bcampti\Larabase\Scopes\OrganizacaoScope;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Normalizer;
 
 abstract class TenantManager 
 {
@@ -20,9 +23,68 @@ abstract class TenantManager
 		return app($this->class_model);
 	}
 	
+	/**
+	 * normalizeFields
+	 * 
+	 * verifica e padroniza os tipos de dados para cada campo
+	 *
+	 * @return Model
+	 */
+	public function normalizeFields( $model ):Model
+	{
+		foreach( $model->getFillable() as $campo )
+		{
+			if( empty($model->{$campo}) && $campo!="id" )
+			{
+				if( $model->hasCast($campo))
+				{
+					switch( $model->getCasts()[$campo] )
+					{
+						case "string":
+						case "uuid" :
+							$model->{$campo} = null;
+							break;
+						case "boolean":
+							$model->{$campo} = false;
+							break;
+						case "float":
+						case "real":
+						case "double":
+							$model->{$campo} = 0;
+							break;
+						case "integer":
+							if( Str::startsWith($campo, "id_") ){
+								$model->{$campo} = null;
+							}else{
+								$model->{$campo} = 0;
+							}
+							break;
+						default:
+							$model->{$campo} = null;
+							break;
+					}
+				}else{
+					$model->{$campo} = null;
+				}
+			}else{
+				if( $model->hasCast($campo))
+				{
+					switch( $model->getCasts()[$campo] )
+					{
+						/* campo string recebe tratamento para remoção de formatação de fonte */
+						case "string":
+							$model->{$campo} = Normalizer::normalize($model->{$campo}, Normalizer::NFKC);
+							break;
+					}
+				}
+			}
+		}
+		return $model;
+	}
+	
 	public function salvar( $model )
 	{
-		$model->normalizeFields();
+		$model = $this->normalizeFields($model);
 		$model->save();
 		return $model;
 	}
