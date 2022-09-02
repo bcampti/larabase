@@ -15,13 +15,14 @@ trait AuditCommandTrait
 
         $execute = true;
         $fileName = 'audit.php';
-        if( $this->exists(config_path($fileName)) ){
+        $params['--force'] = true;
+        /* if( $this->exists(config_path($fileName)) ){
             if( $this->shouldOverwriteFile($fileName) ){
                 $params['--force'] = true;
             } else {
                 $execute = false;
             }
-        }
+        } */
 
         if( $execute == true ){
             $this->call('vendor:publish', $params);

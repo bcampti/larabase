@@ -15,13 +15,14 @@ trait MultitenancyCommandTrait
 
         $execute = true;
         $fileName = 'multitenancy.php';
-        if( $this->exists(config_path($fileName)) ){
+        $params['--force'] = true;
+        /* if( $this->exists(config_path($fileName)) ){
             if( $this->shouldOverwriteFile($fileName) ){
                 $params['--force'] = true;
             } else {
                 $execute = false;
             }
-        }
+        } */
 
         $this->ensureDirectoryExists(app_path('Multitenancy/Tasks'));
 
