@@ -16,7 +16,7 @@ trait HandleFiles
      */
     protected function ensureDirectoryExists(string $path, int $mode = 0755, bool $recursive = true)
     {
-        if (! (new Filesystem())->isDirectory($path)) {
+        if (!(new Filesystem())->isDirectory($path)) {
             (new Filesystem())->makeDirectory($path, $mode, $recursive);
         }
     }
@@ -59,17 +59,17 @@ trait HandleFiles
         foreach ($files as $file) {
             $publishPath = base_path($file);
 
-            $overwrite = false;
+            $overwrite = true;
 
-            if (file_exists($publishPath)) {
+            /* if (file_exists($publishPath)) {
                 $overwrite = $this->confirm(
-                    "<fg=red>{$file} already exists.</fg=red>\n ".
-                    'Do you want to overwrite?',
+                    "<fg=red>{$file} already exists.</fg=red>\n " .
+                        'Do you want to overwrite?',
                     false
                 );
-            }
+            } */
 
-            if (! file_exists($publishPath) || $overwrite) {
+            if (!file_exists($publishPath) || $overwrite) {
                 $this->copyOrOverwreteFile($file);
             }
         }
@@ -78,9 +78,9 @@ trait HandleFiles
     public function copyOrOverwreteFile($file)
     {
         $publishPath = base_path($file);
-        copy(__DIR__.'/../../../stubs/'.$file,
+        copy(
+            __DIR__ . '/../../../stubs/' . $file,
             $publishPath
         );
     }
-
 }

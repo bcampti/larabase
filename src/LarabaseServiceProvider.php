@@ -36,7 +36,6 @@ class LarabaseServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasMigrations(
                 'landlord/2014_10_12_000000_create_users_table',
-                'landlord/2014_10_12_000000_create_users_table',
                 'landlord/2014_10_12_100000_create_password_resets_table',
                 'landlord/2019_08_19_000000_create_failed_jobs_table',
                 'landlord/2022_09_01_170342_create_account_tenants_table',

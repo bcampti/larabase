@@ -81,9 +81,9 @@ class RegisterController extends Controller
                 'tipo' => User::TIPO_CLIENTE,
             ]);
 
-            $account = Account::create([
+            $account = Account::forceCreate([
                 'name' => $data['empresa'],
-                'domain' => $data['empresa'],
+                //'domain' => $data['empresa'],
                 'id_usuario_criacao' => $user->id
             ]);
 
