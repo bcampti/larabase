@@ -30,12 +30,12 @@ trait AuditCommandTrait
             $this->copyOrOverwreteFile('config/audit.php');
         }
 
-        $params = [
+        /* $params = [
             '--provider' => "OwenIt\Auditing\AuditingServiceProvider",
             '--tag' => "migrations"
         ];
 
-        $this->call('vendor:publish', $params);
+        $this->call('vendor:publish', $params); */
 
         return $this;
     }

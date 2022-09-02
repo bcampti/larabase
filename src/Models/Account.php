@@ -11,6 +11,8 @@ use Spatie\Multitenancy\Models\Concerns\UsesLandlordConnection;
 class Account extends Model
 {
 	use UsesLandlordConnection;
+	use HasUsuarioCriacao;
+	use HasUsuarioAlteracao;
 	use HasFactory;
 
 	use HasUsuarioCriacao, HasUsuarioAlteracao;
@@ -27,7 +29,7 @@ class Account extends Model
 
 	protected $casts = [
 		"name"=>"string",
-		"domain"=>"string",
+		//"domain"=>"string",
 		"database"=>"string",
 		"status"=>StatusAccountEnum::class,
 	    "repositorio"=>"string",

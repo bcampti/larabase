@@ -67,7 +67,7 @@ class AccountManager extends TenantManager implements PaginateInterface
 		$database = new Database();
         $database->createSchema($account->database);
         
-        Artisan::call('multitenancy:artisan "migrate --path=database/migrations/tenant --database=tenant --force" --tenant='.$account->id);
+        Artisan::call('migrate:tenant --tenant='.$account->id);
         
 	    return $this->salvar($account);
 	}
