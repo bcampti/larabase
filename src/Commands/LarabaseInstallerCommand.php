@@ -31,11 +31,8 @@ class LarabaseInstallerCommand extends Command
 
         $scopes = [
             'app/Exceptions/Handler.php',
-            'app/Http/Controllers/Auth/RegisterController.php',
-            'app/Http/Controllers/Auth/LoginController.php',
             'app/Http/Kernel.php',
             'app/Models/User.php',
-            'app/Providers/AppServiceProvider.php',
             'config/app.php',
         ];
         $this->publishFiles($scopes);
@@ -45,15 +42,6 @@ class LarabaseInstallerCommand extends Command
             file_get_contents(__DIR__ . '/../../stubs/routes/web.stub'),
             FILE_APPEND
         );
-
-        //(new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views', base_path('resources/views/'));
-        
-        /* (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/controllers', app_path('Http/Controllers/'));
-
-        (new Filesystem)->ensureDirectoryExists(app_path('Http/Requests'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/requests', app_path('Http/Requests/'));
-
-        copy(__DIR__ . '/../../resources/stubs/ui/vite.config.js', base_path('vite.config.js'));*/
 
         $this->replaceWithMetronicTheme();
 
@@ -94,19 +82,8 @@ class LarabaseInstallerCommand extends Command
 
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/public/assets/metronic', public_path('assets/metronic'));
 
-        // Assets
-        /* (new Filesystem)->ensureDirectoryExists(public_path('icons'));
-        (new Filesystem)->ensureDirectoryExists(public_path('js'));
-
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/ui/coreui/icons', public_path('icons'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/ui/coreui/sass', resource_path('sass'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/stubs/ui/coreui/js', public_path('js')); */
 
         copy(__DIR__ . '/../../resources/views/home.blade.php', resource_path('views/home.blade.php'));
-
-        // Demo table
-        /* (new Filesystem)->ensureDirectoryExists(resource_path('views/users'));
-        copy(__DIR__ . '/../../resources/stubs/ui/coreui/views/users/index.blade.php', resource_path('views/users/index.blade.php')); */
 
         $this->components->info('Larabase instalado com sucesso.');
         $this->components->warn('Para finalizar execute "npm install && npm run dev" para fazer deploy dos assets.');
@@ -150,9 +127,9 @@ class LarabaseInstallerCommand extends Command
         (new Filesystem)->ensureDirectoryExists(database_path('migrations/landlord'));
         (new Filesystem)->ensureDirectoryExists(database_path('migrations/tenant'));
 
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../database/landlord', public_path('database/landlord'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../database/tenant', public_path('database/tenant'));
-        
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../database/migrations/landlord', public_path('database/migrations/landlord'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../database/migrations/tenant', public_path('database/migrations/tenant'));
+
         /* $this->publishFiles([
             'database/migrations/landlord/2014_10_12_000000_create_users_table.php',
             'database/migrations/landlord/2014_10_12_100000_create_password_resets_table.php',
