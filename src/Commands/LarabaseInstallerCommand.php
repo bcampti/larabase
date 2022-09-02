@@ -71,6 +71,7 @@ class LarabaseInstallerCommand extends Command
         });
 
         // Views...
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/account'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/auth/passwords'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/errors'));
@@ -79,12 +80,18 @@ class LarabaseInstallerCommand extends Command
         (new Filesystem)->ensureDirectoryExists(resource_path('views/pagination'));
         //(new Filesystem)->ensureDirectoryExists(resource_path('sass'));
 
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/account', resource_path('views/account'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/auth', resource_path('views/auth'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/auth/passwords', resource_path('views/auth/passwords'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/errors', resource_path('views/errors'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/layouts', resource_path('views/layouts'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/layouts/partials', resource_path('views/layouts/partials'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/pagination', resource_path('views/pagination'));
+
+        (new Filesystem)->ensureDirectoryExists(public_path('assets'));
+        (new Filesystem)->ensureDirectoryExists(public_path('assets/metronic'));
+
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/public/assets/metronic', public_path('assets/metronic'));
 
         // Assets
         /* (new Filesystem)->ensureDirectoryExists(public_path('icons'));

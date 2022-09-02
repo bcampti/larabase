@@ -33,12 +33,12 @@ trait MultitenancyCommandTrait
             $this->copyOrOverwreteFile('app/Multitenancy/Tasks/SwitchTenantDatabaseTask.php');
         }
 
-        $params = [
+        /* $params = [
             '--provider' => "Spatie\Multitenancy\MultitenancyServiceProvider",
             '--tag' => "multitenancy-migrations"
         ];
 
-        $this->call('vendor:publish', $params);
+        $this->call('vendor:publish', $params); */
 
         return $this;
     }

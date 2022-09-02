@@ -34,7 +34,19 @@ class LarabaseServiceProvider extends PackageServiceProvider
             ->name('larabase')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_larabase_table')
+            ->hasMigrations(
+                'landlord/2014_10_12_000000_create_users_table',
+                'landlord/2014_10_12_000000_create_users_table',
+                'landlord/2014_10_12_100000_create_password_resets_table',
+                'landlord/2019_08_19_000000_create_failed_jobs_table',
+                'landlord/2022_09_01_170342_create_account_tenants_table',
+                'landlord/2022_09_01_171049_create_audits_table',
+                'landlord/2022_09_01_172625_add_custom_field_to_users_table',
+                'tenant/2022_09_01_000000_create_usuario_table',
+                'tenant/2022_09_01_171049_create_organizacao_table',
+                'tenant/2022_09_01_172625_add_custom_field_to_usuario_table',
+                'tenant/2022_09_01_193049_create_audits_table',
+            )
             ->hasCommands([
                 LarabaseInstallerCommand::class,
                 LarabaseHelpCommand::class,
