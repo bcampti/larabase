@@ -21,7 +21,8 @@ class LarabaseInstallerCommand extends Command
     public function handle(): void
     {
         $this->publishAudit()
-            ->publishMultitenancy();
+            ->publishMultitenancy()
+            ->publishMigrations();
         
         shell_exec("php artisan ui bootstrap --auth");
 
@@ -140,5 +141,22 @@ class LarabaseInstallerCommand extends Command
             base_path('package.json'),
             json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL
         );
+    }
+
+    public function publishMigrations()
+    {
+        $this->publishFiles([
+            'database/migrations/landlord/2014_10_12_000000_create_users_table.php',
+            'database/migrations/landlord/2014_10_12_100000_create_password_resets_table.php',
+            'database/migrations/landlord/2019_08_19_000000_create_failed_jobs_table.php',
+            'database/migrations/landlord/2022_09_01_170342_create_account_tenants_table.php',
+            'database/migrations/landlord/2022_09_01_171049_create_audits_table.php',
+            'database/migrations/landlord/2022_09_01_172625_add_custom_field_to_users_table.php',
+            
+            'database/migrations/tenant/2022_09_01_000000_create_usuario_table.php',
+            'database/migrations/tenant/2022_09_01_171049_create_organizacao_table.php',
+            'database/migrations/tenant/2022_09_01_172625_add_custom_field_to_usuario_table.php',
+            'database/migrations/tenant/2022_09_01_193049_create_audits_table.php'
+        ]);
     }
 }

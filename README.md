@@ -19,12 +19,6 @@ Instala o pacote via composer:
 composer require bcampti/larabase
 ```
 
-Publica os migrations:
-
-```bash
-php artisan vendor:publish --tag="larabase-migrations"
-```
-
 Publica o arquivo de config:
 
 ```bash
@@ -35,6 +29,7 @@ Este é o conteúdo do arquivo de configuração:
 
 ```php
 return [
+    "organizacao_model" => Bcampti\Larabase\Models\Tenant\Organizacao::class,
 ];
 ```
 
@@ -44,16 +39,16 @@ Publica os arquivos modelos 'stubs':
 php artisan vendor:publish --tag="larabase-stubs"
 ```
 
-Publica os arquivos de errors:
-
-```bash
-php artisan vendor:publish --tag="laravel-errors"
-```
-
 Opcionalmente, você pode publicar as views:
 
 ```bash
 php artisan vendor:publish --tag="larabase-views"
+```
+
+Publica os arquivos de errors:
+
+```bash
+php artisan vendor:publish --tag="laravel-errors"
 ```
 
 ## Instalação de dependencias e configurações adicionais
@@ -88,7 +83,6 @@ php artisan migrate:app
 ### 4. [Laravel-pt-BR-localization](https://github.com/lucascudo/laravel-pt-BR-localization)
 Módulo de linguagem pt-BR (português brasileiro) para Laravel, adiciona arquivos de trandução para Portugues do Brasil.
 > Este pacote deve ser instalado separadamente devido a possíveis conflitos nas traduções.
-
 
 
 # Comandos artisan Larabase
