@@ -19,7 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
     const TIPO_SUPORTE = 'SUPORTE';
     const TIPO_CLIENTE = 'CLIENTE';
 
-    protected $with = ["tenant"];
+    protected $with = ["account"];
     /**
      * The attributes that are mass assignable.
      *
