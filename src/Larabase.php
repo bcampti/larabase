@@ -2,7 +2,7 @@
 
 namespace Bcampti\Larabase;
 
-use Bcampti\Larabase\Models\Organizacao;
+use Bcampti\Larabase\Models\Tenant\Organizacao;
 
 class Larabase
 {

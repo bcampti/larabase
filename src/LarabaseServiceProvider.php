@@ -61,6 +61,8 @@ class LarabaseServiceProvider extends PackageServiceProvider
             //->hasTranslations()
             //->hasAssets()
             //->hasRoute('web')
+
+            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
     }
 
     public function boot()

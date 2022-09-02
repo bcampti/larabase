@@ -15,6 +15,18 @@
 
             <div class="fv-row mb-8">
                 <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
+                    <span class="required">Empresa</span>
+                </label>
+                <input type="text" placeholder="Empresa" name="empresa" value="{{ old('empresa') }}" required autocomplete="nome" autofocus class="form-control">
+                @error('empresa')
+                <div class="fv-plugins-message-container invalid-feedback">
+                    <div>{{ $message }}</div>
+                </div>
+                @enderror
+            </div>
+            
+            <div class="fv-row mb-8">
+                <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
                     <span class="required">Nome</span>
                 </label>
                 <input type="text" placeholder="Nome" name="name" value="{{ old('name') }}" required autocomplete="nome" autofocus class="form-control">
