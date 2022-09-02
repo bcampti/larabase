@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Bcampti\Larabase\Actions\CreateAccount;
+use Bcampti\Larabase\Actions\Account\CreateAccount;
 use Bcampti\Larabase\Models\Account;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
@@ -89,6 +89,8 @@ class RegisterController extends Controller
 
             $user->id_account = $account->id;
             $user->save();
+
+            return $user;
         });
 
         CreateAccount::execute($user);

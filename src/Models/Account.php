@@ -6,9 +6,11 @@ use Bcampti\Larabase\Traits\HasUsuarioCriacao;
 use Bcampti\Larabase\Utils\Database;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Storage;
+use Ramsey\Uuid\Uuid;
 use Spatie\Multitenancy\Models\Concerns\UsesLandlordConnection;
+use Spatie\Multitenancy\Models\Tenant;
 
-class Account extends Model
+class Account extends Tenant
 {
 	use UsesLandlordConnection;
 	use HasUsuarioCriacao;
@@ -41,6 +43,8 @@ class Account extends Model
 			$model->status = StatusAccountEnum::NOVA->value;
 			$database = new Database();
 			$model->database = $database->generateSchemaName();
+
+			$model->repositorio = Uuid::uuid4()->toString();
         });
 
 		static::deleting(fn(Account $model) => $model->deleteDependencies());

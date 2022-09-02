@@ -28,10 +28,10 @@ class TenantMigrationCommand extends Command
      */
     public function handle()
     {
-        $artisanCommand = 'multitenancy:artisan "migrate --path=database/migrations/tenant --database=tenant"';
+        $artisanCommand = 'tenants:artisan "migrate --path=database/migrations/tenant --database=tenant"';
         
         if( $this->option('force')=="true" ){
-            $artisanCommand = 'multitenancy:artisan "migrate --path=database/migrations/tenant --database=tenant --force"';
+            $artisanCommand = 'tenants:artisan "migrate --path=database/migrations/tenant --database=tenant --force"';
         }
 
         $tenant = $this->option('tenant');

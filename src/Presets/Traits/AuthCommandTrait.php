@@ -7,6 +7,8 @@ use Symfony\Component\Process\Process;
 
 trait AuthCommandTrait
 {
+    use HandleFiles;
+
     public function publishAuth()
     {
         $this->php_version = 'php';
@@ -20,13 +22,10 @@ trait AuthCommandTrait
             FILE_APPEND
         );
 
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../../stubs/controllers', app_path('Http/Controllers/'));
-
-        (new Filesystem)->ensureDirectoryExists(app_path('Http/Requests'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../../stubs/requests', app_path('Http/Requests/'));
-
-        copy(__DIR__ . '/../../../stubs/ui/AppServiceProvider.php', app_path('Providers/AppServiceProvider.php'));
-        copy(__DIR__ . '/../../../stubs/ui/vite.config.js', base_path('vite.config.js'));
+        $this->publishFiles([
+            'app/Http/Controllers/Auth/RegisterController.php',
+            'app/Http/Controllers/Auth/LoginController.php',
+        ]);
 
         return $this->replaceWithCoreUITheme();
     }

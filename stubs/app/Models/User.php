@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Bcampti\Larabase\Models\Account;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Multitenancy\Models\Tenant;
 
 //use Laravel\Sanctum\HasApiTokens;
 
@@ -19,7 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
     const TIPO_SUPORTE = 'SUPORTE';
     const TIPO_CLIENTE = 'CLIENTE';
 
-    protected $with = ["tenant"];
+    protected $with = ["account"];
     /**
      * The attributes that are mass assignable.
      *
@@ -52,8 +52,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function tenant():BelongsTo
+    public function account():BelongsTo
     {
-        return $this->belongsTo(Tenant::class, 'id_tenant');
+        return $this->belongsTo(Account::class, 'id_account');
     }
 }

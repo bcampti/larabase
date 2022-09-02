@@ -5,6 +5,7 @@ namespace Bcampti\Larabase\Commands;
 use Bcampti\Larabase\Presets\Traits\AuditCommandTrait;
 use Bcampti\Larabase\Presets\Traits\HandleFiles;
 use Bcampti\Larabase\Presets\Traits\MultitenancyCommandTrait;
+use Bcampti\Larabase\Presets\Traits\MigrationCommandTrait;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
@@ -13,6 +14,7 @@ class LarabaseInstallerCommand extends Command
     use AuditCommandTrait;
     use MultitenancyCommandTrait;
     use HandleFiles;
+    use MigrationCommandTrait;
     
     public $signature = 'larabase:install';
 
@@ -31,8 +33,11 @@ class LarabaseInstallerCommand extends Command
 
         $scopes = [
             'app/Exceptions/Handler.php',
+            'app/Http/Controllers/Auth/RegisterController.php',
+            'app/Http/Controllers/Auth/LoginController.php',
             'app/Http/Kernel.php',
             'app/Models/User.php',
+            'app/Providers/AppServiceProvider.php',
             'config/app.php',
         ];
         $this->publishFiles($scopes);
@@ -53,7 +58,6 @@ class LarabaseInstallerCommand extends Command
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                //'@coreui/coreui' => '^4.0.2',
                 'resolve-url-loader' => '^4.0.0',
                 'bootstrap' => '~5.1.3',
             ] + $packages;
@@ -67,7 +71,6 @@ class LarabaseInstallerCommand extends Command
         (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts/partials'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/pagination'));
-        //(new Filesystem)->ensureDirectoryExists(resource_path('sass'));
 
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/account', resource_path('views/account'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/auth', resource_path('views/auth'));
@@ -81,7 +84,6 @@ class LarabaseInstallerCommand extends Command
         (new Filesystem)->ensureDirectoryExists(public_path('assets/metronic'));
 
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/public/assets/metronic', public_path('assets/metronic'));
-
 
         copy(__DIR__ . '/../../resources/views/home.blade.php', resource_path('views/home.blade.php'));
 
@@ -120,28 +122,4 @@ class LarabaseInstallerCommand extends Command
         );
     }
 
-    public function publishMigrations()
-    {
-        (new Filesystem)->ensureDirectoryExists(database_path('factories'));
-        (new Filesystem)->ensureDirectoryExists(database_path('migrations'));
-        (new Filesystem)->ensureDirectoryExists(database_path('migrations/landlord'));
-        (new Filesystem)->ensureDirectoryExists(database_path('migrations/tenant'));
-
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../database/migrations/landlord', public_path('database/migrations/landlord'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../database/migrations/tenant', public_path('database/migrations/tenant'));
-
-        /* $this->publishFiles([
-            'database/migrations/landlord/2014_10_12_000000_create_users_table.php',
-            'database/migrations/landlord/2014_10_12_100000_create_password_resets_table.php',
-            'database/migrations/landlord/2019_08_19_000000_create_failed_jobs_table.php',
-            'database/migrations/landlord/2022_09_01_170342_create_account_tenants_table.php',
-            'database/migrations/landlord/2022_09_01_171049_create_audits_table.php',
-            'database/migrations/landlord/2022_09_01_172625_add_custom_field_to_users_table.php',
-            
-            'database/migrations/tenant/2022_09_01_000000_create_usuario_table.php',
-            'database/migrations/tenant/2022_09_01_171049_create_organizacao_table.php',
-            'database/migrations/tenant/2022_09_01_172625_add_custom_field_to_usuario_table.php',
-            'database/migrations/tenant/2022_09_01_193049_create_audits_table.php'
-        ]); */
-    }
 }

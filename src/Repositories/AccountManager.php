@@ -14,7 +14,6 @@ use Bcampti\Larabase\Utils\Database;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
-use Ramsey\Uuid\Uuid;
 
 class AccountManager extends TenantManager implements PaginateInterface
 {
@@ -77,9 +76,7 @@ class AccountManager extends TenantManager implements PaginateInterface
 		/* CRIA O REPOSITORIO DA COMPANHIA */
 		if( is_empty($account->repositorio) )
 		{
-			$account->repositorio = $account->id.Uuid::uuid4()->toString();
 			//$this->criarRepositorioCompanhia($account);
-			$account = $this->salvar($account);
 		}
 
 		$account->makeCurrent();

@@ -1,6 +1,6 @@
 <?php
 
-use Bcamp\Larabase\Enums\StatusEnum;
+use Bcampti\Larabase\Enums\StatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -28,9 +28,9 @@ return new class extends Migration
             $table->text("telefone");
             $table->text("status")->default(StatusEnum::ATIVO->value);
             $table->timestamp("created_at")->useCurrent();
-            $table->foreignId('id_usuario_criacao')->constrained('users');
+            $table->foreignId('id_usuario_criacao')->constrained('usuario');
             $table->timestamp("updated_at")->nullable();
-            $table->foreignId('id_usuario_alteracao')->nullable()->constrained('users');
+            $table->foreignId('id_usuario_alteracao')->nullable()->constrained('usuario');
             $table->bigInteger("id_organizacao_migration");
         });
     }

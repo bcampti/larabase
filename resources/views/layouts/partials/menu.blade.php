@@ -26,55 +26,11 @@
 
                 <div class="menu-item" >
                     
-                    <a class="menu-link {{ request()->is('aluguel') ? 'active' : ''}}" href="{{ route('aluguel.index') }}">
+                    <a class="menu-link {{ request()->is('/') ? 'active' : ''}}" href="{{ route('home') }}">
                         <span class="menu-icon">
                             <i class="bi bi-calendar3 fs-2x"></i>
                         </span>
-                        <span class="menu-title">Alugueis</span>
-                    </a>
-                    <a class="menu-link {{ request()->is('aluguel/*') ? 'active' : ''}}" href="{{ route('aluguel.create') }}">
-                        <span class="menu-icon">
-                            <i class="bi bi-calendar2-check fs-2x"></i>
-                        </span>
-                        <span class="menu-title">Novo Aluguel</span>
-                    </a>
-
-                    <a class="menu-link {{ request()->is('cliente') ? 'active' : ''}}" href="{{ route('cliente.index') }}">
-                        <span class="menu-icon">
-                            <i class="bi bi-people fs-2x"></i>
-                        </span>
-                        <span class="menu-title">Clientes</span>
-                    </a>
-                    <a class="menu-link {{ request()->is('cliente/*') ? 'active' : ''}}" href="{{ route('cliente.create') }}">
-                        <span class="menu-icon">
-                            <i class="bi bi-person fs-2x"></i>
-                        </span>
-                        <span class="menu-title">Novo Cliente</span>
-                    </a>
-
-                    <a class="menu-link {{ request()->is('produto') ? 'active' : ''}}" href="{{ route('produto.index') }}">
-                        <span class="menu-icon">
-                            <i class="bi bi-grid fs-2x"></i>
-                        </span>
-                        <span class="menu-title">Produtos</span>
-                    </a>
-                    <a class="menu-link {{ request()->is('grupo/produto') ? 'active' : ''}}" href="{{ route('grupo.produto.index') }}">
-                        <span class="menu-icon">
-                            <i class="bi bi-hdd-rack fs-2x"></i>
-                        </span>
-                        <span class="menu-title">Grupos Produto</span>
-                    </a>
-                    <a class="menu-link {{ request()->is('estado') ? 'active' : ''}}" href="{{ route('estado.index') }}">
-                        <span class="menu-icon">
-                            <i class="bi bi-card-list fs-2x"></i>
-                        </span>
-                        <span class="menu-title">Estados</span>
-                    </a>
-                    <a class="menu-link {{ request()->is('cidade') ? 'active' : ''}}" href="{{ route('cidade.index') }}">
-                        <span class="menu-icon">
-                            <i class="bi bi-card-list fs-2x"></i>
-                        </span>
-                        <span class="menu-title">Cidades</span>
+                        <span class="menu-title">Home</span>
                     </a>
 
                 </div>
