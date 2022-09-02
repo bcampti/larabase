@@ -3,9 +3,9 @@ Route::get('sair', [\App\Http\Controllers\Auth\LoginController::class, 'logout']
 
 Route::middleware(['auth','verified'])->group(function()
 {
-    Route::middleware(['hasSuporte','verified'])->group(function(){
-        Route::match( ['get','post'], 'account/tenant', [\App\Http\Controllers\Auth\LoginController::class, 'tenants'] )->name('auth.account.tenant.index');
-        Route::get(	'/account/tenant/select/{id}', [\App\Http\Controllers\Auth\LoginController::class, 'tenantSelect'] )->name('auth.account.tenant.select');
+    Route::prefix('auth')->middleware(['hasSuporte','verified'])->group(function(){
+        Route::match( ['get','post'], 'accounts', [\App\Http\Controllers\Auth\LoginController::class, 'accounts'] )->name('auth.account.index');
+        Route::get(	'/account/select/{id}', [\App\Http\Controllers\Auth\LoginController::class, 'accountSelect'] )->name('auth.account.select');
     });
 
     Route::get('/account/none', [\App\Http\Controllers\Auth\LoginController::class, 'accountNoDatabase'])->name('auth.account.no.database');

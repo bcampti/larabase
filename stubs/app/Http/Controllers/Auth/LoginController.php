@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Bcampti\Larabase\Larabase;
+use Bcampti\Larabase\Models\Account;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Spatie\Multitenancy\Models\Tenant;
 
 class LoginController extends Controller
 {
@@ -56,26 +56,26 @@ class LoginController extends Controller
         return redirect()->route('home');
     }
 
-    public function tenants( Request $request )
+    public function accounts( Request $request )
     {
         if( auth()->user()->tipo !== User::TIPO_SUPORTE ){
             return abort(403, "Acesso não autorizado!");
         }
 
-        $tenants = Tenant::get();
+        $accounts = Account::get();
 
-        return view('auth.tenants', compact('tenants'));
+        return view('auth.accounts', compact('accounts'));
     }
 
-    public function tenantSelect( $id )
+    public function accountSelect( $id )
     {
-        $tenant = Tenant::findOrFail($id);
+        $account = Account::findOrFail($id);
 
         $user = request()->user();
 
         if( $user->tipo == User::TIPO_SUPORTE )
         {
-            $user->id_tenant = $tenant->id;
+            $user->id_account = $account->id;
             $user->save();
         }
 

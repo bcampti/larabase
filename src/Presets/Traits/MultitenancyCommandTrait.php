@@ -15,13 +15,14 @@ trait MultitenancyCommandTrait
 
         $execute = true;
         $fileName = 'multitenancy.php';
-        if( $this->exists(config_path($fileName)) ){
+        $params['--force'] = true;
+        /* if( $this->exists(config_path($fileName)) ){
             if( $this->shouldOverwriteFile($fileName) ){
                 $params['--force'] = true;
             } else {
                 $execute = false;
             }
-        }
+        } */
 
         $this->ensureDirectoryExists(app_path('Multitenancy/Tasks'));
 
@@ -33,12 +34,12 @@ trait MultitenancyCommandTrait
             $this->copyOrOverwreteFile('app/Multitenancy/Tasks/SwitchTenantDatabaseTask.php');
         }
 
-        $params = [
+        /* $params = [
             '--provider' => "Spatie\Multitenancy\MultitenancyServiceProvider",
             '--tag' => "multitenancy-migrations"
         ];
 
-        $this->call('vendor:publish', $params);
+        $this->call('vendor:publish', $params); */
 
         return $this;
     }

@@ -16,14 +16,14 @@ class CheckTenantConnection
         if( !$this->getTenantModel()::checkCurrent())
 		{
 			if( auth()->user()->tipo == User::TIPO_SUPORTE ) {
-				return redirect(route('auth.account.tenant.index'));
+				return redirect(route('auth.account.index'));
 			}
 
 			$tenant = auth()->user()->tenant;
 			if( is_empty($tenant) ){
 				return redirect(route("auth.account.no.database"));
 			}
-			return redirect('auth.account.tenant.select', $tenant->id);
+			return redirect('auth.account.select', $tenant->id);
 		}
 		
 		$tenant = $this->getTenantModel()::current();
