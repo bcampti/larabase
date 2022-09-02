@@ -145,7 +145,15 @@ class LarabaseInstallerCommand extends Command
 
     public function publishMigrations()
     {
-        $this->publishFiles([
+        (new Filesystem)->ensureDirectoryExists(database_path('factories'));
+        (new Filesystem)->ensureDirectoryExists(database_path('migrations'));
+        (new Filesystem)->ensureDirectoryExists(database_path('migrations/landlord'));
+        (new Filesystem)->ensureDirectoryExists(database_path('migrations/tenant'));
+
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../database/landlord', public_path('database/landlord'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../database/tenant', public_path('database/tenant'));
+        
+        /* $this->publishFiles([
             'database/migrations/landlord/2014_10_12_000000_create_users_table.php',
             'database/migrations/landlord/2014_10_12_100000_create_password_resets_table.php',
             'database/migrations/landlord/2019_08_19_000000_create_failed_jobs_table.php',
@@ -157,6 +165,6 @@ class LarabaseInstallerCommand extends Command
             'database/migrations/tenant/2022_09_01_171049_create_organizacao_table.php',
             'database/migrations/tenant/2022_09_01_172625_add_custom_field_to_usuario_table.php',
             'database/migrations/tenant/2022_09_01_193049_create_audits_table.php'
-        ]);
+        ]); */
     }
 }
