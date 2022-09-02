@@ -27,7 +27,9 @@ trait AuditCommandTrait
         if( $execute == true ){
             $this->call('vendor:publish', $params);
 
-            $this->copyOrOverwreteFile('config/audit.php');
+            $this->publishFiles([
+                'config/audit.php'
+            ]);
         }
 
         /* $params = [

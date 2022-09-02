@@ -29,9 +29,11 @@ trait MultitenancyCommandTrait
         if( $execute == true ){
             $this->call('vendor:publish', $params);
 
-            $this->copyOrOverwreteFile('config/database.php');
-            $this->copyOrOverwreteFile('config/multitenancy.php');
-            $this->copyOrOverwreteFile('app/Multitenancy/Tasks/SwitchTenantDatabaseTask.php');
+            $this->publishFiles([
+                'config/database.php',
+                'config/multitenancy.php',
+                'app/Multitenancy/Tasks/SwitchTenantDatabaseTask.php'
+            ]);
         }
 
         /* $params = [
