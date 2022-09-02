@@ -70,17 +70,9 @@ trait HandleFiles
             } */
 
             if (!file_exists($publishPath) || $overwrite) {
-                $this->copyOrOverwreteFile($file);
+                copy(__DIR__ . '/../../../stubs/' . $file, $publishPath);
             }
         }
     }
 
-    public function copyOrOverwreteFile($file)
-    {
-        $publishPath = base_path($file);
-        copy(
-            __DIR__ . '/../../../stubs/' . $file,
-            $publishPath
-        );
-    }
 }
