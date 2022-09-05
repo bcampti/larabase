@@ -8,6 +8,7 @@ use Bcampti\Larabase\Http\Requests\AccountRequest;
 use Bcampti\Larabase\Models\Account;
 use Bcampti\Larabase\Repositories\AccountManager;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
