@@ -6,7 +6,6 @@ use Bcampti\Larabase\Presets\Traits\AuditCommandTrait;
 use Bcampti\Larabase\Presets\Traits\HandleFiles;
 use Bcampti\Larabase\Presets\Traits\MultitenancyCommandTrait;
 use Bcampti\Larabase\Presets\Traits\MigrationCommandTrait;
-use Bcampti\Larabase\Presets\Traits\TranslateCommandTrait;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
@@ -16,7 +15,6 @@ class LarabaseInstallerCommand extends Command
     use MultitenancyCommandTrait;
     use HandleFiles;
     use MigrationCommandTrait;
-    use TranslateCommandTrait;
     
     public $signature = 'larabase:install';
 
@@ -26,8 +24,7 @@ class LarabaseInstallerCommand extends Command
     {
         $this->publishAudit()
             ->publishMultitenancy()
-            ->publishMigrations()
-            ->publishTranslate();
+            ->publishMigrations();
         
         shell_exec("php artisan ui bootstrap --auth");
 
