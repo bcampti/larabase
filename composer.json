@@ -27,6 +27,7 @@
     "require-dev": {
         "laravel/pint": "^1.0",
         "laraveldaily/larastarters": "^2.0",
+        "lucascudo/laravel-pt-br-localization": "^1.2",
         "nunomaduro/collision": "^6.0",
         "orchestra/testbench": "^7.0",
         "pestphp/pest": "^1.21",
