@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::preventLazyLoading(!app()->isProduction());
     	
-        if( config("app.debug_query") ){
+        if( config("larabase.debug_query") ){
     	    DB::listen(function($query){
                 Log::info("\n---------------------------------------------------------------"
                     ."\nSchema=[".$query->connection->getConfig()['schema']."] - TEMPO[".$query->time."]"

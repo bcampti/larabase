@@ -7,9 +7,11 @@ use Bcampti\Larabase\Models\Model;
 use Bcampti\Larabase\Traits\HasUsuarioAlteracao;
 use Bcampti\Larabase\Traits\HasUsuarioCriacao;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Multitenancy\Models\Concerns\UsesTenantModel;
 
 class Organizacao extends Model
 {
+	use UsesTenantModel;
 	use HasUsuarioCriacao;
 	use HasUsuarioAlteracao;
 	use HasFactory;

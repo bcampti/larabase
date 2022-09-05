@@ -18,16 +18,16 @@
     "require": {
         "php": "^8.1",
         "illuminate/contracts": "^9.0",
+        "laravel/ui": "^4.0",
         "laravellegends/pt-br-validator": "^9.0",
+        "lucascudo/laravel-pt-br-localization": "^1.2",
         "owen-it/laravel-auditing": "^13.0",
         "spatie/laravel-multitenancy": "^2.0",
-        "spatie/laravel-package-tools": "^1.9.2",
-        "laravel/ui": "^4.0"
+        "spatie/laravel-package-tools": "^1.9.2"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
         "laraveldaily/larastarters": "^2.0",
-        "lucascudo/laravel-pt-br-localization": "^1.2",
         "nunomaduro/collision": "^6.0",
         "orchestra/testbench": "^7.0",
         "pestphp/pest": "^1.21",

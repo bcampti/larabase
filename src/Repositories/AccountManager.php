@@ -71,7 +71,7 @@ class AccountManager extends TenantManager implements PaginateInterface
 	    return $this->salvar($account);
 	}
 	
-	public function adicionarDadosPadraoNovaConta( $user, $account )
+	public function adicionarDadosPadraoNovaConta( User $user, Account $account )
 	{
 		/* CRIA O REPOSITORIO DA COMPANHIA */
 		if( is_empty($account->repositorio) )
