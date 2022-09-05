@@ -3,7 +3,7 @@
 use Bcampti\Larabase\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('account')->group(function(){
+Route::prefix('account')->middleware(['auth','hasSuporte'])->group(function(){
     Route::match(['get','post'], '/', [AccountController::class, 'index'])->name('account.index');
     Route::get('cadastrar', [AccountController::class, 'create'])->name('account.create');
     Route::post('salvar', [AccountController::class, 'store'])->name('account.store');

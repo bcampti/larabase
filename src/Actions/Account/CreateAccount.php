@@ -12,5 +12,7 @@ class CreateAccount
         $accountManager = new AccountManager();
         
         $account = $accountManager->createDatabase($user->account);
+
+        $accountManager->adicionarDadosPadraoNovaConta($user, $account);
     }
 }
