@@ -51,7 +51,7 @@ Publica os arquivos de errors:
 php artisan vendor:publish --tag="laravel-errors"
 ```
 
-## Instalação de dependencias e configurações adicionais
+## Instalação das dependencias e configurações adicionais
 Executar o comando abaixo para instalar as dependencias do pacote.
 ```bash
 php artisan larabase:install 
@@ -61,10 +61,13 @@ Os pacote abaixo serão instalado e pré configurados.
 ### 1. [pt-br-validator: Validações brasileiras para Laravel.](https://github.com/LaravelLegends/pt-br-validator)
 Esta biblioteca adiciona validações brasileira ao Laravel, para serem utilizadas nos `FormRequest`, `Rules` como CPF, CNPJ, Placa de Carro, CEP, Telefone, Celular e afins.
 
-### 2. [Laravel Auditing](https://github.com/owen-it/laravel-auditing)
+### 2. [Laravel-pt-BR-localization](https://github.com/lucascudo/laravel-pt-BR-localization)
+Módulo de linguagem pt-BR (português brasileiro) para Laravel, adiciona arquivos de trandução para Portugues do Brasil.
+
+### 3. [Laravel Auditing](https://github.com/owen-it/laravel-auditing)
 Verificar na [documentação](https://github.com/owen-it/laravel-auditing-doc/blob/main/documentation.md) em caso de duvidas.
 
-### 3. [Laravel-multitenancy](https://github.com/spatie/laravel-multitenancy)
+### 4. [Laravel-multitenancy](https://github.com/spatie/laravel-multitenancy)
 As configurações padrão para o funcionamento do pacote serão adicionadas:
 * `config/database.php`, connections `landlord` para o schema principal e `tenant` para o schema de clientes.
 * `config/multitenancy.php`, `'tenant_database_connection_name' => 'tenant', 'landlord_database_connection_name' => 'landlord',`.
@@ -79,11 +82,6 @@ ou
 ```bash
 php artisan migrate:app
 ```
-
-### 4. [Laravel-pt-BR-localization](https://github.com/lucascudo/laravel-pt-BR-localization)
-Módulo de linguagem pt-BR (português brasileiro) para Laravel, adiciona arquivos de trandução para Portugues do Brasil.
-> Este pacote deve ser instalado separadamente devido a possíveis conflitos nas traduções.
-
 
 # Comandos artisan Larabase
 ```bash

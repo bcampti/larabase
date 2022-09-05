@@ -19,11 +19,11 @@ class CheckTenantConnection
 				return redirect(route('auth.account.index'));
 			}
 
-			$tenant = auth()->user()->tenant;
+			$tenant = auth()->user()->account;
 			if( is_empty($tenant) ){
 				return redirect(route("auth.account.no.database"));
 			}
-			return redirect('auth.account.select', $tenant->id);
+			return redirect(route('auth.account.select', $tenant->id));
 		}
 		
 		$tenant = $this->getTenantModel()::current();

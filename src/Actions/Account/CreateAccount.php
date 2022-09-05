@@ -12,7 +12,5 @@ class CreateAccount
         $accountManager = new AccountManager();
         
         $account = $accountManager->createDatabase($user->account);
-
-        $user->sendEmailVerificationNotification();
     }
 }
