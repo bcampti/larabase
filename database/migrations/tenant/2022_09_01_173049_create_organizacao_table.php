@@ -16,6 +16,7 @@ return new class extends Migration
     {
         Schema::create('organizacao', function (Blueprint $table) {
             $table->bigIncrements("id");
+            $table->bigInteger('id_account');
             $table->text("nome");
             $table->text("razao_social");
             $table->text("cnpj");
@@ -31,7 +32,6 @@ return new class extends Migration
             $table->foreignId('id_usuario_criacao')->constrained('usuario');
             $table->timestamp("updated_at")->nullable();
             $table->foreignId('id_usuario_alteracao')->nullable()->constrained('usuario');
-            $table->bigInteger("id_organizacao_migration");
         });
     }
 

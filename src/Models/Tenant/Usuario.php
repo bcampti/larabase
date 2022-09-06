@@ -3,11 +3,11 @@
 namespace Bcampti\Larabase\Models\Tenant;
 
 use Bcampti\Larabase\Models\Model;
-use Spatie\Multitenancy\Models\Concerns\UsesTenantModel;
+use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 
 class Usuario extends Model
 {
-    use UsesTenantModel;
+    use UsesTenantConnection;
     
     protected $table = "usuario";
 }
