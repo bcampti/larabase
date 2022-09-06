@@ -1,10 +1,10 @@
 <?php
 
-namespace Bcampti\Larabase\View\Components;
+namespace App\View\Account;
 
 use Illuminate\View\Component;
 
-class StatusAccount extends Component
+class Status extends Component
 {
     public $status;
     /**
