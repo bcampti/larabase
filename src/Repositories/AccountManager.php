@@ -92,8 +92,9 @@ class AccountManager extends TenantManager implements PaginateInterface
 	    $usuario->data_ultimo_login = $user->data_ultimo_login;
 	    $usuario->data_criacao = $user->data_criacao;
 	    $usuario->idioma = $user->idioma;
-	    
-	    $usuario->save();
+
+		$usuarioManager = new UsuarioManager();
+	    $usuarioManager->salvar($usuario);
 	    
 		// ADICIONA ORGANIZACAO
 	    $organizacao = new Organizacao();
