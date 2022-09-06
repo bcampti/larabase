@@ -1,7 +1,9 @@
 <?php
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Blade;
 use OwenIt\Auditing\Models\Audit;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -35,8 +37,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        Model::preventLazyLoading(!app()->isProduction());
-    	
         if( config("larabase.debug_query") ){
     	    DB::listen(function($query){
                 Log::info("\n---------------------------------------------------------------"
@@ -45,5 +45,17 @@ class AppServiceProvider extends ServiceProvider
                 );
             });
         }
+
+        Model::preventLazyLoading(!app()->isProduction());
+
+        Blade::if('havePermission', function ($permissao) {
+            if( auth()->user()->tipo==User::TIPO_SUPORTE )return true;
+            if( auth()->user()->tipo==$permissao )return true;
+            return false;
+        });
+
+        Blade::directive('moneyFormat', function ($valor) {
+            return "<?php echo 'R$ ' . number_format($valor, 2, ',', '.'); ?>";
+        });
     }
 }

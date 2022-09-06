@@ -16,19 +16,19 @@
 			<div class="card-header">
 				<h3 class="card-title">Account</h3>
 				<div class="card-toolbar">
-					@canAccess('cliente')
+					@havePermission('cliente')
 					<a href="{{ route('account.create') }}" class="btn btn-sm fw-bold btn-primary"><i class="fa fa-plus"></i> Novo </a>
-					@endcanAccess
+					@endhavePermission
 				</div>
 			</div>
-		@canAccess('cliente')
+		@havePermission('cliente')
 			@if( empty($account->id) )
 			<form id="kt_account_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('account.store')}}" method="post">
 			@else
 			<form id="kt_account_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('account.update', $account->id)}}" method="post">
 				@method("PUT")
 			@endif
-		@endcanAccess
+		@endhavePermission
 				@csrf
 
 				<div class="card-body">
@@ -56,7 +56,7 @@
 								<span class="required">Situação</span>
 							</label>
 							<select class="form-select form-select-sm" data-control="select2" name="status">
-								@foreach ( \App\Enums\StatusEnum::cases() as $status )
+								@foreach ( \Bcampti\Larabase\Enums\StatusAccountEnum::cases() as $status )
 									<option value="{{ $status->value }}" {{ optional($account->status)->value!=$status->value?:'selected' }}>{{ $status->value }}</option>
 								@endforeach
 							</select>
@@ -70,7 +70,7 @@
 				</div>
 				<div class="card-footer">
 					<div class="d-flex justify-content-end">
-					@canAccess('cliente')
+					@havePermission('cliente')
 						@if( !empty($account->id) )
 						<a href="#" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal" data-bs-target="#modaldelete" title="Excluir Registro"><i class="las la-trash fs-2"></i> Excluir</a>
 						@endif
@@ -81,7 +81,7 @@
 								<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
 							</span>
 						</button>
-					@endcanAccess
+					@endhavePermission
 						<a href="{{ route('account.index') }}" class="btn btn-secondary btn-sm"><i class="fa fa-chevron-left"></i> Voltar</a>
 					</div>
 				</div>
@@ -95,7 +95,7 @@
 </div>
 <!--end::Content-->
 
-@canAccess('cliente')
+@havePermission('cliente')
 @if( !empty($account->id) )
 <!--begin::ModalDelete-->
 <div class="modal fade" id="modaldelete" tabindex="-1" data-backdrop="static" data-keyboard="false" style="display: none;">
@@ -130,7 +130,7 @@
 </div>
 <!--end::ModalDelete-->
 @endif
-@endcanAccess
+@endhavePermission
 @endsection
 
 {{-- 
