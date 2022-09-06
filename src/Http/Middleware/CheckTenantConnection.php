@@ -13,12 +13,11 @@ class CheckTenantConnection
 
     public function handle($request, Closure $next)
     {
-		if( auth()->user()->tipo == User::TIPO_SUPORTE ) {
-			return redirect(route('account.index'));
-		}
-
 		$tenant = auth()->user()->account;
 		if( is_empty($tenant) ){
+			if( auth()->user()->tipo == User::TIPO_SUPORTE ) {
+				return redirect(route('account.index'));
+			}
 			return redirect(route("auth.account.no.database"));
 		}
 		

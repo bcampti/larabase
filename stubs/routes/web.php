@@ -39,7 +39,6 @@ Route::get('/email/verify/{id}/{hash}', function (Illuminate\Foundation\Auth\Ema
 Route::middleware(['auth','verified'])->group(function()
 {
     Route::prefix('auth')->group(function(){
-        Route::match( ['get','post'], 'accounts', [\App\Http\Controllers\Auth\LoginController::class, 'accounts'] )->name('auth.account.index');
         Route::get(	'/account/select/{id}', [\App\Http\Controllers\Auth\LoginController::class, 'accountSelect'] )->name('auth.account.select');
         Route::get('/account/none', [\App\Http\Controllers\Auth\LoginController::class, 'accountNoDatabase'])->name('auth.account.no.database');
 
