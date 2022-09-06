@@ -84,10 +84,9 @@ class AccountManager extends TenantManager implements PaginateInterface
 		/* ADICIONA USUARIO AO SCHEMA */
 	    $usuario = new Usuario();
 	    $usuario->id = $user->id;
-	    $usuario->nome = $user->name;
+	    $usuario->name = $user->name;
 	    $usuario->email = $user->email;
 	    $usuario->password = $user->password;
-	    $usuario->status = $user->status;
 	    $usuario->tipo = $user->tipo;
 
 		$usuarioManager = new UsuarioManager();

@@ -30,6 +30,7 @@ class Organizacao extends Model
 		"email",
 		"telefone",
 		"status",
+		"id_account"
 	];
 
 	protected $casts = [
@@ -43,6 +44,8 @@ class Organizacao extends Model
 		"estado" => "string",
 		"email" => "string",
 		"telefone" => "string",
+
+		"id_account"=>"integer",
 		
 		"status"=>StatusEnum::class,
 		"id_organizacao"=>"integer",

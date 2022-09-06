@@ -60,6 +60,7 @@ class RegisterController extends Controller
             'terms' => ['required', 'accepted'],
         ],
         [
+            'terms.required' => 'Você deve aceitar os Termos e Políticas de Privacidade',
             'terms.accepted' => 'Você deve aceitar os Termos e Políticas de Privacidade',
         ]);
     }
