@@ -24,6 +24,6 @@ class StatusAccount extends Component
      */
     public function render()
     {
-        return view('larabase::components.statusAccount');
+        return view('components.account.status');
     }
 }

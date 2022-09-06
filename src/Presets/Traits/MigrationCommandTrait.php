@@ -32,17 +32,7 @@ trait MigrationCommandTrait
         foreach ($files as $file) {
             $publishPath = base_path($file);
 
-            $overwrite = true;
-
-            /* if (file_exists($publishPath)) {
-                $overwrite = $this->confirm(
-                    "<fg=red>{$file} already exists.</fg=red>\n " .
-                        'Do you want to overwrite?',
-                    false
-                );
-            } */
-
-            if (!file_exists($publishPath) || $overwrite) {
+            if( !file_exists($publishPath) ) {
                 copy(__DIR__ . '/../../../' . $file, $publishPath);
             }
         }

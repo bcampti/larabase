@@ -24,7 +24,7 @@ class AccountController extends Controller
     {
 		$filtro = $this->accountManager->paginate($request);
 
-		return view("larabase::account.listar", compact("filtro"));
+		return view("account.listar", compact("filtro"));
 	}
 
 	public function formulario( Account $account)
@@ -32,7 +32,7 @@ class AccountController extends Controller
 		if( old() ){
 		    $account->fill(old());
 		}
-		return view("larabase::account.formulario", compact("account"));
+		return view("account.formulario", compact("account"));
 	}
 
 	public function create()

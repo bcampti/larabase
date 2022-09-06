@@ -14,7 +14,7 @@ class CheckTenantConnection
     public function handle($request, Closure $next)
     {
 		if( auth()->user()->tipo == User::TIPO_SUPORTE ) {
-			return redirect(route('auth.account.index'));
+			return redirect(route('account.index'));
 		}
 
 		$tenant = auth()->user()->account;
