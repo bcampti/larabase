@@ -13,10 +13,10 @@
 			<div class="card-header">
 				<h3 class="card-title">Account</h3>
 				<div class="card-toolbar">
-					@canAccess('cliente')
+					@havePermission('cliente')
 					<a href="{{ route('account.create') }}" class="btn btn-sm fw-bold btn-primary"><i class="fa fa-plus"></i>
 						Novo </a>
-					@endcanAccess
+					@endhavePermission
 				</div>
 			</div>
 
@@ -45,7 +45,7 @@
 							<div class="d-flex w-md-100px">
 								<select class="form-select form-select-sm" data-control="select2" name="account[status]">
 									<option value="" {{ is_empty($filtro->account->status)?'selected':'' }}>Todas</option>
-									@foreach ( \App\Enums\StatusEnum::cases() as $status )
+									@foreach ( \Bcampti\Larabase\Enums\StatusAccountEnum::cases() as $status )
 										<option value="{{ $status->value }}" {{ optional($filtro->account->status)->value!=$status->value?:'selected' }}>{{ $status->value }}</option>
 									@endforeach
 								</select>
@@ -91,9 +91,9 @@
 								<tr class="{{$loop->odd?'odd':'even'}}">
 									<td>{{ $account->id }}</td>
 									<td>{{ $account->nome }}</td>
-									<td><x-model.status status="{{ $account->status->value }}"/></td>
+									<td><x-larabase-model.status status="{{ $account->status->value }}"/></td>
 									<td class="text-end pt-0 pb-0">
-									@canAccess("cliente")
+									@havePermission("CLIENTE")
 										<a href="{{ route('account.edit', $account->id) }}" class="btn btn-sm btn-icon btn-warning" title="Alterar Registro"><i class="las la-edit fs-2"></i></a>
 										<a href="#" class="btn btn-sm btn-icon btn-danger" data-bs-toggle="modal" data-bs-target="#modaldelete{{$account->id}}" title="Excluir Registro"><i class="las la-trash fs-2"></i></a>
 										<!--begin::ModalDelete-->
@@ -128,7 +128,7 @@
 											</div>
 										</div>
 										<!--end::ModalDelete-->
-										@endcanAccess
+										@endhavePermission
 									</td>
 								</tr>
 								@empty
@@ -136,9 +136,9 @@
 									<td colspan="4" style="text-align: center;">
 										<div class="card-px text-center py-20 my-10">
 											<p class="fs-4 fw-semibold mb-10">Não existe nenhum registro para esta consulta.</p>
-											@canAccess('cliente')
+											@havePermission('cliente')
 											<a href="{{ route('account.create') }}" class="btn btn-sm fw-bold btn-primary"><i class="fa fa-plus"></i> Adicionar Novo Registro</a>
-											@endcanAccess
+											@endhavePermission
 										</div>
 									</td>
 								</tr>
@@ -151,7 +151,7 @@
 
 					<div class="row">
 					
-						@include('paginacao.default')
+						@include('pagination.default')
 					
 					</div>
 

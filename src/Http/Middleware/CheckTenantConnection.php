@@ -13,23 +13,19 @@ class CheckTenantConnection
 
     public function handle($request, Closure $next)
     {
-        if( !$this->getTenantModel()::checkCurrent())
-		{
-			if( auth()->user()->tipo == User::TIPO_SUPORTE ) {
-				return redirect(route('auth.account.index'));
-			}
+		if( auth()->user()->tipo == User::TIPO_SUPORTE ) {
+			return redirect(route('auth.account.index'));
+		}
 
-			$tenant = auth()->user()->account;
-			if( is_empty($tenant) ){
-				return redirect(route("auth.account.no.database"));
-			}
-			return redirect(route('auth.account.select', $tenant->id));
+		$tenant = auth()->user()->account;
+		if( is_empty($tenant) ){
+			return redirect(route("auth.account.no.database"));
 		}
 		
-		$tenant = $this->getTenantModel()::current();
 		if( !(new Database())->schemaExists($tenant->getDatabaseName()) ){
 			return redirect(route("auth.account.no.database"));
 		}
+		
 		$tenant->makeCurrent();
 
 		return $next($request);

@@ -17,4 +17,7 @@ return [
      * Ela pode ser ou extender `Bcampti\Larabase\Models\Tenant\Organizacao::class`
      */
     "organizacao_model" => Bcampti\Larabase\Models\Tenant\Organizacao::class,
+
+    'prefix' => null,
+    'middleware' => ['web'],
 ];

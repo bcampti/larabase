@@ -24,8 +24,8 @@ trait MigrationCommandTrait
             'database/migrations/landlord/2022_09_01_172625_add_custom_field_to_users_table.php',
             
             'database/migrations/tenant/2022_09_01_000000_create_usuario_table.php',
-            'database/migrations/tenant/2022_09_01_171049_create_organizacao_table.php',
             'database/migrations/tenant/2022_09_01_172625_add_custom_field_to_usuario_table.php',
+            'database/migrations/tenant/2022_09_01_173049_create_organizacao_table.php',
             'database/migrations/tenant/2022_09_01_193049_create_audits_table.php'
         ];
 
