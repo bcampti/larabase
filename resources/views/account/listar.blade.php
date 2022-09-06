@@ -91,7 +91,7 @@
 								<tr class="{{$loop->odd?'odd':'even'}}">
 									<td>{{ $account->id }}</td>
 									<td>{{ $account->nome }}</td>
-									<td><x-larabase-model.status status="{{ $account->status->value }}"/></td>
+									<td><x-account.status status="{{ $account->status->value }}"/></td>
 									<td class="text-end pt-0 pb-0">
 									@havePermission("CLIENTE")
 										<a href="{{ route('account.edit', $account->id) }}" class="btn btn-sm btn-icon btn-warning" title="Alterar Registro"><i class="las la-edit fs-2"></i></a>

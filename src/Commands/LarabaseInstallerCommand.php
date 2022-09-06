@@ -31,10 +31,21 @@ class LarabaseInstallerCommand extends Command
         
         shell_exec("php artisan ui bootstrap --auth");
 
-        $this->ensureDirectoryExists(app_path('Exceptions'));
-        $this->ensureDirectoryExists(app_path('Http'));
+        $this->publishAppResources()
+            ->publishConfigResources()
+            ->publishRouteResources();
 
-        $scopes = [
+        
+        $this->replaceWithMetronicTheme();
+
+        $this->info('Installed Larabase package');
+    }
+
+    public function publishAppResources():self
+    {
+        $this->ensureDirectoryExists(app_path('View'));
+
+        $files = [
             'app/Exceptions/Handler.php',
             'app/Http/Controllers/Auth/RegisterController.php',
             'app/Http/Controllers/Auth/LoginController.php',
@@ -42,11 +53,26 @@ class LarabaseInstallerCommand extends Command
             'app/Models/User.php',
             'app/Providers/AppServiceProvider.php',
             'app/Providers/RouteServiceProvider.php',
-            'config/app.php',
-            'routes/web.php',
+            'app/View/Account/Status.php',
+            'app/View/Model/Status.php',
         ];
-        $this->publishFiles($scopes);
+        $this->publishFiles($files);
 
+        return $this;
+    }
+
+    public function publishConfigResources():self
+    {
+        $files = [
+            'config/app.php',
+        ];
+        $this->publishFiles($files);
+
+        return $this;
+    }
+
+    public function publishRouteResources():self
+    {
         /* Copia o conteudo de um arquivo para o outro
         file_put_contents(
             base_path('routes/web.php'),
@@ -54,9 +80,12 @@ class LarabaseInstallerCommand extends Command
             FILE_APPEND
         ); */
 
-        $this->replaceWithMetronicTheme();
+        $files = [
+            'routes/web.php',
+        ];
+        $this->publishFiles($files);
 
-        $this->info('Installed Larabase package');
+        return $this;
     }
 
     protected function replaceWithMetronicTheme()
@@ -69,6 +98,11 @@ class LarabaseInstallerCommand extends Command
             ] + $packages;
         });
 
+        (new Filesystem)->ensureDirectoryExists(public_path('assets'));
+        (new Filesystem)->ensureDirectoryExists(public_path('assets/metronic'));
+
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/public/assets/metronic', public_path('assets/metronic'));
+        
         // Views...
         (new Filesystem)->ensureDirectoryExists(resource_path('views/account'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
@@ -81,15 +115,13 @@ class LarabaseInstallerCommand extends Command
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/account', resource_path('views/account'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/auth', resource_path('views/auth'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/auth/passwords', resource_path('views/auth/passwords'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/components', resource_path('views/components'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/components/account', resource_path('views/components/account'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/components/model', resource_path('views/components/model'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/errors', resource_path('views/errors'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/layouts', resource_path('views/layouts'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/layouts/partials', resource_path('views/layouts/partials'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/pagination', resource_path('views/pagination'));
-
-        (new Filesystem)->ensureDirectoryExists(public_path('assets'));
-        (new Filesystem)->ensureDirectoryExists(public_path('assets/metronic'));
-
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/public/assets/metronic', public_path('assets/metronic'));
 
         copy(__DIR__ . '/../../resources/views/home.blade.php', resource_path('views/home.blade.php'));
 
