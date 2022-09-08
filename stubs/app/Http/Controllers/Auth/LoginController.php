@@ -58,14 +58,13 @@ class LoginController extends Controller
 
     public function accountSelect( $id )
     {
+        Session::forget("ensure_valid_tenant_session_tenant_id");
         $account = Account::findOrFail($id);
 
-        $user = request()->user();
-
-        if( $user->tipo == User::TIPO_SUPORTE )
+        if( request()->user()->tipo == User::TIPO_SUPORTE )
         {
-            $user->id_account = $account->id;
-            $user->save();
+            request()->user()->update(['id_account' => $account->id]);
+            request()->user()->fresh();
         }
 
         return redirect(route('auth.account.organizacao.index'));
