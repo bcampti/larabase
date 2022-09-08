@@ -1,6 +1,5 @@
 <?php
 
-use Bcampti\Larabase\Http\Controllers\AccountController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -47,15 +46,6 @@ Route::middleware(['auth','verified'])->group(function()
             Route::match(['get','post'], 'account/organizacao', [\App\Http\Controllers\Auth\LoginController::class,'organizacoes'] )->name('auth.account.organizacao.index');
             Route::get(	'account/organizacao/select/{id}', [\App\Http\Controllers\Auth\LoginController::class, 'organizacaoSelect'] )->name('auth.account.organizacao.select');
         });    
-    });
-
-    Route::prefix('account')->middleware(['hasSuporte'])->group(function(){
-        Route::match(['get','post'], '/', [AccountController::class, 'index'])->name('account.index');
-        Route::get('cadastrar', [AccountController::class, 'create'])->name('account.create');
-        Route::post('salvar', [AccountController::class, 'store'])->name('account.store');
-        Route::get('alterar/{id}', [AccountController::class, 'edit'])->name('account.edit');
-        Route::put('update/{id}', [AccountController::class, 'update'])->name('account.update');
-        Route::delete('excluir/{id}', [AccountController::class, 'destroy'])->name('account.destroy');
     });
 
     // Utilizado para limpar da sessao o filtro aplicado na consulta das listagens
