@@ -20,6 +20,7 @@ use Bcampti\Larabase\Commands\Multitenancy\AppMigrationCommand;
 use Bcampti\Larabase\Commands\Multitenancy\AppRollbackMigrationCommand;
 use Bcampti\Larabase\Commands\Multitenancy\TenantMigrationCommand;
 use Bcampti\Larabase\Commands\Multitenancy\TenantRollbackMigrationCommand;
+use Illuminate\Support\Facades\Route;
 
 class LarabaseServiceProvider extends PackageServiceProvider
 {
@@ -83,15 +84,16 @@ class LarabaseServiceProvider extends PackageServiceProvider
                 $this->package->basePath('/../stubs/stubs') => base_path("stubs"),
             ], "{$this->package->shortName()}-stubs");
         }
-
-        /* $this->loadViewsFrom(__DIR__.'/../resources/views', 'larabase');
+        
         $this->registerRoutes();
-        $this->loadViewComponentsAs('larabase', [
+
+        //$this->loadViewsFrom(__DIR__.'/../resources/views', 'larabase');
+        /* $this->loadViewComponentsAs('larabase', [
             StatusAccountEnum::class,
         ]); */
     }
     
-    /* protected function registerRoutes()
+    protected function registerRoutes()
     {
         Route::group($this->routeConfiguration(), function () {
             $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
@@ -104,6 +106,6 @@ class LarabaseServiceProvider extends PackageServiceProvider
             'prefix' => config('larabase.prefix'),
             'middleware' => config('larabase.middleware'),
         ];
-    } */
+    }
 
 }

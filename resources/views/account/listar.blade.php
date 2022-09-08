@@ -94,6 +94,7 @@
 									<td><x-account.status status="{{ $account->status->value }}"/></td>
 									<td class="text-end pt-0 pb-0">
 									@havePermission("CLIENTE")
+										<a href="{{ route('auth.account.select', $account->id) }}" class="btn btn-sm fw-bold btn-info"><i class="bi bi-download"></i> Acessar</a>
 										<a href="{{ route('account.edit', $account->id) }}" class="btn btn-sm btn-icon btn-warning" title="Alterar Registro"><i class="las la-edit fs-2"></i></a>
 										<a href="#" class="btn btn-sm btn-icon btn-danger" data-bs-toggle="modal" data-bs-target="#modaldelete{{$account->id}}" title="Excluir Registro"><i class="las la-trash fs-2"></i></a>
 										<!--begin::ModalDelete-->

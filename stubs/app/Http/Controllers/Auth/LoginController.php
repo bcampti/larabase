@@ -56,17 +56,6 @@ class LoginController extends Controller
         return redirect()->route('home');
     }
 
-    public function accounts( Request $request )
-    {
-        if( auth()->user()->tipo !== User::TIPO_SUPORTE ){
-            return abort(403, "Acesso não autorizado!");
-        }
-
-        $accounts = Account::get();
-
-        return view('auth.accounts', compact('accounts'));
-    }
-
     public function accountSelect( $id )
     {
         $account = Account::findOrFail($id);

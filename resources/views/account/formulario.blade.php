@@ -72,6 +72,7 @@
 					<div class="d-flex justify-content-end">
 					@havePermission('cliente')
 						@if( !empty($account->id) )
+						<a href="{{ route('auth.account.select', $account->id) }}" class="btn btn-sm fw-bold btn-info"><i class="bi bi-download"></i> Acessar</a>
 						<a href="#" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal" data-bs-target="#modaldelete" title="Excluir Registro"><i class="las la-trash fs-2"></i> Excluir</a>
 						@endif
 						<button type="submit" data-kt-contacts-type="submit" class="btn btn-primary btn-sm me-3">

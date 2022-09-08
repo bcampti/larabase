@@ -44,6 +44,8 @@ class LarabaseInstallerCommand extends Command
     public function publishAppResources():self
     {
         $this->ensureDirectoryExists(app_path('View'));
+        $this->ensureDirectoryExists(app_path('View/Account'));
+        $this->ensureDirectoryExists(app_path('View/Model'));
 
         $files = [
             'app/Exceptions/Handler.php',
