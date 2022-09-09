@@ -307,7 +307,7 @@
                             <div class="card-body d-flex flex-center flex-column pt-12 p-9">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-65px symbol-circle mb-5">
-                                    <img src="/assets/metronic/media/avatars/300-2.jpg" alt="image">
+                                    <img src="/assets/media/avatars/300-2.jpg" alt="image">
                                     <div class="bg-success position-absolute border border-4 border-body h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>
                                 </div>
                                 <!--end::Avatar-->
@@ -399,7 +399,7 @@
                             <div class="card-body d-flex flex-center flex-column pt-12 p-9">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-65px symbol-circle mb-5">
-                                    <img src="/assets/metronic/media/avatars/300-1.jpg" alt="image">
+                                    <img src="/assets/media/avatars/300-1.jpg" alt="image">
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Name-->
@@ -444,7 +444,7 @@
                             <div class="card-body d-flex flex-center flex-column pt-12 p-9">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-65px symbol-circle mb-5">
-                                    <img src="/assets/metronic/media/avatars/300-14.jpg" alt="image">
+                                    <img src="/assets/media/avatars/300-14.jpg" alt="image">
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Name-->
@@ -489,7 +489,7 @@
                             <div class="card-body d-flex flex-center flex-column pt-12 p-9">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-65px symbol-circle mb-5">
-                                    <img src="/assets/metronic/media/avatars/300-6.jpg" alt="image">
+                                    <img src="/assets/media/avatars/300-6.jpg" alt="image">
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Name-->
@@ -671,7 +671,7 @@
                             <div class="card-body d-flex flex-center flex-column pt-12 p-9">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-65px symbol-circle mb-5">
-                                    <img src="/assets/metronic/media/avatars/300-12.jpg" alt="image">
+                                    <img src="/assets/media/avatars/300-12.jpg" alt="image">
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Name-->
@@ -774,7 +774,7 @@
                                                 <div class="me-5 position-relative">
                                                     <!--begin::Avatar-->
                                                     <div class="symbol symbol-35px symbol-circle">
-                                                        <img alt="Pic" src="/assets/metronic/media/avatars/300-6.jpg">
+                                                        <img alt="Pic" src="/assets/media/avatars/300-6.jpg">
                                                     </div>
                                                     <!--end::Avatar-->
                                                 </div>
@@ -837,7 +837,7 @@
                                                 <div class="me-5 position-relative">
                                                     <!--begin::Avatar-->
                                                     <div class="symbol symbol-35px symbol-circle">
-                                                        <img alt="Pic" src="/assets/metronic/media/avatars/300-1.jpg">
+                                                        <img alt="Pic" src="/assets/media/avatars/300-1.jpg">
                                                     </div>
                                                     <!--end::Avatar-->
                                                 </div>
@@ -867,7 +867,7 @@
                                                 <div class="me-5 position-relative">
                                                     <!--begin::Avatar-->
                                                     <div class="symbol symbol-35px symbol-circle">
-                                                        <img alt="Pic" src="/assets/metronic/media/avatars/300-5.jpg">
+                                                        <img alt="Pic" src="/assets/media/avatars/300-5.jpg">
                                                     </div>
                                                     <!--end::Avatar-->
                                                 </div>
@@ -897,7 +897,7 @@
                                                 <div class="me-5 position-relative">
                                                     <!--begin::Avatar-->
                                                     <div class="symbol symbol-35px symbol-circle">
-                                                        <img alt="Pic" src="/assets/metronic/media/avatars/300-25.jpg">
+                                                        <img alt="Pic" src="/assets/media/avatars/300-25.jpg">
                                                     </div>
                                                     <!--end::Avatar-->
                                                 </div>
@@ -960,7 +960,7 @@
                                                 <div class="me-5 position-relative">
                                                     <!--begin::Avatar-->
                                                     <div class="symbol symbol-35px symbol-circle">
-                                                        <img alt="Pic" src="/assets/metronic/media/avatars/300-9.jpg">
+                                                        <img alt="Pic" src="/assets/media/avatars/300-9.jpg">
                                                     </div>
                                                     <!--end::Avatar-->
                                                 </div>
@@ -1056,7 +1056,7 @@
                                                 <div class="me-5 position-relative">
                                                     <!--begin::Avatar-->
                                                     <div class="symbol symbol-35px symbol-circle">
-                                                        <img alt="Pic" src="/assets/metronic/media/avatars/300-23.jpg">
+                                                        <img alt="Pic" src="/assets/media/avatars/300-23.jpg">
                                                     </div>
                                                     <!--end::Avatar-->
                                                 </div>
@@ -1098,15 +1098,15 @@
 @endsection
 
 @section('script')
-<script src="{{ asset('assets/metronic/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+<script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 
-<script src="{{ asset('assets/metronic/js/custom/utilities/search/horizontal.js') }}"></script>
-<script src="{{ asset('assets/metronic/js/custom/apps/projects/users/users.js') }}"></script>
-<script src="{{ asset('assets/metronic/js/widgets.bundle.js') }}"></script>
-<script src="{{ asset('assets/metronic/js/custom/widgets.js') }}"></script>
-<script src="{{ asset('assets/metronic/js/custom/apps/chat/chat.js') }}"></script>
-<script src="{{ asset('assets/metronic/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
-<script src="{{ asset('assets/metronic/js/custom/utilities/modals/create-app.js') }}"></script>
-<script src="{{ asset('assets/metronic/js/custom/utilities/modals/users-search.js') }}"></script>
+<script src="{{ asset('assets/js/custom/utilities/search/horizontal.js') }}"></script>
+<script src="{{ asset('assets/js/custom/apps/projects/users/users.js') }}"></script>
+<script src="{{ asset('assets/js/widgets.bundle.js') }}"></script>
+<script src="{{ asset('assets/js/custom/widgets.js') }}"></script>
+<script src="{{ asset('assets/js/custom/apps/chat/chat.js') }}"></script>
+<script src="{{ asset('assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
+<script src="{{ asset('assets/js/custom/utilities/modals/create-app.js') }}"></script>
+<script src="{{ asset('assets/js/custom/utilities/modals/users-search.js') }}"></script>
 
 @endsection

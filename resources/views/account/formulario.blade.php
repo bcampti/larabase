@@ -45,8 +45,8 @@
 							<label class="fs-6 fw-semibold form-label mt-3">
 								<span class="required">Nome</span>
 							</label>
-							<input type="text" class="form-control form-control-sm" name="nome" value="{{ $account->nome }}">
-							@error('nome')
+							<input type="text" class="form-control form-control-sm" name="name" value="{{ $account->name }}">
+							@error('name')
 							<div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
 							@enderror
 						</div>
