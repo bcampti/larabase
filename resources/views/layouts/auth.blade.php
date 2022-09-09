@@ -8,12 +8,12 @@
     
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="shortcut icon" href="/assets/metronic/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="/assets/media/logos/favicon.ico" />
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     
-    <link href="{{ asset('assets/metronic/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/metronic/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
 
     @yield('css')
 
@@ -24,7 +24,7 @@
         if ( document.documentElement ) { const defaultThemeMode = "system"; const name = document.body.getAttribute("data-kt-name"); let themeMode = localStorage.getItem("kt_" + ( name !== null ? name + "_" : "" ) + "theme_mode_value"); if ( themeMode === null ) { if ( defaultThemeMode === "system" ) { themeMode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } else { themeMode = defaultThemeMode; } } document.documentElement.setAttribute("data-theme", themeMode); }
     </script>
     <div class="d-flex flex-column flex-root" id="kt_app_root">
-        <style>body {background-image: url('/assets/metronic/media/auth/bg4.jpg');}[data-theme="dark"] body {background-image: url('/assets/metronic/media/auth/bg4-dark.jpg');}
+        <style>body {background-image: url('/assets/media/auth/bg4.jpg');}[data-theme="dark"] body {background-image: url('/assets/media/auth/bg4-dark.jpg');}
         </style>
         <div class="d-flex flex-column flex-column-fluid flex-lg-row">
             
@@ -33,7 +33,7 @@
                 <div class="d-flex flex-column">
 
                     <a href="{{ route('home') }}" class="mb-7">
-                        <img alt="Logo" src="/assets/metronic/media/logos/custom-3.svg" />
+                        <img alt="Logo" src="/assets/media/logos/custom-3.svg" />
                     </a>
 
                     <h2 class="text-white fw-normal m-0">Branding tools designed for your business</h2>
@@ -48,8 +48,8 @@
         </div>
     </div>
 
-    <script src="{{ asset('/assets/metronic/plugins/global/plugins.bundle.js') }}"></script>
-    <script src="{{ asset('/assets/metronic/js/scripts.bundle.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/global/plugins.bundle.js') }}"></script>
+    <script src="{{ asset('/assets/js/scripts.bundle.js') }}"></script>
     
     @yield('scripts')
 

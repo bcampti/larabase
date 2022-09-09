@@ -81,7 +81,7 @@
 							<thead>
 								<tr class="text-start text-gray-600 fw-bold fs-7 text-uppercase gs-0">
 									<th class="min-w-125px">{!! $filtro->coluna('Código', 'id') !!}</th>
-									<th class="min-w-125px">{!! $filtro->coluna('Nome', 'nome') !!}</th>
+									<th class="min-w-125px">{!! $filtro->coluna('Nome', 'name') !!}</th>
 									<th class="min-w-125px">{!! $filtro->coluna('Situação', 'status') !!}</th>
 									<th class="text-end min-w-70px sorting_disabled">Ações</th>
 								</tr>
@@ -90,7 +90,7 @@
 							@forelse( $filtro->items as $account )
 								<tr class="{{$loop->odd?'odd':'even'}}">
 									<td>{{ $account->id }}</td>
-									<td>{{ $account->nome }}</td>
+									<td>{{ $account->name }}</td>
 									<td><x-account.status status="{{ $account->status->value }}"/></td>
 									<td class="text-end pt-0 pb-0">
 									@havePermission("CLIENTE")

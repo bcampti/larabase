@@ -8,7 +8,7 @@
             <!--begin::Logo-->
             <div class="mb-14">
                 <a href="{{ route('home') }}" class="">
-                    <img alt="Logo" src="/assets/metronic/media/logos/custom-2.svg" class="h-40px">
+                    <img alt="Logo" src="/assets/media/logos/custom-2.svg" class="h-40px">
                 </a>
             </div>
             <!--end::Logo-->
@@ -35,8 +35,8 @@
             <!--end::Action-->
             <!--begin::Illustration-->
             <div class="mb-0">
-                <img src="/assets/metronic/media/auth/please-verify-your-email.png" class="mw-100 mh-300px theme-light-show" alt="">
-                <img src="/assets/metronic/media/auth/please-verify-your-email-dark.png" class="mw-100 mh-300px theme-dark-show" alt="">
+                <img src="/assets/media/auth/please-verify-your-email.png" class="mw-100 mh-300px theme-light-show" alt="">
+                <img src="/assets/media/auth/please-verify-your-email-dark.png" class="mw-100 mh-300px theme-dark-show" alt="">
             </div>
             <!--end::Illustration-->
         </div>

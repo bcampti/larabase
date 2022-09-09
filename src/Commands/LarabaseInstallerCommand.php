@@ -101,31 +101,28 @@ class LarabaseInstallerCommand extends Command
         });
 
         (new Filesystem)->ensureDirectoryExists(public_path('assets'));
-        (new Filesystem)->ensureDirectoryExists(public_path('assets/metronic'));
 
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/public/assets/metronic', public_path('assets/metronic'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/assets'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views', resource_path('views/assets'));
         
         // Views...
         (new Filesystem)->ensureDirectoryExists(resource_path('views/account'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/auth/passwords'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/errors'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts/partials'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/pagination'));
 
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/account', resource_path('views/account'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/auth', resource_path('views/auth'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/auth/passwords', resource_path('views/auth/passwords'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/components', resource_path('views/components'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/components/account', resource_path('views/components/account'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/components/model', resource_path('views/components/model'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/errors', resource_path('views/errors'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/layouts', resource_path('views/layouts'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/layouts/partials', resource_path('views/layouts/partials'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/pagination', resource_path('views/pagination'));
 
         copy(__DIR__ . '/../../resources/views/home.blade.php', resource_path('views/home.blade.php'));
+
+        copy(__DIR__ . '/../../stubs/webpack/package.json', app_path('package.json'));
+        copy(__DIR__ . '/../../stubs/webpack/webpack.mix.js', app_path('webpack.mix.js'));
 
         $this->components->info('Larabase instalado com sucesso.');
         $this->components->warn('Para finalizar execute "npm install && npm run dev" para fazer deploy dos assets.');
