@@ -92,7 +92,18 @@ class LarabaseInstallerCommand extends Command
 
     protected function replaceWithMetronicTheme()
     {
-        // NPM Packages...
+        $this->updateNodePackages(function ($packages) {
+            return [
+                "dev" => "npm run development",
+                "development" => "mix",
+                "watch" => "mix watch",
+                "watch-poll" => "mix watch -- --watch-options-poll=1000",
+                "hot" => "mix watch --hot",
+                "prod" => "npm run production",
+                "production" => "mix --production"
+            ];
+        },'scripts');
+
         $this->updateNodePackages(function ($packages) {
             return [
                 "@ckeditor/ckeditor5-alignment" => "^34.0.0",
@@ -178,7 +189,7 @@ class LarabaseInstallerCommand extends Command
                 "vis-timeline" => "^7.4.9",
                 "wnumb" => "^1.2.0"
             ] + $packages;
-        });
+        },'dependencies');
 
         $this->updateNodePackages(function ($packages) {
             return [
@@ -198,7 +209,7 @@ class LarabaseInstallerCommand extends Command
                 "sass-loader" => "^12.4.0",
                 "webpack-rtl-plugin" => "^2.0.0"
             ] + $packages;
-        }, true);
+        },'devDependencies');
 
         copy(__DIR__ . '/../../stubs/webpack/webpack.mix.js', base_path('webpack.mix.js'));
 
@@ -232,16 +243,16 @@ class LarabaseInstallerCommand extends Command
      * Taken from https://github.com/laravel/breeze/blob/1.x/src/Console/InstallCommand.php
      *
      * @param callable $callback
-     * @param bool $dev
+     * @param  string $configurationKey, ['devDependencies', 'dependencies', 'scripts']
      * @return void
      */
-    protected static function updateNodePackages(callable $callback, $dev = true)
+    protected static function updateNodePackages(callable $callback, $configurationKey = 'devDependencies')
     {
         if (!file_exists(base_path('package.json'))) {
             return;
         }
 
-        $configurationKey = $dev ? 'devDependencies' : 'dependencies';
+        //$configurationKey = $dev ? 'devDependencies' : 'dependencies';
 
         $packages = json_decode(file_get_contents(base_path('package.json')), true);
 

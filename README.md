@@ -64,6 +64,10 @@ Executar migração de banco de dados padrão. Este comando executará a migraç
 ```bash
 php artisan migrate:app
 ```
+ou
+```bash
+php artisan migrate:fresh --path=database/migrations/landlord --database=landlord
+```
 
 # Comandos artisan Larabase
 ```bash
