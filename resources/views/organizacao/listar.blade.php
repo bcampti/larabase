@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', ' - Account')
+@section('title', ' - Organizacao')
 
 @section('content')
 <!--begin::Content-->
@@ -8,13 +8,13 @@
 	<!--begin::Content container-->
 	<div id="kt_app_content_container" class="app-container container-fluid">
 
-		<div class="card card-shadow" id="kt_account_main">
+		<div class="card card-shadow" id="kt_organizacao_main">
 
 			<div class="card-header">
-				<h3 class="card-title">Account</h3>
+				<h3 class="card-title">Organizacao</h3>
 				<div class="card-toolbar">
 					@havePermission('cliente')
-					<a href="{{ route('account.create') }}" class="btn btn-sm fw-bold btn-primary"><i class="fa fa-plus"></i>
+					<a href="{{ route('organizacao.create') }}" class="btn btn-sm fw-bold btn-primary"><i class="fa fa-plus"></i>
 						Novo </a>
 					@endhavePermission
 				</div>
@@ -22,7 +22,7 @@
 
 			<div class="card-body pt-0 pb-0">
 
-				<form role="form" action="{{ route('account.index') }}" method="post">
+				<form role="form" action="{{ route('organizacao.index') }}" method="post">
 					@csrf
 					<input type="hidden" name="pagina" value="{{$filtro->pagina}}">
 					<input type="hidden" name="orderBy" value="{{$filtro->orderBy}}">
@@ -43,10 +43,10 @@
 							</div>
 
 							<div class="d-flex w-md-100px">
-								<select class="form-select form-select-sm" data-control="select2" name="account[status]">
-									<option value="" {{ is_empty($filtro->account->status)?'selected':'' }}>Todas</option>
-									@foreach ( \Bcampti\Larabase\Enums\StatusAccountEnum::cases() as $status )
-										<option value="{{ $status->value }}" {{ optional($filtro->account->status)->value!=$status->value?:'selected' }}>{{ $status->value }}</option>
+								<select class="form-select form-select-sm" data-control="select2" name="organizacao[status]">
+									<option value="" {{ is_empty($filtro->organizacao->status)?'selected':'' }}>Todas</option>
+									@foreach ( \Bcampti\Larabase\Enums\StatusEnum::cases() as $status )
+										<option value="{{ $status->value }}" {{ optional($filtro->organizacao->status)->value!=$status->value?:'selected' }}>{{ $status->value }}</option>
 									@endforeach
 								</select>
 							</div>
@@ -81,28 +81,27 @@
 							<thead>
 								<tr class="text-start text-gray-600 fw-bold fs-7 text-uppercase gs-0">
 									<th class="min-w-125px">{!! $filtro->coluna('Código', 'id') !!}</th>
-									<th class="min-w-125px">{!! $filtro->coluna('Nome', 'name') !!}</th>
+									<th class="min-w-125px">{!! $filtro->coluna('Nome', 'nome') !!}</th>
 									<th class="min-w-125px">{!! $filtro->coluna('Situação', 'status') !!}</th>
 									<th class="text-end min-w-70px sorting_disabled">Ações</th>
 								</tr>
 							</thead>
 							<tbody class="fw-semibold">
-							@forelse( $filtro->items as $account )
+							@forelse( $filtro->items as $organizacao )
 								<tr class="{{$loop->odd?'odd':'even'}}">
-									<td>{{ $account->id }}</td>
-									<td>{{ $account->name }}</td>
-									<td><x-account.status status="{{ $account->status->value }}"/></td>
+									<td>{{ $organizacao->id }}</td>
+									<td>{{ $organizacao->nome }}</td>
+									<td><x-model.status status="{{ $organizacao->status->value }}"/></td>
 									<td class="text-end pt-0 pb-0">
 									@havePermission("CLIENTE")
-										<a href="{{ route('auth.account.select', $account->id) }}" class="btn btn-sm fw-bold btn-info"><i class="bi bi-download"></i> Acessar</a>
-										<a href="{{ route('account.edit', $account->id) }}" class="btn btn-sm btn-icon btn-warning" title="Alterar Registro"><i class="las la-edit fs-2"></i></a>
-										<a href="#" class="btn btn-sm btn-icon btn-danger" data-bs-toggle="modal" data-bs-target="#modaldelete{{$account->id}}" title="Excluir Registro"><i class="las la-trash fs-2"></i></a>
+										<a href="{{ route('organizacao.edit', $organizacao->id) }}" class="btn btn-sm btn-icon btn-warning" title="Alterar Registro"><i class="las la-edit fs-2"></i></a>
+										<a href="#" class="btn btn-sm btn-icon btn-danger" data-bs-toggle="modal" data-bs-target="#modaldelete{{$organizacao->id}}" title="Excluir Registro"><i class="las la-trash fs-2"></i></a>
 										<!--begin::ModalDelete-->
-										<div class="modal fade" id="modaldelete{{$account->id}}" tabindex="-1" data-backdrop="static" data-keyboard="false" style="display: none;">
+										<div class="modal fade" id="modaldelete{{$organizacao->id}}" tabindex="-1" data-backdrop="static" data-keyboard="false" style="display: none;">
 											<div class="modal-dialog modal-dialog-centered">
 												<div class="modal-content rounded">
 													<div class="modal-body pb-15 px-5 px-xl-20">
-														<form action="{{ route('account.destroy', $account->id)}}" method="post">
+														<form action="{{ route('organizacao.destroy', $organizacao->id)}}" method="post">
 															@method("DELETE") @csrf
 															<div class="mb-13 text-center">
 																<h1 class="mb-3">Excluir Registro</h1>
@@ -138,7 +137,7 @@
 										<div class="card-px text-center py-20 my-10">
 											<p class="fs-4 fw-semibold mb-10">Não existe nenhum registro para esta consulta.</p>
 											@havePermission('cliente')
-											<a href="{{ route('account.create') }}" class="btn btn-sm fw-bold btn-primary"><i class="fa fa-plus"></i> Adicionar Novo Registro</a>
+											<a href="{{ route('organizacao.create') }}" class="btn btn-sm fw-bold btn-primary"><i class="fa fa-plus"></i> Adicionar Novo Registro</a>
 											@endhavePermission
 										</div>
 									</td>

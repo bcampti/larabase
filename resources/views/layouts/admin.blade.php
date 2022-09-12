@@ -39,8 +39,9 @@
             @include('layouts.partials.header')
             <!-- end:: Header -->
             <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+                
                 <!-- begin:: Menu -->
-                @include('layouts.partials.menu')
+                @include('layouts.partials.admin.menu')
                 <!-- end:: Menu -->
                 <!-- begin:: Main -->
                 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">

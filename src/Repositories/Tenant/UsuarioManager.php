@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcampti\Larabase\Repositories;
+namespace Bcampti\Larabase\Repositories\Tenant;
 
 use Bcampti\Larabase\Models\Tenant\Usuario;
 use Bcampti\Larabase\Repositories\TenantManager;

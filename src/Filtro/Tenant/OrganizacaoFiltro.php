@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcampti\Larabase\Filtro;
+namespace Bcampti\Larabase\Filtro\Tenant;
 
 use Bcampti\Larabase\Enums\StatusEnum;
 use Bcampti\Larabase\Filtro\AbstractFiltro;

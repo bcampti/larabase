@@ -1,6 +1,6 @@
 @extends('layouts.admin') 
 
-@section('title', ' - Account')
+@section('title', ' - Organizacao')
 
 @section('css')
 @endsection
@@ -11,21 +11,21 @@
 	<!--begin::Content container-->
 	<div id="kt_app_content_container" class="app-container container-fluid">
 
-		<div class="card card-shadow" id="kt_account_main">
+		<div class="card card-shadow" id="kt_organizacao_main">
 
 			<div class="card-header">
-				<h3 class="card-title">Account</h3>
+				<h3 class="card-title">Organizacao</h3>
 				<div class="card-toolbar">
 					@havePermission('cliente')
-					<a href="{{ route('account.create') }}" class="btn btn-sm fw-bold btn-primary"><i class="fa fa-plus"></i> Novo </a>
+					<a href="{{ route('organizacao.create') }}" class="btn btn-sm fw-bold btn-primary"><i class="fa fa-plus"></i> Novo </a>
 					@endhavePermission
 				</div>
 			</div>
 		@havePermission('cliente')
-			@if( empty($account->id) )
-			<form id="kt_account_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('account.store')}}" method="post">
+			@if( empty($organizacao->id) )
+			<form id="kt_organizacao_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('organizacao.store')}}" method="post">
 			@else
-			<form id="kt_account_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('account.update', $account->id)}}" method="post">
+			<form id="kt_organizacao_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('organizacao.update', $organizacao->id)}}" method="post">
 				@method("PUT")
 			@endif
 		@endhavePermission
@@ -45,8 +45,8 @@
 							<label class="fs-6 fw-semibold form-label mt-3">
 								<span class="required">Nome</span>
 							</label>
-							<input type="text" class="form-control form-control-sm" name="name" value="{{ $account->name }}">
-							@error('name')
+							<input type="text" class="form-control form-control-sm" name="nome" value="{{ $organizacao->nome }}">
+							@error('nome')
 							<div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
 							@enderror
 						</div>
@@ -56,8 +56,8 @@
 								<span class="required">Situação</span>
 							</label>
 							<select class="form-select form-select-sm" data-control="select2" name="status">
-								@foreach ( \Bcampti\Larabase\Enums\StatusAccountEnum::cases() as $status )
-									<option value="{{ $status->value }}" {{ optional($account->status)->value!=$status->value?:'selected' }}>{{ $status->value }}</option>
+								@foreach ( \Bcampti\Larabase\Enums\StatusEnum::cases() as $status )
+									<option value="{{ $status->value }}" {{ optional($organizacao->status)->value!=$status->value?:'selected' }}>{{ $status->value }}</option>
 								@endforeach
 							</select>
 							@error('status')
@@ -71,8 +71,7 @@
 				<div class="card-footer">
 					<div class="d-flex justify-content-end">
 					@havePermission('cliente')
-						@if( !empty($account->id) )
-						<a href="{{ route('auth.account.select', $account->id) }}" class="btn btn-sm fw-bold btn-info"><i class="bi bi-download"></i> Acessar</a>
+						@if( !empty($organizacao->id) )
 						<a href="#" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal" data-bs-target="#modaldelete" title="Excluir Registro"><i class="las la-trash fs-2"></i> Excluir</a>
 						@endif
 						<button type="submit" data-kt-contacts-type="submit" class="btn btn-primary btn-sm me-3">
@@ -83,7 +82,7 @@
 							</span>
 						</button>
 					@endhavePermission
-						<a href="{{ route('account.index') }}" class="btn btn-secondary btn-sm"><i class="fa fa-chevron-left"></i> Voltar</a>
+						<a href="{{ route('organizacao.index') }}" class="btn btn-secondary btn-sm"><i class="fa fa-chevron-left"></i> Voltar</a>
 					</div>
 				</div>
 
@@ -97,13 +96,13 @@
 <!--end::Content-->
 
 @havePermission('cliente')
-@if( !empty($account->id) )
+@if( !empty($organizacao->id) )
 <!--begin::ModalDelete-->
 <div class="modal fade" id="modaldelete" tabindex="-1" data-backdrop="static" data-keyboard="false" style="display: none;">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content rounded">
 			<div class="modal-body pb-15 px-5 px-xl-20">
-				<form action="{{ route('account.destroy', $account->id)}}" method="post">
+				<form action="{{ route('organizacao.destroy', $organizacao->id)}}" method="post">
 					@method("DELETE") @csrf
 					<div class="mb-13 text-center">
 						<h1 class="mb-3">Excluir Registro</h1>

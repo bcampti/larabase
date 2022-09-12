@@ -1,8 +1,8 @@
 <?php
 
-namespace Bcampti\Larabase\Repositories;
+namespace Bcampti\Larabase\Repositories\Tenant;
 
-use Bcampti\Larabase\Filtro\OrganizacaoFiltro;
+use Bcampti\Larabase\Filtro\Tenant\OrganizacaoFiltro;
 use Bcampti\Larabase\Models\Tenant\Organizacao;
 use Bcampti\Larabase\Repositories\PaginateInterface;
 use Bcampti\Larabase\Repositories\TenantManager;
