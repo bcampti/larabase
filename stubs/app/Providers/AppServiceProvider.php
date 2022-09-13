@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
         if( config("larabase.debug_query") ){
     	    DB::listen(function($query){
                 Log::info("\n---------------------------------------------------------------"
-                    ."\nSchema=[".$query->connection->getConfig()['schema']."] - TEMPO[".$query->time."]"
+                    ."\nSchema=[".$query->connection->getConfig()['search_path']."] - TEMPO[".$query->time."]"
                     ."\nQUERY[". Str::replaceArray('?', $query->bindings, $query->sql) ."]"
                 );
             });

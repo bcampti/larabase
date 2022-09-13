@@ -8,7 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Bcampti\Larabase\Larabase;
 use Bcampti\Larabase\Models\Account;
 use Bcampti\Larabase\Repositories\AccountManager;
-use Bcampti\Larabase\Repositories\Tenant\OrganizacaoManager;
+use Bcampti\Larabase\Repositories\Tenant\UsuarioOrganizacaoManager;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +37,7 @@ class LoginController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     private $accountManager;
-    private $organizacaoManager;
+    private $usuarioOrganizacaoManager;
 
     /**
      * Create a new controller instance.
@@ -49,7 +49,7 @@ class LoginController extends Controller
         //$this->middleware('guest')->except('logout');
 
         $this->accountManager = new AccountManager();
-        $this->organizacaoManager = new OrganizacaoManager();
+        $this->usuarioOrganizacaoManager = new UsuarioOrganizacaoManager();
     }
 
     /**
@@ -66,28 +66,33 @@ class LoginController extends Controller
 
     public function accountSelect( $id )
     {
-        Session::forget('id_organizacao');
-        Session::forget("ensure_valid_tenant_session_tenant_id");
         $account = $this->accountManager->findOrFail($id);
 
         if( request()->user()->tipo == User::TIPO_SUPORTE ){
             request()->user()->update(['id_account' => $account->id]);
             request()->user()->fresh();
         }
+        Session::forget('id_organizacao');
+        Session::forget("ensure_valid_tenant_session_tenant_id");
         return redirect(route('auth.account.organizacao.index'));
     }
 
     public function organizacoes(Request $request)
     {
+        $filtro = $this->usuarioOrganizacaoManager->paginate($request);
+
+        if( !Session::has('id_organizacao') && $filtro->items->count()==1 ){
+            return redirect(route('auth.account.organizacao.select',$filtro->items[0]->id));
+        }
+        Session::put('organizacoes_count', $filtro->items->count());
         Session::forget('id_organizacao');
-        $filtro = $this->organizacaoManager->paginate($request);
         return view('auth.organizacoes', compact('filtro'));
     }
 
-    public function organizacaoSelect( $id )
+    public function organizacaoSelect( $id_organizacao )
     {
-        $organizacao = $this->organizacaoManager->findOrFail($id);
-        Session::put('id_organizacao', $organizacao->id);
+        $usuarioOrganizacao = $this->usuarioOrganizacaoManager->getUsuarioOrganizacao($id_organizacao);
+        Session::put('id_organizacao', $usuarioOrganizacao->organizacao->id);
 
         return redirect()->intended($this->redirectPath());
     }

@@ -22,7 +22,7 @@
 
 			<div class="card-body pt-0 pb-0">
 
-				<form role="form" action="{{ route('organizacao.index') }}" method="post">
+				<form role="form" action="{{ route('auth.account.organizacao.index') }}" method="post">
 					@csrf
 					<input type="hidden" name="pagina" value="{{$filtro->pagina}}">
 					<input type="hidden" name="orderBy" value="{{$filtro->orderBy}}">
@@ -42,15 +42,6 @@
 								<input type="text" class="form-control form-control-sm ps-10" name="search" value="{{$filtro->search}}">
 							</div>
 
-							<div class="d-flex w-md-100px">
-								<select class="form-select form-select-sm" data-control="select2" name="organizacao[status]">
-									<option value="" {{ is_empty($filtro->organizacao->status)?'selected':'' }}>Todas</option>
-									@foreach ( \Bcampti\Larabase\Enums\StatusEnum::cases() as $status )
-										<option value="{{ $status->value }}" {{ optional($filtro->organizacao->status)->value!=$status->value?:'selected' }}>{{ $status->value }}</option>
-									@endforeach
-								</select>
-							</div>
-	
 						</div>
 						<div class="d-flex align-items-center flex-wrap gap-2">
 
@@ -87,22 +78,22 @@
 								</tr>
 							</thead>
 							<tbody class="fw-semibold">
-							@forelse( $filtro->items as $organizacao )
+							@forelse( $filtro->items as $userOrg )
 								<tr class="{{$loop->odd?'odd':'even'}}">
-									<td>{{ $organizacao->id }}</td>
-									<td>{{ $organizacao->nome }}</td>
-									<td><x-model.status status="{{ $organizacao->status->value }}"/></td>
+									<td>{{ $userOrg->organizacao->id }}</td>
+									<td>{{ $userOrg->organizacao->nome }}</td>
+									<td><x-model.status status="{{ $userOrg->organizacao->status->value }}"/></td>
 									<td class="text-end pt-0 pb-0">
-                                        <a href="{{ route('auth.account.organizacao.select', $organizacao->id) }}" class="btn btn-sm fw-bold btn-info"><i class="bi bi-download"></i> Acessar</a>
+                                        <a href="{{ route('auth.account.organizacao.select', $userOrg->organizacao->id) }}" class="btn btn-sm fw-bold btn-info"><i class="bi bi-download"></i> Acessar</a>
                                     @havePermission("SUPORTE")
-										<a href="{{ route('organizacao.edit', $organizacao->id) }}" class="btn btn-sm btn-icon btn-warning" title="Alterar Registro"><i class="las la-edit fs-2"></i></a>
-										<a href="#" class="btn btn-sm btn-icon btn-danger" data-bs-toggle="modal" data-bs-target="#modaldelete{{$organizacao->id}}" title="Excluir Registro"><i class="las la-trash fs-2"></i></a>
+										<a href="{{ route('organizacao.edit', $userOrg->organizacao->id) }}" class="btn btn-sm btn-icon btn-warning" title="Alterar Registro"><i class="las la-edit fs-2"></i></a>
+										<a href="#" class="btn btn-sm btn-icon btn-danger" data-bs-toggle="modal" data-bs-target="#modaldelete{{$userOrg->organizacao->id}}" title="Excluir Registro"><i class="las la-trash fs-2"></i></a>
 										<!--begin::ModalDelete-->
-										<div class="modal fade" id="modaldelete{{$organizacao->id}}" tabindex="-1" data-backdrop="static" data-keyboard="false" style="display: none;">
+										<div class="modal fade" id="modaldelete{{$userOrg->organizacao->id}}" tabindex="-1" data-backdrop="static" data-keyboard="false" style="display: none;">
 											<div class="modal-dialog modal-dialog-centered">
 												<div class="modal-content rounded">
 													<div class="modal-body pb-15 px-5 px-xl-20">
-														<form action="{{ route('organizacao.destroy', $organizacao->id)}}" method="post">
+														<form action="{{ route('organizacao.destroy', $userOrg->organizacao->id)}}" method="post">
 															@method("DELETE") @csrf
 															<div class="mb-13 text-center">
 																<h1 class="mb-3">Excluir Registro</h1>

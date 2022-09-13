@@ -69,6 +69,8 @@ ou
 php artisan migrate:fresh --path=database/migrations/landlord --database=landlord
 ```
 
+REMOVER ARQUIVOS NÃO UTILIZADOS
+
 # Comandos artisan Larabase
 ```bash
 php artisan larabase:make Locale/Pais
