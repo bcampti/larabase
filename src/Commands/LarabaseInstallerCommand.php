@@ -223,6 +223,7 @@ class LarabaseInstallerCommand extends Command
         (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/errors'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/organizacao'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/pagination'));
 
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/account', resource_path('views/account'));
@@ -230,6 +231,7 @@ class LarabaseInstallerCommand extends Command
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/components', resource_path('views/components'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/errors', resource_path('views/errors'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/layouts', resource_path('views/layouts'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/organizacao', resource_path('views/organizacao'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/pagination', resource_path('views/pagination'));
 
         copy(__DIR__ . '/../../resources/views/home.blade.php', resource_path('views/home.blade.php'));

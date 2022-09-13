@@ -11,6 +11,7 @@ var defaults = {
 		"info": "Showing _START_ to _END_ of _TOTAL_ records",
     	"infoEmpty": "Showing no records",
 		"lengthMenu": "_MENU_",
+		"processing": '<span class="spinner-border w-15px h-15px text-muted align-middle me-2"></span> <span class="text-gray-600">Loading...</span>',
 		"paginate": {
 			"first": '<i class="first"></i>',
 			"last": '<i class="last"></i>',

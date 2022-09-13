@@ -1,5 +1,6 @@
 <?php
 
+use Bcampti\Larabase\Http\Controllers\Tenant\OrganizacaoController;
 use Bcampti\Larabase\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 
