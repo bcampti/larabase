@@ -67,7 +67,7 @@ class Database
     {
         $string = trim(strtolower( Uuid::uuid4()->toString() ));
 
-        $string = "connectspot_". $string;
+        $string = "tenant_". $string;
 
         $dict = array(
             "ltda"=>"",
