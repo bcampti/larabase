@@ -2,6 +2,7 @@
 
 namespace Bcampti\Larabase\Http\Middleware;
 
+use Bcampti\Larabase\Models\Tenant\UsuarioOrganizacao;
 use Closure;
 
 class CheckOrganizacao
@@ -15,9 +16,10 @@ class CheckOrganizacao
 	 */
 	public function handle($request, Closure $next)
 	{
-		if( !session()->has('id_organizacao') ){
+		if( !UsuarioOrganizacao::checkCurrent() ){
 			return redirect(route('auth.account.organizacao.index'));
 		}
+
 		return $next($request);
 	}
 }

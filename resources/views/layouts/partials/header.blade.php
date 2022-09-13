@@ -62,9 +62,11 @@
                             <a href="{{route('auth.account.organizacao.index')}}" class="menu-link px-5">Organizações</a>
                         </div>
 
+                        @havePermission('SUPORTE')
                         <div class="menu-item px-5">
                             <a href="{{route('account.index')}}" class="menu-link px-5">Accounts</a>
                         </div>
+                        @endhavePermission
 
                         <div class="separator my-2"></div>
 
