@@ -350,8 +350,8 @@ $app-sidebar-minimize-gap-bottom-mobile: 0px !default;
 $app-sidebar-primary-base-transition: none !default;
 $app-sidebar-primary-base-width: 100px !default;
 $app-sidebar-primary-base-width-mobile: 100px !default;
-$app-sidebar-primary-base-z-index: 107 !default;
-$app-sidebar-primary-base-z-index-mobile: 108 !default;
+$app-sidebar-primary-base-z-index: 1 !default;
+$app-sidebar-primary-base-z-index-mobile: 1 !default;
 $app-sidebar-primary-base-bg-color: null !default;
 $app-sidebar-primary-base-bg-color-dark: null !default;
 $app-sidebar-primary-base-bg-color-mobile: null !default;
@@ -411,8 +411,8 @@ $app-sidebar-primary-minimize-gap-bottom-mobile: 0px !default;
 
 // Sidebar secondary
 $app-sidebar-secondary-base-transition: none !default;
-$app-sidebar-secondary-base-z-index: 106 !default;
-$app-sidebar-secondary-base-z-index-mobile: 107 !default;
+$app-sidebar-secondary-base-z-index: null !default;
+$app-sidebar-secondary-base-z-index-mobile: null !default;
 $app-sidebar-secondary-base-bg-color: null !default;
 $app-sidebar-secondary-base-bg-color-dark: null !default;
 $app-sidebar-secondary-base-bg-color-mobile: null !default;

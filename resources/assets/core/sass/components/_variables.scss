@@ -309,8 +309,8 @@ $link-color:                $primary !default;
 $link-color-dark:           $primary !default;
 $link-decoration:           none !default;
 $link-shade-percentage:     20% !default;
-$link-hover-color:          shift-color($link-color, $link-shade-percentage) !default;
-$link-hover-color-dark:     shift-color($link-color, $link-shade-percentage) !default;
+$link-hover-color:          $primary-active !default;
+$link-hover-color-dark:     $primary-active !default;
 $link-hover-decoration:     none !default;
 
 
@@ -849,7 +849,7 @@ $form-file-button-hover-bg-dark:                    shade-color($form-file-butto
 // Form floating
 $input-height-border:                   			$input-border-width * 2 !default;
 $form-floating-height:            					calc(3.75rem + #{$input-height-border}) !default;
-$form-floating-input-padding-t:                     2.15rem !default;
+$form-floating-input-padding-t:                     1.85rem !default;
 
 
 // Navs
@@ -1217,7 +1217,7 @@ $carousel-custom-bullet-indicator-active-bg-color-dark:         $gray-600-dark !
 
 
 // Spinners
-$spinner-border-width:   					.185em !default;
+$spinner-border-width:   					.185rem !default;
 $spinner-animation-speed:   				.65s !default;
 $spinner-border-width-sm:   				.145em !default;
 

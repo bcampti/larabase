@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcampti\Larabase\Controllers\Tenant;
+namespace Bcampti\Larabase\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
 use Bcampti\Larabase\Enums\StatusEnum;

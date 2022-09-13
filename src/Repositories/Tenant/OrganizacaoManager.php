@@ -17,7 +17,7 @@ class OrganizacaoManager extends TenantManager implements PaginateInterface
 	{
 	    $filtro = new OrganizacaoFiltro($request);
 	    
-		$query = $this->getQuery($filtro->account);
+		$query = $this->getQuery($filtro->organizacao);
 		
 		$query->when($filtro->search, function ($query) use ($filtro) {
 			$query->where(function($q) use ($filtro) {
