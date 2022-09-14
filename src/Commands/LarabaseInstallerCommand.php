@@ -13,9 +13,9 @@ use Illuminate\Filesystem\Filesystem;
 class LarabaseInstallerCommand extends Command
 {
     use AuditCommandTrait;
-    use MultitenancyCommandTrait;
     use HandleFiles;
     use MigrationCommandTrait;
+    use MultitenancyCommandTrait;
     use TranslateCommandTrait;
     
     public $signature = 'larabase:install';
@@ -24,10 +24,10 @@ class LarabaseInstallerCommand extends Command
 
     public function handle(): void
     {
-        $this->publishAudit()
-            ->publishMultitenancy()
-            ->publishMigrations()
-            ->publishTranslate();
+        $this->publishAudit();
+        $this->publishMultitenancy();
+        $this->publishMigrations();
+        $this->publishTranslate();
         
         shell_exec("php artisan ui bootstrap --auth");
 
@@ -35,7 +35,6 @@ class LarabaseInstallerCommand extends Command
             ->publishConfigResources()
             ->publishRouteResources();
 
-        
         $this->replaceWithMetronicTheme();
 
         $this->info('Installed Larabase package');

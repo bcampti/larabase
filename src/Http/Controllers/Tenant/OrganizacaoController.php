@@ -5,9 +5,9 @@ namespace Bcampti\Larabase\Http\Controllers\Tenant;
 use App\Http\Controllers\Controller;
 use Bcampti\Larabase\Enums\StatusEnum;
 use Bcampti\Larabase\Exceptions\GenericMessage;
+use Bcampti\Larabase\Http\Requests\Tenant\OrganizacaoRequest;
 use Bcampti\Larabase\Models\Tenant\Organizacao;
 use Bcampti\Larabase\Repositories\Tenant\OrganizacaoManager;
-use Bcampti\Larabase\Requests\Tenant\OrganizacaoRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 

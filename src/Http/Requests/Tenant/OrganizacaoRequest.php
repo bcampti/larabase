@@ -32,7 +32,13 @@ class OrganizacaoRequest extends FormRequest
                 "required",
                 "string"
             ],
-            "razao_social" => [
+            "status" => [
+                "required", 
+                "string",
+                new Enum(StatusEnum::class)
+            ]
+
+            /* "razao_social" => [
                 "required",
                 "string"
             ],
@@ -73,13 +79,7 @@ class OrganizacaoRequest extends FormRequest
                 "required",
                 "integer",
                 Rule::exists(Account::class,"id"),
-            ],
-
-            "status" => [
-                "required", 
-                "string",
-                new Enum(StatusEnum::class)
-            ]
+            ] */
         ];
     }
 
@@ -104,7 +104,6 @@ class OrganizacaoRequest extends FormRequest
     {
         return [
             "nome" => "Nome",
-            "id_account" => "Conta",
             "status" => "situação",
         ];
     }
