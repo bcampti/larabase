@@ -17,8 +17,8 @@ return new class extends Migration
         Schema::create('organizacao', function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->text("nome");
-            /* $table->bigInteger('id_account');
-            $table->text("razao_social")->nullable();
+            $table->bigInteger('id_account');
+            /* $table->text("razao_social")->nullable();
             $table->text("cnpj")->nullable();
             $table->text("endereco")->nullable();
             $table->text("bairro")->nullable();
