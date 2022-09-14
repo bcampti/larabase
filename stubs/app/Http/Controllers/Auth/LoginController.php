@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Bcampti\Larabase\Larabase;
-use Bcampti\Larabase\Models\Account;
+use Bcampti\Larabase\Models\Tenant\Organizacao;
 use Bcampti\Larabase\Repositories\AccountManager;
+use Bcampti\Larabase\Repositories\Tenant\OrganizacaoManager;
 use Bcampti\Larabase\Repositories\Tenant\UsuarioOrganizacaoManager;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -37,6 +37,7 @@ class LoginController extends Controller
     protected $redirectTo = RouteServiceProvider::HOME;
 
     private $accountManager;
+    private $organizacaoManager;
     private $usuarioOrganizacaoManager;
 
     /**
@@ -46,9 +47,10 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('guest')->except('logout');
+        //$this->middleware("guest")->except("logout");
 
         $this->accountManager = new AccountManager();
+        $this->organizacaoManager = new OrganizacaoManager();
         $this->usuarioOrganizacaoManager = new UsuarioOrganizacaoManager();
     }
 
@@ -61,7 +63,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        return redirect()->route('home');
+        return redirect()->route("home");
     }
 
     public function accountSelect( $id )
@@ -69,30 +71,37 @@ class LoginController extends Controller
         $account = $this->accountManager->findOrFail($id);
 
         if( request()->user()->tipo == User::TIPO_SUPORTE ){
-            request()->user()->update(['id_account' => $account->id]);
+            request()->user()->update(["id_account" => $account->id]);
             request()->user()->fresh();
         }
-        Session::forget('id_organizacao');
         Session::forget("ensure_valid_tenant_session_tenant_id");
-        return redirect(route('auth.account.organizacao.index'));
+        Organizacao::forgetCurrent();
+
+        return redirect(route("auth.account.organizacao.index"));
     }
 
     public function organizacoes(Request $request)
     {
-        $filtro = $this->usuarioOrganizacaoManager->paginate($request);
+        $filtro = $this->organizacaoManager->getOrganizacoesComAcesso($request);
 
-        if( !Session::has('id_organizacao') && $filtro->items->count()==1 ){
-            return redirect(route('auth.account.organizacao.select',$filtro->items[0]->id));
+        if( Organizacao::checkCurrent() ){
+			$filtro->filtroAtivo = true;
+		}
+        $disponiveis = $filtro->items->count();
+
+        Organizacao::forgetCurrent();
+
+        if( $disponiveis == 1 && !$filtro->filtroAtivo ){
+            return redirect(route("auth.account.organizacao.select", $filtro->items[0]->id));
         }
-        Session::put('organizacoes_count', $filtro->items->count());
-        Session::forget('id_organizacao');
-        return view('auth.organizacoes', compact('filtro'));
+
+        return view("auth.organizacoes", compact("filtro"));
     }
 
     public function organizacaoSelect( $id_organizacao )
     {
         $usuarioOrganizacao = $this->usuarioOrganizacaoManager->getUsuarioOrganizacao($id_organizacao);
-        Session::put('id_organizacao', $usuarioOrganizacao->organizacao->id);
+        $usuarioOrganizacao->organizacao->makeCurrent();
 
         return redirect()->intended($this->redirectPath());
     }
@@ -108,6 +117,6 @@ class LoginController extends Controller
     public function accountNoDatabase()
     {
         return abort(403, "Acesso não autorizado!");
-        return view('auth.noDatabase');
+        return view("auth.noDatabase");
     }
 }
