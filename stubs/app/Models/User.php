@@ -16,8 +16,6 @@ class User extends Authenticatable implements MustVerifyEmail
     //use HasApiTokens;
     use HasFactory, Notifiable;
 
-    const CARGO_SUPORTE = 'SUPORTE';
-
     protected $with = ["account"];
     /**
      * The attributes that are mass assignable.

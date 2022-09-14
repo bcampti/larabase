@@ -19,14 +19,14 @@ class UsuarioOrganizacao extends Model
     protected $fillable = [
         "id_usuario",
         "id_organizacao",
-        "tipo",
+        "cargo",
         "status"
     ];
 
     protected $casts = [
         "id_usuario"=>"integer",
         "id_organizacao"=>"integer",
-        "tipo"=>"string",
+        "cargo"=>"string",
         
         "status"=>StatusUsuarioEnum::class,
 		"created_at"=>"datetime",

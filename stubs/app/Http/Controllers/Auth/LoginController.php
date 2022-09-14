@@ -101,9 +101,16 @@ class LoginController extends Controller
 
     public function organizacaoSelect( $id_organizacao )
     {
-        $usuarioOrganizacao = $this->usuarioOrganizacaoManager->getUsuarioOrganizacao($id_organizacao);
-        $usuarioOrganizacao->organizacao->makeCurrent();
-
+        if( CargoUsuarioEnum::SUPORTE->equals(request()->user()->cargo) )
+        {
+            $organizacao = $this->organizacaoManager->findOrFail($id_organizacao);
+            $organizacao->makeCurrent();
+        }
+        else
+        {
+            $usuarioOrganizacao = $this->usuarioOrganizacaoManager->getUsuarioOrganizacao($id_organizacao);
+            $usuarioOrganizacao->organizacao->makeCurrent();
+        }
         return redirect()->intended($this->redirectPath());
     }
 

@@ -68,6 +68,10 @@ ou
 ```bash
 php artisan migrate:fresh --path=database/migrations/landlord --database=landlord
 ```
+Adiciona um usuário com cargo de `SUPORTE`, `suporte@mailinator.com`
+```bash
+php artisan db:seed --class=UserSuporteSeeder
+```
 
 REMOVER ARQUIVOS NÃO UTILIZADOS
 
