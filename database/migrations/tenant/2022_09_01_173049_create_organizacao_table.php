@@ -16,8 +16,8 @@ return new class extends Migration
     {
         Schema::create('organizacao', function (Blueprint $table) {
             $table->bigIncrements("id");
-            $table->bigInteger('id_account');
             $table->text("nome");
+            /* $table->bigInteger('id_account');
             $table->text("razao_social")->nullable();
             $table->text("cnpj")->nullable();
             $table->text("endereco")->nullable();
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->text("cidade")->nullable();
             $table->text("estado")->nullable();
             $table->text("email")->nullable();
-            $table->text("telefone")->nullable();
+            $table->text("telefone")->nullable(); */
             $table->text("status")->default(StatusEnum::ATIVO->value);
             $table->timestamp("created_at")->useCurrent();
             $table->foreignId('id_usuario_criacao')->constrained('usuario');
