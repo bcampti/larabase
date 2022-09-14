@@ -2,7 +2,7 @@
 
 namespace Bcampti\Larabase\Http\Middleware;
 
-use App\Models\User;
+use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Utils\Database;
 use Closure;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantModel;
@@ -15,7 +15,7 @@ class CheckTenantConnection
     {
 		$tenant = auth()->user()->account;
 		if( is_empty($tenant) ){
-			if( auth()->user()->tipo == User::TIPO_SUPORTE ) {
+			if( CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ) {
 				return redirect(route('account.index'));
 			}
 			return redirect(route("auth.account.no.database"));

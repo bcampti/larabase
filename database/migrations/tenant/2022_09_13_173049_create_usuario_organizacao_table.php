@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigIncrements("id");
             $table->foreignId('id_usuario')->constrained('usuario');
             $table->foreignId('id_organizacao')->constrained('organizacao');
-            $table->text("tipo");
+            $table->text("cargo");
             $table->text("status")->default(StatusUsuarioEnum::ATIVO->value);
             $table->timestamp("created_at")->useCurrent();
             $table->foreignId('id_usuario_criacao')->constrained('usuario');
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('organizacao');
+        Schema::dropIfExists('usuario_organizacao');
     }
 };

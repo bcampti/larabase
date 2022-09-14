@@ -3,6 +3,7 @@
 namespace Bcampti\Larabase\Repositories;
 
 use App\Models\User;
+use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Enums\StatusEnum;
 use Bcampti\Larabase\Enums\StatusUsuarioEnum;
 use Bcampti\Larabase\Exceptions\GenericMessage;
@@ -63,7 +64,7 @@ class AccountManager extends TenantManager implements PaginateInterface
         }
 
         if( $database->schemaExists($account->database) ){
-			if( auth()->user()->tipo == User::TIPO_SUPORTE ){
+			if( CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
 				throw new GenericMessage("A base de dados já esta criada");
 			}
             return $account;
@@ -93,7 +94,6 @@ class AccountManager extends TenantManager implements PaginateInterface
 	    $usuario->name = $user->name;
 	    $usuario->email = $user->email;
 	    $usuario->password = $user->password;
-	    $usuario->tipo = $user->tipo;
 
 		$usuarioManager = new UsuarioManager();
 	    $usuarioManager->salvar($usuario);
@@ -111,7 +111,7 @@ class AccountManager extends TenantManager implements PaginateInterface
 		$usuarioOrganizacao = new UsuarioOrganizacao();
 		$usuarioOrganizacao->id_usuario = $usuario->id;
 		$usuarioOrganizacao->id_organizacao = $organizacao->id;
-		$usuarioOrganizacao->tipo = $usuario->tipo;
+		$usuarioOrganizacao->cargo = CargoUsuarioEnum::ADMIN;
 		$usuarioOrganizacao->status = StatusUsuarioEnum::ATIVO->value;
 		$usuarioOrganizacao->id_usuario_criacao = $usuario->id;
 
