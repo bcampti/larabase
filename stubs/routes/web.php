@@ -45,7 +45,7 @@ Route::middleware(['auth','verified'])->group(function()
         {
             Route::match(['get','post'], 'account/organizacao', [\App\Http\Controllers\Auth\LoginController::class,'organizacoes'] )->name('auth.account.organizacao.index');
             Route::get(	'account/organizacao/select/{id}', [\App\Http\Controllers\Auth\LoginController::class, 'organizacaoSelect'] )->name('auth.account.organizacao.select');
-        });    
+        });
     });
 
     // Utilizado para limpar da sessao o filtro aplicado na consulta das listagens

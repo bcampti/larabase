@@ -16,8 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
     //use HasApiTokens;
     use HasFactory, Notifiable;
 
-    const TIPO_SUPORTE = 'SUPORTE';
-    const TIPO_CLIENTE = 'CLIENTE';
+    const CARGO_SUPORTE = 'SUPORTE';
 
     protected $with = ["account"];
     /**
@@ -29,7 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'tipo',
+        'cargo',
         'id_account'
     ];
 

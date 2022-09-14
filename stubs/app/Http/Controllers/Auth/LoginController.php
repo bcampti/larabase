@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Models\Tenant\Organizacao;
 use Bcampti\Larabase\Repositories\AccountManager;
 use Bcampti\Larabase\Repositories\Tenant\OrganizacaoManager;
@@ -70,7 +71,7 @@ class LoginController extends Controller
     {
         $account = $this->accountManager->findOrFail($id);
 
-        if( request()->user()->tipo == User::TIPO_SUPORTE ){
+        if( CargoUsuarioEnum::SUPORTE->equals(request()->user()->cargo) ){
             request()->user()->update(["id_account" => $account->id]);
             request()->user()->fresh();
         }

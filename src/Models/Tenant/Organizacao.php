@@ -70,7 +70,7 @@ class Organizacao extends Model
         static::forgetCurrent();
 
         Session::put(static::containerKey(), $this);
-        Session::put('id_organizacao', $this->organizacao->id);
+        Session::put('id_organizacao', $this->id);
 
         return $this;
     }

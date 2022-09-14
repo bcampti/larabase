@@ -2,6 +2,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
 use OwenIt\Auditing\Models\Audit;
@@ -49,8 +50,16 @@ class AppServiceProvider extends ServiceProvider
         Model::preventLazyLoading(!app()->isProduction());
 
         Blade::if('havePermission', function ($permissao) {
-            if( auth()->user()->tipo==User::TIPO_SUPORTE )return true;
-            if( auth()->user()->tipo==$permissao )return true;
+            if( CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
+                return true;
+            }
+            if( is_array($permissao) ){
+                return in_array(auth()->user()->cargo, $permissao);
+            }else{
+                if( auth()->user()->cargo==$permissao ){
+                    return true;
+                }
+            }
             return false;
         });
 
