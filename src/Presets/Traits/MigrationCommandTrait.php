@@ -14,6 +14,7 @@ trait MigrationCommandTrait
         (new Filesystem)->ensureDirectoryExists(database_path('migrations'));
         (new Filesystem)->ensureDirectoryExists(database_path('migrations/landlord'));
         (new Filesystem)->ensureDirectoryExists(database_path('migrations/tenant'));
+        (new Filesystem)->ensureDirectoryExists(database_path('seeders'));
 
         $files = [
             'database/migrations/landlord/2014_10_12_000000_create_users_table.php',
@@ -24,9 +25,11 @@ trait MigrationCommandTrait
             'database/migrations/landlord/2022_09_01_172625_add_custom_field_to_users_table.php',
             
             'database/migrations/tenant/2022_09_01_000000_create_usuario_table.php',
-            'database/migrations/tenant/2022_09_01_172625_add_custom_field_to_usuario_table.php',
             'database/migrations/tenant/2022_09_01_173049_create_organizacao_table.php',
-            'database/migrations/tenant/2022_09_01_193049_create_audits_table.php'
+            'database/migrations/tenant/2022_09_01_193049_create_audits_table.php',
+            'database/migrations/tenant/2022_09_01_193049_create_usuario_organizacao_table.php',
+
+            'database/seeders/UserSuporteSeeder.php'
         ];
 
         foreach ($files as $file) {

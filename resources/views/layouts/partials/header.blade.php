@@ -45,7 +45,7 @@
                                     <div class="fw-bold d-flex align-items-center fs-5">
                                         {{ auth()->user()->name }}
                                     </div>
-                                    <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">{{ auth()->user()->email }}</a>
+                                    <a href="{{route('usuario.perfil')}}" class="fw-semibold text-muted text-hover-primary fs-7">{{ auth()->user()->email }}</a>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                         <div class="separator my-2"></div>
 
                         <div class="menu-item px-5">
-                            <a href="#" class="menu-link px-5">Meu Usuário</a>
+                            <a href="{{route('usuario.perfil')}}" class="menu-link px-5">Meu Usuário</a>
                         </div>
 
                         <div class="separator my-2"></div>

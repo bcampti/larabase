@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <!--begin::Content container-->
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid pt-10">
+	<!--begin::Content container-->
     <div id="kt_app_content_container" class="app-container container-fluid">
         <!--begin::Form-->
         <form action="#">

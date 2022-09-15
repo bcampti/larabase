@@ -21,7 +21,8 @@ class Organizacao extends Model
 
     protected $fillable = [
 		"nome",
-		"razao_social",
+		"status",
+		/* "razao_social",
 		"cnpj",
 		"endereco",
 		"bairro",
@@ -30,13 +31,12 @@ class Organizacao extends Model
 		"estado",
 		"email",
 		"telefone",
-		"status",
-		"id_account"
+		"id_account" */
 	];
 
 	protected $casts = [
 		"nome" => "string",
-		"razao_social" => "string",
+		/* "razao_social" => "string",
 		"cnpj" => "string",
 		"endereco" => "string",
 		"bairro" => "string",
@@ -44,7 +44,7 @@ class Organizacao extends Model
 		"cidade" => "string",
 		"estado" => "string",
 		"email" => "string",
-		"telefone" => "string",
+		"telefone" => "string", */
 
 		"id_account"=>"integer",
 		
