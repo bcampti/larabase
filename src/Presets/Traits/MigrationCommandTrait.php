@@ -26,8 +26,8 @@ trait MigrationCommandTrait
             
             'database/migrations/tenant/2022_09_01_000000_create_usuario_table.php',
             'database/migrations/tenant/2022_09_01_173049_create_organizacao_table.php',
+            'database/migrations/tenant/2022_09_01_183049_create_usuario_organizacao_table.php',
             'database/migrations/tenant/2022_09_01_193049_create_audits_table.php',
-            'database/migrations/tenant/2022_09_01_193049_create_usuario_organizacao_table.php',
 
             'database/seeders/UserSuporteSeeder.php'
         ];
