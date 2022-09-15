@@ -48,12 +48,34 @@ class LarabaseInstallerCommand extends Command
 
         $files = [
             'app/Exceptions/Handler.php',
+
+            'app/Filtro/Tenant/OrganizacaoFiltro.php',
+            'app/Filtro/Tenant/UsuarioOrganizacaoFiltro.php',
+            
             'app/Http/Controllers/Auth/RegisterController.php',
             'app/Http/Controllers/Auth/LoginController.php',
+            'app/Http/Controllers/Tenant/OrganizacaoController.php',
+            'app/Http/Controllers/Tenant/UsuarioController.php',
+            'app/Http/Controllers/Tenant/UsuarioOrganizacaoController.php',
+
+            'app/Http/Requests/Tenant/OrganizacaoRequest.php',
+            'app/Http/Requests/Tenant/UsuarioPasswordRequest.php',
+            'app/Http/Requests/Tenant/UsuarioRequest.php',
+            
             'app/Http/Kernel.php',
+            
+            'app/Models/Tenant/Organizacao.php',
+            'app/Models/Tenant/Usuario.php',
+            'app/Models/Tenant/UsuarioOrganizacao.php',
             'app/Models/User.php',
+            
             'app/Providers/AppServiceProvider.php',
             'app/Providers/RouteServiceProvider.php',
+
+            'app/Repositories/Tenant/OrganizacaoManager.php',
+            'app/Repositories/Tenant/UsuarioManager.php',
+            'app/Repositories/Tenant/UsuarioOrganizacaoManager.php',
+
             'app/View/Account/Status.php',
             'app/View/Model/Status.php',
         ];
@@ -212,26 +234,33 @@ class LarabaseInstallerCommand extends Command
 
         copy(__DIR__ . '/../../stubs/webpack/webpack.mix.js', base_path('webpack.mix.js'));
 
-        (new Filesystem)->ensureDirectoryExists(public_path('assets'));
+        (new Filesystem)->deleteDirectory(resource_path('css'));
+        (new Filesystem)->deleteDirectory(resource_path('js'));
+        (new Filesystem)->deleteDirectory(resource_path('sass'));
 
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/assets'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('assets'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/assets', resource_path('assets'));
         
         // Views...
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/account'));
+        (new Filesystem)->deleteDirectory(resource_path('views'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views'));
+
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views', resource_path('views'));
+        
+        /* (new Filesystem)->ensureDirectoryExists(resource_path('views/account'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/errors'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
         (new Filesystem)->ensureDirectoryExists(resource_path('views/organizacao'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/pagination'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/pagination')); */
 
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/account', resource_path('views/account'));
+        /* (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/account', resource_path('views/account'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/auth', resource_path('views/auth'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/components', resource_path('views/components'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/errors', resource_path('views/errors'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/layouts', resource_path('views/layouts'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/organizacao', resource_path('views/organizacao'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/pagination', resource_path('views/pagination'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/pagination', resource_path('views/pagination')); */
 
         copy(__DIR__ . '/../../resources/views/home.blade.php', resource_path('views/home.blade.php'));
 
