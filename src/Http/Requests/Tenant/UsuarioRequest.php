@@ -2,11 +2,9 @@
 
 namespace Bcampti\Larabase\Http\Requests\Tenant;
 
-use Bcampti\Larabase\Enums\StatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
-class OrganizacaoRequest extends FormRequest
+class UsuarioRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,58 +24,10 @@ class OrganizacaoRequest extends FormRequest
     public function rules()
     {
         return [
-            "nome" => [
+            "name" => [
                 "required",
-                "string"
-            ],
-            "status" => [
-                "required", 
                 "string",
-                new Enum(StatusEnum::class)
-            ]
-
-            /* "razao_social" => [
-                "required",
-                "string"
             ],
-            "cnpj" => [
-                "required",
-                "string"
-            ],
-            "endereco" => [
-                "nullable",
-                "string"
-            ],
-            "bairro" => [
-                "nullable",
-                "string"
-            ],
-            "cep" => [
-                "nullable",
-                "string"
-            ],
-            "cidade" => [
-                "nullable",
-                "string"
-            ],
-            "estado" => [
-                "nullable",
-                "string"
-            ],
-            "email" => [
-                "nullable",
-                "string"
-            ],
-            "telefone" => [
-                "nullable",
-                "string"
-            ],
-
-            "id_account"=>[
-                "required",
-                "integer",
-                Rule::exists(Account::class,"id"),
-            ] */
         ];
     }
 
@@ -102,7 +52,6 @@ class OrganizacaoRequest extends FormRequest
     {
         return [
             "nome" => "Nome",
-            "status" => "situação",
         ];
     }
 
