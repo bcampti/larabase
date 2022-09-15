@@ -1,13 +1,13 @@
 <?php
 
-namespace Bcampti\Larabase\Http\Controllers\Tenant;
+namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
 use Bcampti\Larabase\Enums\StatusEnum;
 use Bcampti\Larabase\Exceptions\GenericMessage;
-use Bcampti\Larabase\Http\Requests\Tenant\OrganizacaoRequest;
-use Bcampti\Larabase\Models\Tenant\Organizacao;
-use Bcampti\Larabase\Repositories\Tenant\OrganizacaoManager;
+use App\Http\Requests\Tenant\OrganizacaoRequest;
+use App\Models\Tenant\Organizacao;
+use App\Repositories\Tenant\OrganizacaoManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 

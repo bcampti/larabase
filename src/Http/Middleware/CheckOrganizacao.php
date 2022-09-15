@@ -1,8 +1,8 @@
 <?php
 
-namespace Bcampti\Larabase\Http\Middleware;
+namespace App\Http\Middleware;
 
-use Bcampti\Larabase\Models\Tenant\Organizacao;
+use App\Models\Tenant\Organizacao;
 use Closure;
 
 class CheckOrganizacao

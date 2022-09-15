@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcampti\Larabase\Http\Requests\Tenant;
+namespace App\Http\Requests\Tenant;
 
 use Bcampti\Larabase\Enums\StatusEnum;
 use Illuminate\Foundation\Http\FormRequest;

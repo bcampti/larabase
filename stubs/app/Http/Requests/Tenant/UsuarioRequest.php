@@ -1,10 +1,10 @@
 <?php
 
-namespace Bcampti\Larabase\Http\Requests\Tenant;
+namespace App\Http\Requests\Tenant;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UsuarioPasswordRequest extends FormRequest
+class UsuarioRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,10 @@ class UsuarioPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            "name" => [
+                "required",
+                "string",
+            ],
         ];
     }
 

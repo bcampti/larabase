@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcampti\Larabase\Http\Controllers\Tenant;
+namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
 use Bcampti\Larabase\Exceptions\GenericMessage;
