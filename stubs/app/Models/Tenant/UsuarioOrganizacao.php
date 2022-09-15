@@ -1,6 +1,6 @@
 <?php
 
-namespace Bcampti\Larabase\Models\Tenant;
+namespace App\Models\Tenant;
 
 use Bcampti\Larabase\Enums\StatusUsuarioEnum;
 use Bcampti\Larabase\Models\Model;

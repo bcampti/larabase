@@ -1,19 +1,13 @@
 <?php
 
-namespace Bcampti\Larabase\Repositories\Tenant;
+namespace App\Repositories\Tenant;
 
 use Bcampti\Larabase\Enums\CargoUsuarioEnum;
-use Bcampti\Larabase\Enums\StatusEnum;
-use Bcampti\Larabase\Enums\StatusUsuarioEnum;
-use Bcampti\Larabase\Filtro\Tenant\UsuarioOrganizacaoFiltro;
-use Bcampti\Larabase\Models\Tenant\Organizacao;
-use Bcampti\Larabase\Models\Tenant\Usuario;
-use Bcampti\Larabase\Models\Tenant\UsuarioOrganizacao;
-use Bcampti\Larabase\Repositories\PaginateInterface;
+use App\Models\Tenant\Organizacao;
+use App\Models\Tenant\Usuario;
+use App\Models\Tenant\UsuarioOrganizacao;
 use Bcampti\Larabase\Repositories\TenantManager;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class UsuarioOrganizacaoManager extends TenantManager
 {

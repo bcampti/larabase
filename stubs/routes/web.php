@@ -59,6 +59,12 @@ Route::middleware(['auth','verified'])->group(function()
         Route::middleware(['checkOrganizacao'])->group(function()
         {
             Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+            Route::prefix('perfil')->group(function(){
+                Route::get('/', [App\Http\Controllers\Tenant\UsuarioController::class, 'perfil'])->name('usuario.perfil');
+                Route::post('update', [App\Http\Controllers\Tenant\UsuarioController::class, 'update'])->name('usuario.perfil.update');
+                Route::post('update/password', [App\Http\Controllers\Tenant\UsuarioController::class, 'updatePassword'])->name('usuario.perfil.update.password');
+            });
         });
 
     });

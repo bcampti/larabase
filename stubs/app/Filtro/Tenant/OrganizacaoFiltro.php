@@ -1,10 +1,10 @@
 <?php
 
-namespace Bcampti\Larabase\Filtro\Tenant;
+namespace App\Filtro\Tenant;
 
 use Bcampti\Larabase\Enums\StatusEnum;
 use Bcampti\Larabase\Filtro\AbstractFiltro;
-use Bcampti\Larabase\Models\Tenant\Organizacao;
+use App\Models\Tenant\Organizacao;
 
 class OrganizacaoFiltro extends AbstractFiltro
 {
