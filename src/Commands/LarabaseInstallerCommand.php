@@ -42,44 +42,36 @@ class LarabaseInstallerCommand extends Command
 
     public function publishAppResources():self
     {
-        $this->ensureDirectoryExists(app_path('View'));
-        $this->ensureDirectoryExists(app_path('View/Account'));
-        $this->ensureDirectoryExists(app_path('View/Model'));
+        (new Filesystem)->ensureDirectoryExists(app_path('Exceptions'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Exceptions', app_path('Exceptions'));
 
-        $files = [
-            'app/Exceptions/Handler.php',
+        (new Filesystem)->ensureDirectoryExists(app_path('Filtro'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Filtro', app_path('Filtro'));
 
-            'app/Filtro/Tenant/OrganizacaoFiltro.php',
-            'app/Filtro/Tenant/UsuarioOrganizacaoFiltro.php',
-            
-            'app/Http/Controllers/Auth/RegisterController.php',
-            'app/Http/Controllers/Auth/LoginController.php',
-            'app/Http/Controllers/Tenant/OrganizacaoController.php',
-            'app/Http/Controllers/Tenant/UsuarioController.php',
-            'app/Http/Controllers/Tenant/UsuarioOrganizacaoController.php',
+        (new Filesystem)->ensureDirectoryExists(app_path('Http/Controllers/Auth'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Http/Controllers/Auth', app_path('Http/Controllers/Auth'));
 
-            'app/Http/Requests/Tenant/OrganizacaoRequest.php',
-            'app/Http/Requests/Tenant/UsuarioPasswordRequest.php',
-            'app/Http/Requests/Tenant/UsuarioRequest.php',
-            
-            'app/Http/Kernel.php',
-            
-            'app/Models/Tenant/Organizacao.php',
-            'app/Models/Tenant/Usuario.php',
-            'app/Models/Tenant/UsuarioOrganizacao.php',
-            'app/Models/User.php',
-            
-            'app/Providers/AppServiceProvider.php',
-            'app/Providers/RouteServiceProvider.php',
+        (new Filesystem)->ensureDirectoryExists(app_path('Http/Controllers/Tenant'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Http/Controllers/Tenant', app_path('Http/Controllers/Tenant'));
 
-            'app/Repositories/Tenant/OrganizacaoManager.php',
-            'app/Repositories/Tenant/UsuarioManager.php',
-            'app/Repositories/Tenant/UsuarioOrganizacaoManager.php',
+        (new Filesystem)->ensureDirectoryExists(app_path('Http/Requests/Tenant'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Http/Requests/Tenant', app_path('Http/Requests/Tenant'));
 
-            'app/View/Account/Status.php',
-            'app/View/Model/Status.php',
-        ];
-        $this->publishFiles($files);
+        (new Filesystem)->copy(__DIR__ . '/../../stubs/app/Http/Kernel.php',app_path('Http/Kernel.php'));
+
+        (new Filesystem)->ensureDirectoryExists(app_path('Models/Tenant'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Models/Tenant', app_path('Models/Tenant'));
+
+        (new Filesystem)->copy(__DIR__ . '/../../stubs/app/Models/User.php',app_path('Models/User.php'));
+
+        (new Filesystem)->copy(__DIR__ . '/../../stubs/app/Providers/AppServiceProvider.php',app_path('Providers/AppServiceProvider.php'));
+        (new Filesystem)->copy(__DIR__ . '/../../stubs/app/Providers/RouteServiceProvider.php',app_path('Providers/RouteServiceProvider.php'));
+
+        (new Filesystem)->ensureDirectoryExists(app_path('Repositories/Tenant'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Repositories/Tenant', app_path('Repositories/Tenant'));
+
+        (new Filesystem)->ensureDirectoryExists(app_path('View'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/View', app_path('View'));
 
         return $this;
     }
@@ -247,23 +239,6 @@ class LarabaseInstallerCommand extends Command
 
         (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views', resource_path('views'));
         
-        /* (new Filesystem)->ensureDirectoryExists(resource_path('views/account'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/errors'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/organizacao'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/pagination')); */
-
-        /* (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/account', resource_path('views/account'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/auth', resource_path('views/auth'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/components', resource_path('views/components'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/errors', resource_path('views/errors'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/layouts', resource_path('views/layouts'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/organizacao', resource_path('views/organizacao'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../resources/views/pagination', resource_path('views/pagination')); */
-
-        copy(__DIR__ . '/../../resources/views/home.blade.php', resource_path('views/home.blade.php'));
-
         $this->components->info('Larabase instalado com sucesso.');
         $this->components->warn('Para finalizar execute "npm install && npm run dev" para fazer deploy dos assets.');
     }
@@ -281,8 +256,6 @@ class LarabaseInstallerCommand extends Command
         if (!file_exists(base_path('package.json'))) {
             return;
         }
-
-        //$configurationKey = $dev ? 'devDependencies' : 'dependencies';
 
         $packages = json_decode(file_get_contents(base_path('package.json')), true);
 

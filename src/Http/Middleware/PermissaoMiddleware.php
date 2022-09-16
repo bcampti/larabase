@@ -1,10 +1,8 @@
 <?php namespace App\Http\Middleware\App;
 
-use App\Models\User;
 use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Closure;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Session;
 
 class PermissaoMiddleware
 {

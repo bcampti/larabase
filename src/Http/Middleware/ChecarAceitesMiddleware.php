@@ -1,7 +1,6 @@
 <?php
-namespace App\Http\Middleware\App;
+namespace Bcampti\Larabase\Http\Middleware;
 
-use App\Models\User;
 use Closure;
 use App\Models\Admin\Companhia;
 use App\Models\Admin\TermoPolitica;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace Bcampti\Larabase\Http\Middleware;
 
 use App\Models\Tenant\Organizacao;
 use Closure;
