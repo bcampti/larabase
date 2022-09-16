@@ -49,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
 
         Model::preventLazyLoading(!app()->isProduction());
 
-        Blade::if('havePermission', function ($permissao) {
+        Blade::if('hasPermission', function ($permissao) {
             if( CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
                 return true;
             }
@@ -61,6 +61,15 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
             return false;
+        });
+        Blade::if('hasSuporte', function () {
+            return CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo);
+        });
+        Blade::if('hasProprietario', function () {
+            return CargoUsuarioEnum::PROPRIETARIO->equals(auth()->user()->cargo) || CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo);
+        });
+        Blade::if('hasProprietario', function () {
+            return CargoUsuarioEnum::ADMIN->equals(auth()->user()->cargo) || CargoUsuarioEnum::PROPRIETARIO->equals(auth()->user()->cargo) || CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo);
         });
 
         Blade::directive('moneyFormat', function ($valor) {

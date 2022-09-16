@@ -13,10 +13,10 @@
 			<div class="card-header">
 				<h3 class="card-title">Account</h3>
 				<div class="card-toolbar">
-					@havePermission('cliente')
+					@hasSuporte
 					<a href="{{ route('account.create') }}" class="btn btn-sm fw-bold btn-primary"><i class="fa fa-plus"></i>
 						Novo </a>
-					@endhavePermission
+					@endhasSuporte
 				</div>
 			</div>
 
@@ -93,7 +93,7 @@
 									<td>{{ $account->name }}</td>
 									<td><x-account.status status="{{ $account->status->value }}"/></td>
 									<td class="text-end pt-0 pb-0">
-									@havePermission("CLIENTE")
+									@hasSuporte
 										<a href="{{ route('auth.account.select', $account->id) }}" class="btn btn-sm fw-bold btn-info"><i class="bi bi-download"></i> Acessar</a>
 										<a href="{{ route('account.edit', $account->id) }}" class="btn btn-sm btn-icon btn-warning" title="Alterar Registro"><i class="las la-edit fs-2"></i></a>
 										<a href="#" class="btn btn-sm btn-icon btn-danger" data-bs-toggle="modal" data-bs-target="#modaldelete{{$account->id}}" title="Excluir Registro"><i class="las la-trash fs-2"></i></a>
@@ -129,7 +129,7 @@
 											</div>
 										</div>
 										<!--end::ModalDelete-->
-										@endhavePermission
+										@endhasSuporte
 									</td>
 								</tr>
 								@empty
@@ -137,9 +137,9 @@
 									<td colspan="4" style="text-align: center;">
 										<div class="card-px text-center py-20 my-10">
 											<p class="fs-4 fw-semibold mb-10">Não existe nenhum registro para esta consulta.</p>
-											@havePermission('cliente')
+											@hasSuporte
 											<a href="{{ route('account.create') }}" class="btn btn-sm fw-bold btn-primary"><i class="fa fa-plus"></i> Adicionar Novo Registro</a>
-											@endhavePermission
+											@endhasSuporte
 										</div>
 									</td>
 								</tr>

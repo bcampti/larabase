@@ -4,16 +4,16 @@ namespace Bcampti\Larabase\Enums;
 enum CargoUsuarioEnum:string
 {
     case SUPORTE = 'Suporte';
+    case PROPRIETARIO = 'Proprietário';
     case ADMIN = 'Administrador';
-	case USUARIO = "Usuário";
 
     public function color(): string
     {
         return match($this) 
         {
             CargoUsuarioEnum::SUPORTE => 'info',
-            CargoUsuarioEnum::ADMIN => 'dark',
-            CargoUsuarioEnum::USUARIO => 'warnning',
+            CargoUsuarioEnum::PROPRIETARIO => 'dark',
+            CargoUsuarioEnum::ADMIN => 'warnning',
         };
     }
 
