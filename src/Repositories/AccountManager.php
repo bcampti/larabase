@@ -111,7 +111,7 @@ class AccountManager extends TenantManager implements PaginateInterface
 		$usuarioOrganizacao = new UsuarioOrganizacao();
 		$usuarioOrganizacao->id_usuario = $usuario->id;
 		$usuarioOrganizacao->id_organizacao = $organizacao->id;
-		$usuarioOrganizacao->cargo = CargoUsuarioEnum::ADMIN->value;
+		$usuarioOrganizacao->cargo = CargoUsuarioEnum::PROPRIETARIO->value;
 		$usuarioOrganizacao->status = StatusUsuarioEnum::ATIVO->value;
 		$usuarioOrganizacao->id_usuario_criacao = $usuario->id;
 

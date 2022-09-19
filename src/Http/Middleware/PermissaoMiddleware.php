@@ -17,7 +17,7 @@ class PermissaoMiddleware
 	{
 		if ( !CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) )
 		{
-			if( !acessoLiberado($permissao) ) {
+			if( !hasPermission($permissao) ) {
 				if ($request->ajax ()) {
 					$msg['mensagem']['tipo'] = 'erro';
 					$msg['mensagem']['titulo'] = 'Atenção!';

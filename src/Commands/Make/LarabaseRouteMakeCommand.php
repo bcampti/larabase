@@ -37,7 +37,10 @@ class LarabaseRouteMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        $stub = '/stubs/route.stub';
+        if( config('larabase.controle')=='cargo' )
+            $stub = '/stubs/route-cargo.stub';
+        else
+            $stub = '/stubs/route.stub';
         return $this->resolveStubPath($stub);
     }
 

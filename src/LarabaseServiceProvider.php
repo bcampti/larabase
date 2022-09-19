@@ -87,10 +87,6 @@ class LarabaseServiceProvider extends PackageServiceProvider
         
         $this->registerRoutes();
 
-        //$this->loadViewsFrom(__DIR__.'/../resources/views', 'larabase');
-        /* $this->loadViewComponentsAs('larabase', [
-            StatusAccountEnum::class,
-        ]); */
     }
     
     protected function registerRoutes()

@@ -50,26 +50,13 @@ class AppServiceProvider extends ServiceProvider
         Model::preventLazyLoading(!app()->isProduction());
 
         Blade::if('hasPermission', function ($permissao) {
-            if( CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
-                return true;
-            }
-            if( is_array($permissao) ){
-                return in_array(auth()->user()->cargo, $permissao);
-            }else{
-                if( auth()->user()->cargo==$permissao ){
-                    return true;
-                }
-            }
-            return false;
+            return hasPermission($permissao);
         });
         Blade::if('hasSuporte', function () {
-            return CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo);
+            return hasPermission(CargoUsuarioEnum::SUPORTE->value);
         });
         Blade::if('hasProprietario', function () {
-            return CargoUsuarioEnum::PROPRIETARIO->equals(auth()->user()->cargo) || CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo);
-        });
-        Blade::if('hasProprietario', function () {
-            return CargoUsuarioEnum::ADMIN->equals(auth()->user()->cargo) || CargoUsuarioEnum::PROPRIETARIO->equals(auth()->user()->cargo) || CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo);
+            return hasPermission(CargoUsuarioEnum::PROPRIETARIO->value);
         });
 
         Blade::directive('moneyFormat', function ($valor) {

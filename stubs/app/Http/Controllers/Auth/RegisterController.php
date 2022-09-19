@@ -80,7 +80,7 @@ class RegisterController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'cargo' => CargoUsuarioEnum::ADMIN->value,
+                'cargo' => CargoUsuarioEnum::PROPRIETARIO->value,
             ]);
 
             $account = Account::forceCreate([

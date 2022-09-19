@@ -5,15 +5,15 @@ enum CargoUsuarioEnum:string
 {
     case SUPORTE = 'Suporte';
     case PROPRIETARIO = 'Proprietário';
-    case ADMIN = 'Administrador';
+    case USUARIO = 'Usuário';
 
     public function color(): string
     {
         return match($this) 
         {
-            CargoUsuarioEnum::SUPORTE => 'info',
-            CargoUsuarioEnum::PROPRIETARIO => 'dark',
-            CargoUsuarioEnum::ADMIN => 'warnning',
+            CargoUsuarioEnum::SUPORTE => 'dark',
+            CargoUsuarioEnum::PROPRIETARIO => 'info',
+            CargoUsuarioEnum::USUARIO => 'success',
         };
     }
 
