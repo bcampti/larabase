@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Tenant\UsuarioPasswordRequest;
+use App\Http\Requests\Tenant\UsuarioRequest;
+use App\Repositories\Tenant\UsuarioManager;
 use Bcampti\Larabase\Exceptions\GenericMessage;
-use Bcampti\Larabase\Http\Requests\Tenant\UsuarioPasswordRequest;
-use Bcampti\Larabase\Http\Requests\Tenant\UsuarioRequest;
-use Bcampti\Larabase\Repositories\Tenant\UsuarioManager;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 

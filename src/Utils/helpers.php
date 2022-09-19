@@ -1,5 +1,6 @@
 <?php
 
+use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Illuminate\Database\Eloquent\Collection;
 
 if (!function_exists('is_empty')) {
@@ -94,4 +95,30 @@ if( !function_exists('strUpper')) {
     function strUpper($value): string{
         return mb_strtoupper($value, 'UTF-8');
     }
+}
+
+if( !function_exists('hasPermission')) {
+
+	function hasPermission( $permissao ) {
+        if( CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
+            return true;
+        }
+        if( CargoUsuarioEnum::PROPRIETARIO->equals(auth()->user()->cargo) && CargoUsuarioEnum::PROPRIETARIO->equals($permissao) ){
+            return true;
+        }
+
+        if( config('larabase.controle') == 'cargo' ){
+            if( is_array($permissao) ){
+                return in_array(auth()->user()->cargo, $permissao);
+            }else{
+                if( auth()->user()->cargo==$permissao ){
+                    return true;
+                }
+            }
+        }else{
+            //return PermissaoSerivice::validaPermissaoUsuario( $permissao );
+            return false;
+        }
+        return false;
+	}
 }

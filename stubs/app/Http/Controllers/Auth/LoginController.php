@@ -115,6 +115,9 @@ class LoginController extends Controller
 
     public function logout($message = null)
 	{
+        if( CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
+            auth()->user()->update(['id_account'=>null]);
+        }
 		Auth::logout();
 		request()->session()->invalidate();
 		request()->session()->regenerateToken();
@@ -123,7 +126,6 @@ class LoginController extends Controller
 
     public function accountNoDatabase()
     {
-        return abort(403, "Acesso não autorizado!");
         return view("auth.noDatabase");
     }
 }

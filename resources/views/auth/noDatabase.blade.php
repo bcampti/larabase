@@ -32,6 +32,7 @@
             <!--begin::Link-->
             <div class="mb-0">
                 <a href="{{route('home')}}" class="btn btn-sm btn-primary">Voltar ao sistema</a>
+                <a href="{{route('sair')}}" class="btn btn-sm btn-dark">Sair</a>
             </div>
             <!--end::Link-->
         </div>

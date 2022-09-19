@@ -2,7 +2,6 @@
 
 namespace Bcampti\Larabase\Http\Middleware;
 
-use App\Models\User;
 use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Closure;
 use Illuminate\Http\Request;

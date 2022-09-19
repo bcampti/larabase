@@ -16,19 +16,19 @@
 			<div class="card-header">
 				<h3 class="card-title">Account</h3>
 				<div class="card-toolbar">
-					@havePermission('cliente')
+					@hasSuporte
 					<a href="{{ route('account.create') }}" class="btn btn-sm fw-bold btn-primary"><i class="fa fa-plus"></i> Novo </a>
-					@endhavePermission
+					@endhasSuporte
 				</div>
 			</div>
-		@havePermission('cliente')
+		@hasSuporte
 			@if( empty($account->id) )
 			<form id="kt_account_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('account.store')}}" method="post">
 			@else
 			<form id="kt_account_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('account.update', $account->id)}}" method="post">
 				@method("PUT")
 			@endif
-		@endhavePermission
+		@endhasSuporte
 				@csrf
 
 				<div class="card-body">
@@ -70,7 +70,7 @@
 				</div>
 				<div class="card-footer">
 					<div class="d-flex justify-content-end">
-					@havePermission('cliente')
+					@hasSuporte
 						@if( !empty($account->id) )
 						<a href="{{ route('auth.account.select', $account->id) }}" class="btn btn-sm fw-bold btn-info"><i class="bi bi-download"></i> Acessar</a>
 						<a href="#" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal" data-bs-target="#modaldelete" title="Excluir Registro"><i class="las la-trash fs-2"></i> Excluir</a>
@@ -82,7 +82,7 @@
 								<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
 							</span>
 						</button>
-					@endhavePermission
+					@endhasSuporte
 						<a href="{{ route('account.index') }}" class="btn btn-secondary btn-sm"><i class="fa fa-chevron-left"></i> Voltar</a>
 					</div>
 				</div>
@@ -96,7 +96,7 @@
 </div>
 <!--end::Content-->
 
-@havePermission('cliente')
+@hasSuporte
 @if( !empty($account->id) )
 <!--begin::ModalDelete-->
 <div class="modal fade" id="modaldelete" tabindex="-1" data-backdrop="static" data-keyboard="false" style="display: none;">
@@ -131,7 +131,7 @@
 </div>
 <!--end::ModalDelete-->
 @endif
-@endhavePermission
+@endhasSuporte
 @endsection
 
 {{-- 

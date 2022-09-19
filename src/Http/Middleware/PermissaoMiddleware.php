@@ -1,10 +1,8 @@
 <?php namespace App\Http\Middleware\App;
 
-use App\Models\User;
 use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Closure;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Session;
 
 class PermissaoMiddleware
 {
@@ -19,7 +17,7 @@ class PermissaoMiddleware
 	{
 		if ( !CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) )
 		{
-			if( !acessoLiberado($permissao) ) {
+			if( !hasPermission($permissao) ) {
 				if ($request->ajax ()) {
 					$msg['mensagem']['tipo'] = 'erro';
 					$msg['mensagem']['titulo'] = 'Atenção!';
