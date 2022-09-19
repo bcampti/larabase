@@ -115,7 +115,7 @@ class LoginController extends Controller
 
     public function logout($message = null)
 	{
-        if( CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
+        if( auth()->check() && CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
             auth()->user()->update(['id_account'=>null]);
         }
 		Auth::logout();

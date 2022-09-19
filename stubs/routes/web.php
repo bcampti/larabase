@@ -45,6 +45,15 @@ Route::middleware(['auth','verified'])->group(function()
         {
             Route::match(['get','post'], 'account/organizacao', [\App\Http\Controllers\Auth\LoginController::class,'organizacoes'] )->name('auth.account.organizacao.index');
             Route::get(	'account/organizacao/select/{id}', [\App\Http\Controllers\Auth\LoginController::class, 'organizacaoSelect'] )->name('auth.account.organizacao.select');
+
+            Route::prefix('organizacao')->group(function(){
+                Route::match(['get','post'], '/', [OrganizacaoController::class, 'index'])->name('organizacao.index');
+                Route::get('cadastrar', [OrganizacaoController::class, 'create'])->name('organizacao.create');
+                Route::post('salvar', [OrganizacaoController::class, 'store'])->name('organizacao.store');
+                Route::get('alterar/{id}', [OrganizacaoController::class, 'edit'])->name('organizacao.edit');
+                Route::put('update/{id}', [OrganizacaoController::class, 'update'])->name('organizacao.update');
+                Route::delete('excluir/{id}', [OrganizacaoController::class, 'destroy'])->name('organizacao.destroy');
+            });
         });
     });
 

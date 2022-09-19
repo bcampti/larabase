@@ -26,13 +26,14 @@
 
                 <div class="menu-item" >
                     
+                    @hasSuporte
                     <a class="menu-link {{ request()->is('account') ? 'active' : ''}}" href="{{ route('account.index') }}">
                         <span class="menu-icon">
                             <i class="bi bi-calendar3 fs-2x"></i>
                         </span>
                         <span class="menu-title">Accounts</span>
                     </a>
-
+                    @endhasSuporte
                     <a class="menu-link {{ request()->is('auth/account/organizacao') ? 'active' : ''}}" href="{{ route('auth.account.organizacao.index') }}">
                         <span class="menu-icon">
                             <i class="bi bi-calendar3 fs-2x"></i>
