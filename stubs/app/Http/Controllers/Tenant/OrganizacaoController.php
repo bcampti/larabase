@@ -70,6 +70,7 @@ class OrganizacaoController extends Controller
 			$usuarioOrganizacaoManager = new UsuarioOrganizacaoManager();
 			$usuarioOrganizacaoManager->salvar($usuarioOrganizacao);
 		}
+		return redirect(route("organizacao.edit", [$organizacao->id]))->with(GenericMessage::INSERT_SUCCESS);
 	}
 
 	public function edit( $id )
