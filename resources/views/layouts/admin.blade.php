@@ -36,7 +36,7 @@
 
         <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
             <!-- begin:: Header -->
-            @include('layouts.partials.header')
+            @include('layouts.partials.admin.header')
             <!-- end:: Header -->
             <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
                 
