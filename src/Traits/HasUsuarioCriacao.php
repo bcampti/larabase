@@ -2,7 +2,7 @@
 
 namespace Bcampti\Larabase\Traits;
 
-use App\Models\Usuario;
+use App\Models\Tenant\Usuario;
 
 trait HasUsuarioCriacao
 {

@@ -2,7 +2,7 @@
 
 namespace Bcampti\Larabase\Factories;
 
-use App\Models\Sistema\Organizacao;
+use App\Models\Tenant\Organizacao;
 
 trait HasOrganizacaoFactory
 {
