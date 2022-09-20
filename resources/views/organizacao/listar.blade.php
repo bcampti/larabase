@@ -136,7 +136,7 @@
 									<td colspan="4" style="text-align: center;">
 										<div class="card-px text-center py-20 my-10">
 											<p class="fs-4 fw-semibold mb-10">Não existe nenhum registro para esta consulta.</p>
-											hasProprietario
+											@hasProprietario
 											<a href="{{ route('organizacao.create') }}" class="btn btn-sm fw-bold btn-primary"><i class="fa fa-plus"></i> Adicionar Novo Registro</a>
 											@endhasProprietario
 										</div>

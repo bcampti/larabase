@@ -7,9 +7,14 @@ use Bcampti\Larabase\Enums\StatusEnum;
 use Bcampti\Larabase\Exceptions\GenericMessage;
 use App\Http\Requests\Tenant\OrganizacaoRequest;
 use App\Models\Tenant\Organizacao;
+use App\Models\Tenant\UsuarioOrganizacao;
 use App\Repositories\Tenant\OrganizacaoManager;
+use App\Repositories\Tenant\UsuarioOrganizacaoManager;
+use Bcampti\Larabase\Enums\CargoUsuarioEnum;
+use Bcampti\Larabase\Enums\StatusUsuarioEnum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Multitenancy\Models\Tenant;
 
 class OrganizacaoController extends Controller
 {
@@ -22,6 +27,9 @@ class OrganizacaoController extends Controller
 	
 	public function index(Request $request)
     {
+		if( !CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
+			return redirect(route('auth.account.organizacao.index'));
+		}
 		$filtro = $this->organizacaoManager->paginate($request);
 
 		return view("organizacao.listar", compact("filtro"));
@@ -46,10 +54,22 @@ class OrganizacaoController extends Controller
 	public function store(OrganizacaoRequest $request)
     {
 		$organizacao = new Organizacao($request->validated());
-		
+		$organizacao->id_account = Tenant::current()->id;
+
 		$organizacao = $this->organizacaoManager->salvar($organizacao);
-		
-		return redirect(route("organizacao.edit", [$organizacao->id]))->with(GenericMessage::INSERT_SUCCESS);
+
+		if( CargoUsuarioEnum::PROPRIETARIO->equals(auth()->user()->cargo) )
+		{
+			$usuarioOrganizacao = new UsuarioOrganizacao();
+			$usuarioOrganizacao->id_usuario = auth()->user()->id;
+			$usuarioOrganizacao->id_organizacao = $organizacao->id;
+			$usuarioOrganizacao->cargo = CargoUsuarioEnum::PROPRIETARIO->value;
+			$usuarioOrganizacao->status = StatusUsuarioEnum::ATIVO->value;
+			$usuarioOrganizacao->id_usuario_criacao = auth()->user()->id;
+
+			$usuarioOrganizacaoManager = new UsuarioOrganizacaoManager();
+			$usuarioOrganizacaoManager->salvar($usuarioOrganizacao);
+		}
 	}
 
 	public function edit( $id )
