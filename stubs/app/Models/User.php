@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Models\Account;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -47,6 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'cargo' => CargoUsuarioEnum::class
     ];
 
     public function account():BelongsTo
