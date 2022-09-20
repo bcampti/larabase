@@ -103,15 +103,15 @@ if( !function_exists('hasPermission')) {
         if( CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
             return true;
         }
-        if( CargoUsuarioEnum::PROPRIETARIO->equals(auth()->user()->cargo) && CargoUsuarioEnum::PROPRIETARIO->equals($permissao) ){
+        if( CargoUsuarioEnum::PROPRIETARIO->equals(auth()->user()->cargo) ){
             return true;
         }
 
         if( config('larabase.controle') == 'cargo' ){
             if( is_array($permissao) ){
-                return in_array(auth()->user()->cargo, $permissao);
+                return in_array(auth()->user()->cargo->name, $permissao);
             }else{
-                if( auth()->user()->cargo==$permissao ){
+                if( auth()->user()->cargo->name==$permissao ){
                     return true;
                 }
             }

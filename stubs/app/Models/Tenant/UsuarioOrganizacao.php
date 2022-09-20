@@ -4,6 +4,7 @@ namespace App\Models\Tenant;
 
 use Bcampti\Larabase\Enums\StatusUsuarioEnum;
 use Bcampti\Larabase\Models\Model;
+use Bcampti\Larabase\Traits\HasStatus;
 use Bcampti\Larabase\Traits\HasUsuarioAlteracao;
 use Bcampti\Larabase\Traits\HasUsuarioCriacao;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
@@ -13,6 +14,7 @@ class UsuarioOrganizacao extends Model
     use UsesTenantConnection;
 	use HasUsuarioCriacao;
 	use HasUsuarioAlteracao;
+    use HasStatus;
     
     protected $table = "usuario_organizacao";
 

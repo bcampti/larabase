@@ -9,7 +9,6 @@ use App\Models\Tenant\Organizacao;
 use Bcampti\Larabase\Repositories\PaginateInterface;
 use Bcampti\Larabase\Repositories\TenantManager;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class OrganizacaoManager extends TenantManager implements PaginateInterface
 {
@@ -23,8 +22,8 @@ class OrganizacaoManager extends TenantManager implements PaginateInterface
 		
 		$query->when($filtro->search, function ($query) use ($filtro) {
 			$query->where(function($q) use ($filtro) {
-				$q->whereRaw("lower(nome) like '".Str::lower($filtro->search)."%'");
-					//->orWhere("status", "like", Str::lower($filtro->search)."%");
+				$q->whereRaw("lower(nome) like '".strLower($filtro->search)."%'");
+					//->orWhere("status", "like", strLower($filtro->search)."%");
 			});
 		});
 		
@@ -59,7 +58,7 @@ class OrganizacaoManager extends TenantManager implements PaginateInterface
 			
 		$query->when($filtro->search, function ($query2) use ($filtro) {
 			$query2->where(function($q) use ($filtro) {
-				$q->whereRaw("lower(organizacao.nome) like '".Str::lower($filtro->search)."%'");
+				$q->whereRaw("lower(organizacao.nome) like '".strLower($filtro->search)."%'");
 			});
 		})->where("organizacao.status", StatusEnum::ATIVO);
 

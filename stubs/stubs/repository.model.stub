@@ -7,7 +7,6 @@ use Bcampti\Larabase\Repositories\PaginateInterface;
 use Bcampti\Larabase\Repositories\TenantManager;
 use {{ filtroNamespace }};
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class {{ class }} extends TenantManager implements PaginateInterface
 {
@@ -21,8 +20,8 @@ class {{ class }} extends TenantManager implements PaginateInterface
 		
 		$query->when($filtro->search, function ($query) use ($filtro) {
 			$query->where(function($q) use ($filtro) {
-				$q->whereRaw("lower(nome) like '".Str::lower($filtro->search)."%'");
-					//->orWhere("status", "like", Str::lower($filtro->search)."%");
+				$q->whereRaw("lower(nome) like '".strLower($filtro->search)."%'");
+					//->orWhere("status", "like", strLower($filtro->search)."%");
 			});
 		});
 		
