@@ -5,7 +5,6 @@ namespace Bcampti\Larabase\Repositories;
 use App\Models\User;
 use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Enums\StatusEnum;
-use Bcampti\Larabase\Enums\StatusUsuarioEnum;
 use Bcampti\Larabase\Exceptions\GenericMessage;
 use Bcampti\Larabase\Filtro\AccountFiltro;
 use Bcampti\Larabase\Models\Account;
@@ -111,8 +110,7 @@ class AccountManager extends TenantManager implements PaginateInterface
 		$usuarioOrganizacao = new UsuarioOrganizacao();
 		$usuarioOrganizacao->id_usuario = $usuario->id;
 		$usuarioOrganizacao->id_organizacao = $organizacao->id;
-		$usuarioOrganizacao->cargo = CargoUsuarioEnum::ADMIN ->value;
-		$usuarioOrganizacao->status = StatusUsuarioEnum::ATIVO->value;
+		$usuarioOrganizacao->cargo = CargoUsuarioEnum::ADMIN->value;
 		$usuarioOrganizacao->id_usuario_criacao = $usuario->id;
 
 		$usuarioOrganizacaoManager = new UsuarioOrganizacaoManager();

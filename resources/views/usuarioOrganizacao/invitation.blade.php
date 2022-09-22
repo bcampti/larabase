@@ -61,10 +61,8 @@
 										value="{{Bcampti\Larabase\Enums\CargoUsuarioEnum::USUARIO->value}}" 
 										{{Bcampti\Larabase\Enums\CargoUsuarioEnum::USUARIO->value==old('cargo')||!old('cargo')? 'checked="checked"':''}}>
 									<label class="form-check-label" for="role_option_1">
-										<div class="fw-bold text-gray-800">Usuário</div>
+										<div class="fw-bold text-gray-800">{{Bcampti\Larabase\Enums\CargoUsuarioEnum::USUARIO->value}}</div>
 										<div class="text-gray-600">Possui acesso para realizar cadastros, alterações e exclusão de registros do sistema.</div>
-										<div class="text-gray-600">Não pode convidar novo usuário.</div>
-										<div class="text-gray-600">Não pode cadastrar nova organização.</div>
 									</label>
 								</div>
 								<!--end::Radio-->
@@ -76,10 +74,10 @@
 								<!--begin::Radio-->
 								<div class="form-check form-check-custom form-check-solid">
 									<input class="form-check-input me-3" name="cargo" type="radio" id="role_option_2"
-										value="{{Bcampti\Larabase\Enums\CargoUsuarioEnum::ADMIN ->value}}"
-										{{Bcampti\Larabase\Enums\CargoUsuarioEnum::ADMIN ->value==old('cargo')? 'checked="checked"':''}}>
+										value="{{Bcampti\Larabase\Enums\CargoUsuarioEnum::ADMIN->value}}"
+										{{Bcampti\Larabase\Enums\CargoUsuarioEnum::ADMIN->value==old('cargo')? 'checked="checked"':''}}>
 									<label class="form-check-label" for="role_option_2">
-										<div class="fw-bold text-gray-800">Proprietário</div>
+										<div class="fw-bold text-gray-800">{{Bcampti\Larabase\Enums\CargoUsuarioEnum::ADMIN->value}}</div>
 										<div class="text-gray-600">Possui acesso para realizar cadastros, alterações e exclusão de registros do sistema.</div>
 										<div class="text-gray-600">Possui acesso a todos os recursos do sistema.</div>
 										<div class="text-gray-600">Pode convidar novo usuário.</div>

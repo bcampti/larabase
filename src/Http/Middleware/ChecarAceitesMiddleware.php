@@ -5,7 +5,6 @@ use Closure;
 use App\Models\Admin\Companhia;
 use App\Models\Admin\TermoPolitica;
 use App\Repositories\Sistema\UsuarioAceiteManager;
-use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Enums\UserTypeEnum;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;

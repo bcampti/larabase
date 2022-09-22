@@ -42,6 +42,9 @@ class LarabaseInstallerCommand extends Command
 
     public function publishAppResources():self
     {
+        (new Filesystem)->ensureDirectoryExists(app_path('Enums'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Enums', app_path('Enums'));
+
         (new Filesystem)->ensureDirectoryExists(app_path('Exceptions'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Exceptions', app_path('Exceptions'));
 
@@ -63,6 +66,9 @@ class LarabaseInstallerCommand extends Command
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Models/Tenant', app_path('Models/Tenant'));
 
         (new Filesystem)->copy(__DIR__ . '/../../stubs/app/Models/User.php',app_path('Models/User.php'));
+
+        (new Filesystem)->ensureDirectoryExists(app_path('Notifications'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/app/Notifications', app_path('Notifications'));
 
         (new Filesystem)->copy(__DIR__ . '/../../stubs/app/Providers/AppServiceProvider.php',app_path('Providers/AppServiceProvider.php'));
         (new Filesystem)->copy(__DIR__ . '/../../stubs/app/Providers/RouteServiceProvider.php',app_path('Providers/RouteServiceProvider.php'));
