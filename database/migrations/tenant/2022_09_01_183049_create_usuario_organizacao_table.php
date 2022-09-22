@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignId('id_usuario')->constrained('usuario');
             $table->foreignId('id_organizacao')->constrained('organizacao');
             $table->text("cargo");
-            $table->text("status")->default(StatusUsuarioEnum::ATIVO->value);
             $table->timestamp("created_at")->useCurrent();
             $table->foreignId('id_usuario_criacao')->constrained('usuario');
             $table->timestamp("updated_at")->nullable();

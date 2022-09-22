@@ -2,7 +2,6 @@
 
 namespace App\Models\Tenant;
 
-use Bcampti\Larabase\Enums\StatusUsuarioEnum;
 use Bcampti\Larabase\Models\Model;
 use Bcampti\Larabase\Traits\HasUsuarioAlteracao;
 use Bcampti\Larabase\Traits\HasUsuarioCriacao;
@@ -20,7 +19,6 @@ class UsuarioOrganizacao extends Model
         "id_usuario",
         "id_organizacao",
         "cargo",
-        "status"
     ];
 
     protected $casts = [
@@ -28,7 +26,6 @@ class UsuarioOrganizacao extends Model
         "id_organizacao"=>"integer",
         "cargo"=>"string",
         
-        "status"=>StatusUsuarioEnum::class,
 		"created_at"=>"datetime",
 		"id_usuario_criacao"=>"integer",
 		"updated_at"=>"datetime",

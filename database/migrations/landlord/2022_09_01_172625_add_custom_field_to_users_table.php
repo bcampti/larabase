@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('cargo');
+            $table->string('type');
             $table->foreignId('id_account')->nullable()->constrained('account');
         });
     }
@@ -27,7 +27,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('cargo');
+            $table->dropColumn('type');
             $table->dropColumn('id_account');
         });
     }

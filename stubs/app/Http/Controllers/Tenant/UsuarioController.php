@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Tenant;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tenant\UsuarioPasswordRequest;
-use App\Http\Requests\Tenant\UsuarioRequest;
+use App\Http\Requests\Tenant\UsuarioUpdateRequest;
 use App\Repositories\Tenant\UsuarioManager;
 use Bcampti\Larabase\Exceptions\GenericMessage;
 use Illuminate\Support\Facades\Hash;
@@ -26,7 +26,7 @@ class UsuarioController extends Controller
 		return view("usuario.perfil", compact("user"));
 	}
 
-	public function update(UsuarioRequest $request)
+	public function update(UsuarioUpdateRequest $request)
     {
 		$user = auth()->user();
 		$user->update($request->validated());

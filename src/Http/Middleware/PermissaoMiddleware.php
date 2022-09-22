@@ -1,6 +1,7 @@
 <?php namespace App\Http\Middleware\App;
 
 use Bcampti\Larabase\Enums\CargoUsuarioEnum;
+use Bcampti\Larabase\Enums\UserTypeEnum;
 use Closure;
 use Illuminate\Http\Response;
 
@@ -15,7 +16,7 @@ class PermissaoMiddleware
 	 */
 	public function handle($request, Closure $next, ...$permissao)
 	{
-		if ( !CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) )
+		if ( !UserTypeEnum::SUPORTE->equals(auth()->user()->type) )
 		{
 			if( !hasPermission($permissao) ) {
 				if ($request->ajax ()) {

@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Bcampti\Larabase\Actions\Account\CreateAccount;
 use Bcampti\Larabase\Enums\CargoUsuarioEnum;
+use Bcampti\Larabase\Enums\UserTypeEnum;
 use Bcampti\Larabase\Models\Account;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
@@ -55,6 +56,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, 
         [
+            'empresa' =>['required','string'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -80,7 +82,7 @@ class RegisterController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'cargo' => CargoUsuarioEnum::PROPRIETARIO->value,
+                'type' => UserTypeEnum::PROPRIETARIO->value,
             ]);
 
             $account = Account::forceCreate([

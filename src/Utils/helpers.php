@@ -99,26 +99,12 @@ if( !function_exists('strUpper')) {
 
 if( !function_exists('hasPermission')) {
 
-	function hasPermission( $permissao ) {
-        if( CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
-            return true;
-        }
-        if( CargoUsuarioEnum::PROPRIETARIO->equals(auth()->user()->cargo) && CargoUsuarioEnum::PROPRIETARIO->equals($permissao) ){
-            return true;
-        }
-
+    function hasPermission( $permissao )
+    {
         if( config('larabase.controle') == 'cargo' ){
-            if( is_array($permissao) ){
-                return in_array(auth()->user()->cargo, $permissao);
-            }else{
-                if( auth()->user()->cargo==$permissao ){
-                    return true;
-                }
-            }
+            return CargoUsuarioEnum::validaPermissao($permissao);
         }else{
-            //return PermissaoSerivice::validaPermissaoUsuario( $permissao );
             return false;
         }
-        return false;
 	}
 }

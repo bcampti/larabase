@@ -2,7 +2,7 @@
 
 namespace Bcampti\Larabase\Traits;
 
-use App\Models\Organizacao;
+use App\Models\Tenant\Organizacao;
 use Bcampti\Larabase\Scopes\OrganizacaoScope;
 use Illuminate\Validation\ValidationException;
 
@@ -24,7 +24,7 @@ trait HasOrganizacao
 
 			if( is_empty($model->id_organizacao) )
             {
-				$model->id_organizacao = session('id_organizacao');
+				$model->id_organizacao = Organizacao::currentId();
 			}
         });
     }

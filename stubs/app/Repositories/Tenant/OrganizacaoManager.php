@@ -2,14 +2,13 @@
 
 namespace App\Repositories\Tenant;
 
-use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Enums\StatusEnum;
 use App\Filtro\Tenant\OrganizacaoFiltro;
 use App\Models\Tenant\Organizacao;
+use Bcampti\Larabase\Enums\UserTypeEnum;
 use Bcampti\Larabase\Repositories\PaginateInterface;
 use Bcampti\Larabase\Repositories\TenantManager;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class OrganizacaoManager extends TenantManager implements PaginateInterface
 {
@@ -23,8 +22,8 @@ class OrganizacaoManager extends TenantManager implements PaginateInterface
 		
 		$query->when($filtro->search, function ($query) use ($filtro) {
 			$query->where(function($q) use ($filtro) {
-				$q->whereRaw("lower(nome) like '".Str::lower($filtro->search)."%'");
-					//->orWhere("status", "like", Str::lower($filtro->search)."%");
+				$q->whereRaw("lower(nome) like '".strLower($filtro->search)."%'");
+					//->orWhere("status", "like", strLower($filtro->search)."%");
 			});
 		});
 		
@@ -51,7 +50,7 @@ class OrganizacaoManager extends TenantManager implements PaginateInterface
 		$query = $this->getQuery()
 			->select("organizacao.*");
 
-		if( !CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
+		if( !UserTypeEnum::SUPORTE->equals(auth()->user()->type) ){
 			$query->join("usuario_organizacao", function ($join) {
 				$join->on( "organizacao.id", "=","usuario_organizacao.id_organizacao")->where("usuario_organizacao.id_usuario", auth()->id());
 			});
@@ -59,7 +58,7 @@ class OrganizacaoManager extends TenantManager implements PaginateInterface
 			
 		$query->when($filtro->search, function ($query2) use ($filtro) {
 			$query2->where(function($q) use ($filtro) {
-				$q->whereRaw("lower(organizacao.nome) like '".Str::lower($filtro->search)."%'");
+				$q->whereRaw("lower(organizacao.nome) like '".strLower($filtro->search)."%'");
 			});
 		})->where("organizacao.status", StatusEnum::ATIVO);
 

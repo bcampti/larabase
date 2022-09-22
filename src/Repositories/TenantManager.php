@@ -1,5 +1,6 @@
 <?php namespace Bcampti\Larabase\Repositories;
 
+use App\Models\Tenant\Organizacao;
 use Bcampti\Larabase\Scopes\OrganizacaoScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -161,7 +162,7 @@ abstract class TenantManager
 		$query = $model->newQuery();
 		if( $enableOrganizacaoScope ){
 			$query->withoutGlobalScope(OrganizacaoScope::class);
-			$query->where($model->getTable().'.id_organizacao', session("id_organizacao"));
+			$query->where($model->getTable().'.id_organizacao', Organizacao::currentId());
 		}
 
 		if( !is_null($model) )

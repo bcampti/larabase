@@ -16,11 +16,11 @@ use Bcampti\Larabase\Repositories\PaginateInterface;
 use App\Repositories\Tenant\OrganizacaoManager;
 use App\Repositories\Tenant\UsuarioManager;
 use App\Repositories\Tenant\UsuarioOrganizacaoManager;
+use Bcampti\Larabase\Enums\UserTypeEnum;
 use Bcampti\Larabase\Repositories\TenantManager;
 use Bcampti\Larabase\Utils\Database;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Str;
 
 class AccountManager extends TenantManager implements PaginateInterface
 {
@@ -34,8 +34,8 @@ class AccountManager extends TenantManager implements PaginateInterface
 		
 		$query->when($filtro->search, function ($query) use ($filtro) {
 			$query->where(function($q) use ($filtro) {
-				$q->whereRaw("lower(name) like '".Str::lower($filtro->search)."%'");
-					//->orWhere("status", "like", Str::lower($filtro->search)."%");
+				$q->whereRaw("lower(name) like '".strLower($filtro->search)."%'");
+					//->orWhere("status", "like", strLower($filtro->search)."%");
 			});
 		});
 		
@@ -64,7 +64,7 @@ class AccountManager extends TenantManager implements PaginateInterface
         }
 
         if( $database->schemaExists($account->database) ){
-			if( CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
+			if( UserTypeEnum::SUPORTE->equals(auth()->user()->type) ){
 				throw new GenericMessage("A base de dados já esta criada");
 			}
             return $account;
@@ -111,7 +111,7 @@ class AccountManager extends TenantManager implements PaginateInterface
 		$usuarioOrganizacao = new UsuarioOrganizacao();
 		$usuarioOrganizacao->id_usuario = $usuario->id;
 		$usuarioOrganizacao->id_organizacao = $organizacao->id;
-		$usuarioOrganizacao->cargo = CargoUsuarioEnum::PROPRIETARIO->value;
+		$usuarioOrganizacao->cargo = CargoUsuarioEnum::ADMIN ->value;
 		$usuarioOrganizacao->status = StatusUsuarioEnum::ATIVO->value;
 		$usuarioOrganizacao->id_usuario_criacao = $usuario->id;
 

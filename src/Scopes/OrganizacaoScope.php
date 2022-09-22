@@ -2,6 +2,7 @@
 
 namespace Bcampti\Larabase\Scopes;
 
+use App\Models\Tenant\Organizacao;
 use Bcampti\Larabase\Exceptions\GenericMessage;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -22,12 +23,12 @@ class OrganizacaoScope implements Scope
     {
         if( $model->enableOrganizacaoScope )
         {
-            if( !session()->has("id_organizacao") )
+            if( !Organizacao::checkCurrent() )
             {
                 info(__CLASS__." - Model: ".$model::class);
                 throw new GenericMessage("Organização não identificada, recarregue e tente novamente");
             }
-            $builder->where($model->getTable().'.id_organizacao', session("id_organizacao"));
+            $builder->where($model->getTable().'.id_organizacao', Organizacao::currentId());
         }
     }
 }

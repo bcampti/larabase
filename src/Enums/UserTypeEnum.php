@@ -1,17 +1,17 @@
 <?php
 namespace Bcampti\Larabase\Enums;
 
-enum StatusUsuarioEnum:string
+enum UserTypeEnum:string
 {
-    case ATIVO = 'Ativo';
-    case INATIVO = 'Inativo';
+    case SUPORTE = 'Suporte';
+    case PROPRIETARIO = 'Proprietário';
 
     public function color(): string
     {
         return match($this) 
         {
-            StatusUsuarioEnum::ATIVO => 'success',
-            StatusUsuarioEnum::INATIVO => 'dark',
+            UserTypeEnum::SUPORTE => 'dark',
+            UserTypeEnum::PROPRIETARIO => 'info',
         };
     }
 

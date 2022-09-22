@@ -3,6 +3,7 @@
 namespace Bcampti\Larabase\Http\Middleware;
 
 use Bcampti\Larabase\Enums\CargoUsuarioEnum;
+use Bcampti\Larabase\Enums\UserTypeEnum;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,7 +19,7 @@ class EnsureUserHasSuporte
      */
     public function handle(Request $request, Closure $next)
     {
-        if( !CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ) {
+        if( !UserTypeEnum::SUPORTE->equals(auth()->user()->type) ) {
             abort(Response::HTTP_UNAUTHORIZED);
         }
         return $next($request);

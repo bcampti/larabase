@@ -9,6 +9,7 @@ use App\Models\Tenant\Organizacao;
 use Bcampti\Larabase\Repositories\AccountManager;
 use App\Repositories\Tenant\OrganizacaoManager;
 use App\Repositories\Tenant\UsuarioOrganizacaoManager;
+use Bcampti\Larabase\Enums\UserTypeEnum;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -70,7 +71,7 @@ class LoginController extends Controller
     {
         $account = $this->accountManager->findOrFail($id);
 
-        if( CargoUsuarioEnum::SUPORTE->equals(request()->user()->cargo) ){
+        if( UserTypeEnum::SUPORTE->equals(request()->user()->type) ){
             request()->user()->update(["id_account" => $account->id]);
             request()->user()->fresh();
         }
@@ -100,7 +101,7 @@ class LoginController extends Controller
 
     public function organizacaoSelect( $id_organizacao )
     {
-        if( CargoUsuarioEnum::SUPORTE->equals(request()->user()->cargo) )
+        if( UserTypeEnum::SUPORTE->equals(request()->user()->type) )
         {
             $organizacao = $this->organizacaoManager->findOrFail($id_organizacao);
             $organizacao->makeCurrent();
@@ -115,7 +116,7 @@ class LoginController extends Controller
 
     public function logout($message = null)
 	{
-        if( auth()->check() && CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
+        if( auth()->check() && UserTypeEnum::SUPORTE->equals(auth()->user()->type) ){
             auth()->user()->update(['id_account'=>null]);
         }
 		Auth::logout();
