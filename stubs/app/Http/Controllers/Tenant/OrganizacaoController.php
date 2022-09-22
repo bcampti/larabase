@@ -27,7 +27,7 @@ class OrganizacaoController extends Controller
 	
 	public function index(Request $request)
     {
-		if( !UserTypeEnum::SUPORTE->equals(auth()->user()->type) ){
+		if( !UserTypeEnum::SUPORTE->equals(auth()->user()->type->value) ){
 			return redirect(route('auth.account.organizacao.index'));
 		}
 		$filtro = $this->organizacaoManager->paginate($request);
@@ -58,7 +58,7 @@ class OrganizacaoController extends Controller
 
 		$organizacao = $this->organizacaoManager->salvar($organizacao);
 
-		if( UserTypeEnum::PROPRIETARIO->equals(auth()->user()->type) )
+		if( UserTypeEnum::PROPRIETARIO->equals(auth()->user()->type->value) )
 		{
 			$usuarioOrganizacao = new UsuarioOrganizacao();
 			$usuarioOrganizacao->id_usuario = auth()->user()->id;

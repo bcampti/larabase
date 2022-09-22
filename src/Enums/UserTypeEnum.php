@@ -5,6 +5,7 @@ enum UserTypeEnum:string
 {
     case SUPORTE = 'Suporte';
     case PROPRIETARIO = 'Proprietário';
+    case USUARIO = 'Usuário';
 
     public function color(): string
     {
@@ -12,6 +13,7 @@ enum UserTypeEnum:string
         {
             UserTypeEnum::SUPORTE => 'dark',
             UserTypeEnum::PROPRIETARIO => 'info',
+            UserTypeEnum::USUARIO => 'warning',
         };
     }
 

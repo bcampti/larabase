@@ -58,7 +58,7 @@ class Organizacao extends Model
 		"id_usuario_alteracao"=>"integer",
 	];
 
-    public function sessionKey(){
+    public static function sessionKey(){
         return 'organizacao';
     }
 
