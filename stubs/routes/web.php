@@ -35,6 +35,9 @@ Route::get('/email/verify/{id}/{hash}', function (Illuminate\Foundation\Auth\Ema
     return redirect(route('home'));
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
+Route::middleware(['signed'])->get('/aceitar/convite/{userInvitation}', [App\Http\Controllers\Tenant\UsuarioOrganizacaoController::class, 'aceitarConvite'])->name('usuario.convite.aceitar');
+Route::post('usuario/nova/conta', [App\Http\Controllers\Tenant\UsuarioOrganizacaoController::class, 'adicionarUsuario'])->name('usuario.convite.add.usuario');
+
 Route::middleware(['auth','verified'])->group(function()
 {
     Route::prefix('auth')->group(function(){
@@ -84,6 +87,7 @@ Route::middleware(['auth','verified'])->group(function()
                 Route::prefix('convite')->group(function(){
                     Route::get('/', [App\Http\Controllers\Tenant\UsuarioOrganizacaoController::class, 'invitation'])->name('usuario.organizacao.invitation');
                     Route::post('salvar', [App\Http\Controllers\Tenant\UsuarioOrganizacaoController::class, 'storeInvitation'])->name('usuario.organizacao.invitation.store');
+                    Route::post('reenviar/{userInvitation}', [App\Http\Controllers\Tenant\UsuarioOrganizacaoController::class, 'sendInvitation'])->name('usuario.organizacao.invitation.send');
                     Route::delete('excluir/{id}', [App\Http\Controllers\Tenant\UsuarioOrganizacaoController::class, 'destroyInvitation'])->name('usuario.organizacao.invitation.destroy');
                 });
             });

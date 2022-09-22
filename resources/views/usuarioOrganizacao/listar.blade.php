@@ -40,12 +40,35 @@
 										@forelse( $userInvitations as $invitation )
 										<tr class="{{$loop->odd?'odd':'even'}}">
 											<td>
-												<div class="fs-5 fw-bold mb-1">{{ $invitation->name }} <x-user.cargo cargo="{{ $invitation->cargo }}"/></div>
+												<div class="fs-5 fw-bold mb-1">{{ $invitation->name }} <x-user.cargo cargo="{{ $invitation->cargo->value }}"/></div>
 												<div class="text-gray-700 fs-7">{{ $invitation->email }}</div>
 												<div class="text-gray-700 fs-7">Enviado em {{ $invitation->created_at->format('d/m/Y H:i') }}</div>
 											</td>
 											<td class="text-end">
-												<a href="#" class="btn btn-sm btn-icon btn-primary" data-bs-toggle="modal" data-bs-target="#modalEnviarInvitation{{$invitation->id}}" title="Re-enviar convite"><i class="fa fa-paper-plane"></i></a>
+												<a href="#" class="btn btn-sm btn-icon btn-primary" data-bs-toggle="modal" data-bs-target="#modalSendInvitation{{$invitation->id}}" title="Reenviar convite"><i class="fa fa-paper-plane"></i></a>
+												<!--begin::ModalSend-->
+												<div class="modal fade" id="modalSendInvitation{{$invitation->id}}" tabindex="-1" data-backdrop="static" data-keyboard="false" style="display: none;">
+													<div class="modal-dialog modal-dialog-centered">
+														<div class="modal-content rounded">
+															<div class="modal-body pb-15 px-5 px-xl-20">
+																<form action="{{ route('usuario.organizacao.invitation.send', $invitation) }}" method="post">
+																	@csrf
+																	<div class="mb-13 text-center">
+																		<h1 class="mb-3">Reenviar Convite</h1>
+																		<div class="fw-semibold fs-5">
+																			Você confirma o reenvio deste convite?
+																		</div>
+																	</div>
+																	<div class="d-flex flex-center flex-row-fluid">
+																		<button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
+																		<button type="submit" class="btn btn-success">Confirmar</button>
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!--end::ModalSend-->
 												<a href="#" class="btn btn-sm btn-icon btn-danger" data-bs-toggle="modal" data-bs-target="#modaldeleteInvitation{{$invitation->id}}" title="Excluir convite"><i class="fa fa-trash-can"></i></a>
 												<!--begin::ModalDelete-->
 												<div class="modal fade" id="modaldeleteInvitation{{$invitation->id}}" tabindex="-1" data-backdrop="static" data-keyboard="false" style="display: none;">
@@ -83,9 +106,10 @@
 										</tr>
 										@empty
 										<tr>
-											<td colspan="1" style="text-align: center;">
-												<div class="card-px text-center py-20 my-10">
-													<p class="fs-4 fw-semibold mb-10">Nenhum convite pendente.</p>
+											<td colspan="2" style="text-align: center;">
+												<div class="card-px text-center py-5 my-10">
+													<p class="fs-4 fw-semibold">Nenhum convite pendente.</p>
+													<a href="{{ route('usuario.organizacao.invitation') }}" class="btn btn-sm fw-bold btn-primary"><i class="fa fa-plus"></i> Convidar Usuário</a>
 												</div>
 											</td>
 										</tr>
@@ -165,6 +189,7 @@
 										<tr class="text-start text-gray-600 fw-bold fs-7 text-uppercase gs-0">
 											<th class="min-w-125px">{!! $filtro->coluna('Nome', 'usuario.name') !!}</th>
 											<th class="min-w-125px">{!! $filtro->coluna('E-mail', 'usuario.email') !!}</th>
+											<th class="min-w-125px">{!! $filtro->coluna('Cargo', 'cargo') !!}</th>
 											<th class="text-end min-w-70px sorting_disabled">Ações</th>
 										</tr>
 									</thead>
@@ -173,6 +198,7 @@
 										<tr class="{{$loop->odd?'odd':'even'}}">
 											<td>{{ $usuarioOrganizacao->usuario->name }}</td>
 											<td>{{ $usuarioOrganizacao->usuario->email }}</td>
+											<td><x-user.cargo cargo="{{ $usuarioOrganizacao->cargo->value }}"/></td>
 											<td class="text-end pt-0 pb-0">
 										@hasPermission('PROPRIETARIO')
 											@if( auth()->id()==$usuarioOrganizacao->id_usuario )

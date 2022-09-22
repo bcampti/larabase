@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Bcampti\Larabase\Actions\Account\CreateAccount;
-use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Enums\UserTypeEnum;
 use Bcampti\Larabase\Models\Account;
 use Illuminate\Foundation\Auth\RegistersUsers;

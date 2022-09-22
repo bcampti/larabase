@@ -11,7 +11,6 @@ use App\Models\Tenant\UsuarioOrganizacao;
 use App\Repositories\Tenant\OrganizacaoManager;
 use App\Repositories\Tenant\UsuarioOrganizacaoManager;
 use Bcampti\Larabase\Enums\CargoUsuarioEnum;
-use Bcampti\Larabase\Enums\StatusUsuarioEnum;
 use Bcampti\Larabase\Enums\UserTypeEnum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -64,8 +63,7 @@ class OrganizacaoController extends Controller
 			$usuarioOrganizacao = new UsuarioOrganizacao();
 			$usuarioOrganizacao->id_usuario = auth()->user()->id;
 			$usuarioOrganizacao->id_organizacao = $organizacao->id;
-			$usuarioOrganizacao->cargo = CargoUsuarioEnum::ADMIN ->value;
-			$usuarioOrganizacao->status = StatusUsuarioEnum::ATIVO->value;
+			$usuarioOrganizacao->cargo = CargoUsuarioEnum::ADMIN->value;
 			$usuarioOrganizacao->id_usuario_criacao = auth()->user()->id;
 
 			$usuarioOrganizacaoManager = new UsuarioOrganizacaoManager();

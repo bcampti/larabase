@@ -2,11 +2,8 @@
 
 namespace App\Http\Requests\Tenant;
 
-use App\Models\Tenant\UserInvitation;
 use Bcampti\Larabase\Enums\CargoUsuarioEnum;
-use Bcampti\Larabase\Rules\UniqueToOrg;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 
 class UsuarioOrganizacaoRequest extends FormRequest

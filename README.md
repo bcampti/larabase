@@ -31,12 +31,6 @@ Publica os arquivos modelos 'stubs':
 php artisan vendor:publish --tag="larabase-stubs"
 ```
 
-Opcionalmente, você pode publicar as views:
-
-```bash
-php artisan vendor:publish --tag="larabase-views"
-```
-
 ## Instalação das dependencias e configurações adicionais
 Executar o comando abaixo para instalar as dependencias do pacote.
 ```bash

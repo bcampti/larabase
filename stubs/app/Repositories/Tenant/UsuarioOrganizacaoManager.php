@@ -63,7 +63,7 @@ class UsuarioOrganizacaoManager extends TenantManager implements PaginateInterfa
 		if( is_empty($usuarioOrganizacao) )
 		{
 			$user = auth()->user();
-			if( UserTypeEnum::SUPORTE->equals($user->cargo) )
+			if( UserTypeEnum::SUPORTE->equals($user->type) )
 			{
 				$organizacao = Organizacao::whereKey($id_organizacao)->first();
 				if( is_empty($organizacao) )

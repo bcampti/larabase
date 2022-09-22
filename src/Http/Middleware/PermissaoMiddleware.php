@@ -1,6 +1,5 @@
 <?php namespace App\Http\Middleware\App;
 
-use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Enums\UserTypeEnum;
 use Closure;
 use Illuminate\Http\Response;

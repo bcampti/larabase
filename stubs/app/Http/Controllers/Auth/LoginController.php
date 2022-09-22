@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use App\Models\Tenant\Organizacao;
 use Bcampti\Larabase\Repositories\AccountManager;
 use App\Repositories\Tenant\OrganizacaoManager;

@@ -24,7 +24,6 @@ class Cargo extends Component
      */
     public function render()
     {
-        dd($this->cargo);
         return view('components.user.cargo');
     }
 }

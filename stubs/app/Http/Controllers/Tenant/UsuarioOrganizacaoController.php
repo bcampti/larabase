@@ -7,13 +7,19 @@ use App\Http\Requests\Tenant\UserInvitationRequest;
 use App\Http\Requests\Tenant\UsuarioOrganizacaoRequest;
 use App\Models\Tenant\Organizacao;
 use App\Models\Tenant\UserInvitation;
+use App\Models\Tenant\Usuario;
 use App\Models\Tenant\UsuarioOrganizacao;
 use App\Models\User;
+use App\Notifications\Tenant\UserInvitationNotification;
 use App\Repositories\Tenant\UsuarioManager;
 use App\Repositories\Tenant\UsuarioOrganizacaoManager;
+use Bcampti\Larabase\Enums\UserTypeEnum;
 use Bcampti\Larabase\Exceptions\GenericMessage;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Spatie\Multitenancy\Models\Tenant;
 
@@ -97,9 +103,9 @@ class UsuarioOrganizacaoController extends Controller
 
 	public function storeInvitation(UserInvitationRequest $request)
     {
-		$userIntivation = new UserInvitation($request->validated());
+		$userInvitation = new UserInvitation($request->validated());
 
-		$user = User::where("email", $userIntivation->email)
+		$user = User::where("email", $userInvitation->email)
 					->where("id_account", Tenant::current()->id)
 					->get();
 
@@ -108,21 +114,28 @@ class UsuarioOrganizacaoController extends Controller
 		}
 
 		$usuario = UsuarioOrganizacao::where("id_organizacao", Organizacao::currentId())
-						->whereHas('usuario', function($query) use ($userIntivation){
-							$query->where("email", $userIntivation->email);
+						->whereHas('usuario', function($query) use ($userInvitation){
+							$query->where("email", $userInvitation->email);
 						})->get();
 
 		if( !is_empty($usuario) ){
 			throw ValidationException::withMessages(['email'=>"Este e-mail já possui acesso a esta Organização."]);
 		}
 		
-		$userIntivation->id_organizacao = Organizacao::currentId();
-		$userIntivation->id_account = Tenant::current()->id;
-		$userIntivation->save();
+		$userInvitation->id_organizacao = Organizacao::currentId();
+		$userInvitation->id_account = Tenant::current()->id;
+		$userInvitation->save();
 
-		//$userIntivation->notifyNow();
+		$userInvitation->notifyNow(new UserInvitationNotification($userInvitation));
 		
 		return redirect(route("usuario.organizacao.index"))->with(GenericMessage::alertMessage("Convite enviado com sucesso!"));
+	}
+
+	public function sendInvitation( UserInvitation $userInvitation )
+	{
+		$userInvitation->notifyNow(new UserInvitationNotification($userInvitation));
+
+		return redirect(route('usuario.organizacao.index'))->with(GenericMessage::alertMessage("Convite reenviado com sucesso!"));
 	}
 
 	public function destroyInvitation($id)
@@ -134,11 +147,81 @@ class UsuarioOrganizacaoController extends Controller
 			return back()->with(GenericMessage::PASSWORD_BAD);
 		}
 		
-		$userIntivation = UserInvitation::findOrFail($id);
+		$userInvitation = UserInvitation::findOrFail($id);
 		
-		$userIntivation->delete();
+		$userInvitation->delete();
 
 		return redirect(route("usuario.organizacao.index"))->with(GenericMessage::successMessage("Convite removido com sucesso!"));
 	}
 
+	public function aceitarConvite( UserInvitation $userInvitation )
+	{
+		if( auth()->check() && auth()->user()->email != $userInvitation->email ){
+			return redirect(route("home"))->with(GenericMessage::alertMessage("Existe um Usuário conectado neste navegador, para aceitar o convite desconecte desta conta."));
+		}
+		$user = User::where('email', $userInvitation->email)->first();
+
+		if( is_empty($user) ){
+			return view('usuarioOrganizacao.convite', compact('userInvitation'));
+		}
+
+		$userInvitation->account->makeCurrent();
+		$organizacao = $userInvitation->organizacao;
+
+		/* ADICIONA USUARIO AO SCHEMA */
+	    $usuario = new Usuario();
+	    $usuario->id = $user->id;
+	    $usuario->name = $user->name;
+	    $usuario->email = $user->email;
+	    $usuario->password = $user->password;
+
+		$usuarioManager = new UsuarioManager();
+	    $usuarioManager->salvar($usuario);
+		
+		$usuarioOrganizacao = new UsuarioOrganizacao();
+		$usuarioOrganizacao->id_usuario = $usuario->id;
+		$usuarioOrganizacao->id_organizacao = $organizacao->id;
+		$usuarioOrganizacao->cargo = $userInvitation->cargo->value;
+		$usuarioOrganizacao->id_usuario_criacao = $usuario->id;
+
+		$usuarioOrganizacaoManager = new UsuarioOrganizacaoManager();
+		$usuarioOrganizacaoManager->salvar($usuarioOrganizacao);
+
+		$userInvitation->delete();
+
+		return redirect(route('auth.account.organizacao.index'));
+	}
+	
+	public function adicionarUsuario(Request $request)
+	{
+		$inputs = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'terms' => ['required', 'accepted'],
+			'invitation' => ['required','exists:user_invitation,id']
+        ],
+        [
+            'terms.required' => 'Você deve aceitar os Termos e Políticas de Privacidade',
+            'terms.accepted' => 'Você deve aceitar os Termos e Políticas de Privacidade',
+        ])->validate();
+
+		$userInvitation = UserInvitation::findOrFail($inputs['invitation']);
+		
+		$user = User::create([
+			'name' => $inputs['name'],
+			'email' => $userInvitation->email,
+			'password' => Hash::make($inputs['password']),
+			'type' => UserTypeEnum::USUARIO->value,
+			'id_account'=>$userInvitation->id_account,
+		]);
+
+		if ($user->markEmailAsVerified()) {
+            event(new Verified($user));
+        }
+
+		if (Auth::attempt(['email' => $user->email, 'password' => $inputs['password']])) {
+			return back();
+		}
+		return redirect(route('login'));
+	}
 }
