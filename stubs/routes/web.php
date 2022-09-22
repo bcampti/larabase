@@ -74,6 +74,20 @@ Route::middleware(['auth','verified'])->group(function()
                 Route::post('update', [App\Http\Controllers\Tenant\UsuarioController::class, 'update'])->name('usuario.perfil.update');
                 Route::post('update/password', [App\Http\Controllers\Tenant\UsuarioController::class, 'updatePassword'])->name('usuario.perfil.update.password');
             });
+
+            Route::prefix('usuario/organizacao')->group(function(){
+                Route::match(['get','post'], '/', [App\Http\Controllers\Tenant\UsuarioOrganizacaoController::class, 'index'])->name('usuario.organizacao.index');
+                Route::get('alterar/{id}', [App\Http\Controllers\Tenant\UsuarioOrganizacaoController::class, 'edit'])->name('usuario.organizacao.edit');
+                Route::put('update/{id}', [App\Http\Controllers\Tenant\UsuarioOrganizacaoController::class, 'update'])->name('usuario.organizacao.update');
+                Route::delete('excluir/{id}', [App\Http\Controllers\Tenant\UsuarioOrganizacaoController::class, 'destroy'])->name('usuario.organizacao.destroy');
+
+                Route::prefix('convite')->group(function(){
+                    Route::get('/', [App\Http\Controllers\Tenant\UsuarioOrganizacaoController::class, 'invitation'])->name('usuario.organizacao.invitation');
+                    Route::post('salvar', [App\Http\Controllers\Tenant\UsuarioOrganizacaoController::class, 'storeInvitation'])->name('usuario.organizacao.invitation.store');
+                    Route::delete('excluir/{id}', [App\Http\Controllers\Tenant\UsuarioOrganizacaoController::class, 'destroyInvitation'])->name('usuario.organizacao.invitation.destroy');
+                });
+            });
+
         });
 
     });

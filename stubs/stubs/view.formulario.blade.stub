@@ -11,7 +11,7 @@
 	<!--begin::Content container-->
 	<div id="kt_app_content_container" class="app-container container-fluid">
 
-		<div class="card card-shadow" id="kt_{{ routeModelName }}_main">
+		<div class="card card-shadow" id="kt_{{ modelVariable }}_main">
 
 			<div class="card-header">
 				<h3 class="card-title">{{ model }}</h3>
@@ -23,9 +23,9 @@
 			</div>
 		@hasPermission('USUARIO')
 			@if( empty(${{ modelVariable }}->id) )
-			<form id="kt_{{ routeModelName }}_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('{{ routeModelName }}.store')}}" method="post">
+			<form id="kt_{{ modelVariable }}_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('{{ routeModelName }}.store')}}" method="post">
 			@else
-			<form id="kt_{{ routeModelName }}_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('{{ routeModelName }}.update', ${{ modelVariable }}->id)}}" method="post">
+			<form id="kt_{{ modelVariable }}_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('{{ routeModelName }}.update', ${{ modelVariable }}->id)}}" method="post">
 				@method("PUT")
 			@endif
 		@endhasPermission
@@ -72,7 +72,7 @@
 					<div class="d-flex justify-content-end">
 					@hasPermission('USUARIO')
 						@if( !empty(${{ modelVariable }}->id) )
-						<a href="#" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal" data-bs-target="#modaldelete" title="Excluir Registro"><i class="las la-trash fs-2"></i> Excluir</a>
+						<a href="#" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal" data-bs-target="#modaldelete" title="Excluir Registro"><i class="fa fa-trash-can"></i> Excluir</a>
 						@endif
 						<button type="submit" data-kt-contacts-type="submit" class="btn btn-primary btn-sm me-3">
 							<i class="fa fa-check"></i> 

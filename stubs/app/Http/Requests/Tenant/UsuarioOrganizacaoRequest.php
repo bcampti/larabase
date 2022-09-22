@@ -2,9 +2,14 @@
 
 namespace App\Http\Requests\Tenant;
 
+use App\Models\Tenant\UserInvitation;
+use Bcampti\Larabase\Enums\CargoUsuarioEnum;
+use Bcampti\Larabase\Rules\UniqueToOrg;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
-class UsuarioRequest extends FormRequest
+class UsuarioOrganizacaoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,6 +33,11 @@ class UsuarioRequest extends FormRequest
                 "required",
                 "string",
             ],
+            "cargo" => [
+                "required",
+                "string",
+                new Enum(CargoUsuarioEnum::class)
+            ]
         ];
     }
 
@@ -37,9 +47,7 @@ class UsuarioRequest extends FormRequest
     public function messages()
     {
         return [
-            //"nome.required" => "O Nome deve ser informado.",
-            //"status.required" => "A situação deve ser informada.",
-            //"status.in" => "A situação informada não é valida.",
+            
         ];
     }
 
@@ -51,7 +59,7 @@ class UsuarioRequest extends FormRequest
     public function attributes()
     {
         return [
-            "nome" => "Nome",
+            "name" => "nome",
         ];
     }
 
@@ -63,7 +71,7 @@ class UsuarioRequest extends FormRequest
     protected function prepareForValidation()
     {
         /* $this->merge([
-            'slug' => Str::slug($this->slug),
+            "slug" => Str::slug($this->slug),
         ]); */
     }
 }

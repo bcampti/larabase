@@ -9,12 +9,11 @@ class UsuarioOrganizacaoFiltro extends AbstractFiltro
 {
     public function init()
 	{
-		$this->status = StatusEnum::ATIVO;
 	}
 
 	public function getOrderBy()
 	{
-		return 'organizacao.nome';
+		return 'usuario.name';
 	}
 	
 	public function getDirecao()

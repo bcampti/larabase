@@ -11,12 +11,20 @@ trait MigrationCommandTrait
     private function publishMigrations():self
     {
         (new Filesystem)->ensureDirectoryExists(database_path('factories'));
+        
+        (new Filesystem)->deleteDirectory(database_path('migrations'));
         (new Filesystem)->ensureDirectoryExists(database_path('migrations'));
-        (new Filesystem)->ensureDirectoryExists(database_path('migrations/landlord'));
-        (new Filesystem)->ensureDirectoryExists(database_path('migrations/tenant'));
-        (new Filesystem)->ensureDirectoryExists(database_path('seeders'));
 
-        $files = [
+        (new Filesystem)->ensureDirectoryExists(database_path('migrations/landlord'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../../database/migrations/landlord', database_path('migrations/landlord'));
+        
+        (new Filesystem)->ensureDirectoryExists(database_path('migrations/tenant'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../../database/migrations/tenant', database_path('migrations/tenant'));
+
+        (new Filesystem)->ensureDirectoryExists(database_path('seeders'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../../database/seeders', database_path('seeders'));
+
+        /* $files = [
             'database/migrations/landlord/2014_10_12_000000_create_users_table.php',
             'database/migrations/landlord/2014_10_12_100000_create_password_resets_table.php',
             'database/migrations/landlord/2019_08_19_000000_create_failed_jobs_table.php',
@@ -38,7 +46,7 @@ trait MigrationCommandTrait
             if( !file_exists($publishPath) ) {
                 copy(__DIR__ . '/../../../' . $file, $publishPath);
             }
-        }
+        } */
 
         return $this;
     }

@@ -5,7 +5,6 @@ enum StatusUsuarioEnum:string
 {
     case ATIVO = 'Ativo';
     case INATIVO = 'Inativo';
-	case CONVIDADO = "Convidado";
 
     public function color(): string
     {
@@ -13,7 +12,6 @@ enum StatusUsuarioEnum:string
         {
             StatusUsuarioEnum::ATIVO => 'success',
             StatusUsuarioEnum::INATIVO => 'dark',
-            StatusUsuarioEnum::CONVIDADO => 'warnning',
         };
     }
 

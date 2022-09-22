@@ -2,17 +2,53 @@
 
 namespace App\Repositories\Tenant;
 
+use App\Filtro\Tenant\UsuarioOrganizacaoFiltro;
 use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use App\Models\Tenant\Organizacao;
 use App\Models\Tenant\Usuario;
 use App\Models\Tenant\UsuarioOrganizacao;
+use Bcampti\Larabase\Repositories\PaginateInterface;
 use Bcampti\Larabase\Repositories\TenantManager;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
-class UsuarioOrganizacaoManager extends TenantManager
+class UsuarioOrganizacaoManager extends TenantManager implements PaginateInterface
 {
 	protected $class_model = UsuarioOrganizacao::class;
 
+	public function paginate(Request $request)
+	{
+	    $filtro = new UsuarioOrganizacaoFiltro($request);
+	    
+		$query = $this->getQuery()
+			->join('usuario', 'usuario.id','usuario_organizacao.id_usuario')
+			->with('usuario');
+		
+		$query->where("id_organizacao", Organizacao::currentId());
+
+		$query->when($filtro->search, function ($query) use ($filtro) {
+			$query->whereHas('usuario', function($q) use ($filtro) {
+				$q->whereRaw("lower(usuario.name) like '".strLower($filtro->search)."%'")
+					->orWhereRaw("lower(email) like '". strLower($filtro->search)."%'");
+			});
+		});
+		
+		$filtro->setTotal($query->count());
+		
+		if( !empty($filtro->orderBy) ){
+			$query->orderBy( $filtro->orderBy, $filtro->direcao );
+		}
+		if( $filtro->orderBy != "id" ){
+		    $query->orderBy("id");
+		}
+		$query->offset($filtro->inicio)->limit( $filtro->limit )
+				->select($this->newInstance()->getTable().".*");
+		
+		$filtro->setItems($query->get());
+		
+		return $filtro;
+	}
+	
 	public function getUsuarioOrganizacao($id_organizacao):?UsuarioOrganizacao
 	{
 		if( is_empty($id_organizacao) ){
