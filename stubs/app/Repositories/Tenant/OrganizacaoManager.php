@@ -2,10 +2,10 @@
 
 namespace App\Repositories\Tenant;
 
-use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Enums\StatusEnum;
 use App\Filtro\Tenant\OrganizacaoFiltro;
 use App\Models\Tenant\Organizacao;
+use Bcampti\Larabase\Enums\UserTypeEnum;
 use Bcampti\Larabase\Repositories\PaginateInterface;
 use Bcampti\Larabase\Repositories\TenantManager;
 use Illuminate\Http\Request;
@@ -50,7 +50,7 @@ class OrganizacaoManager extends TenantManager implements PaginateInterface
 		$query = $this->getQuery()
 			->select("organizacao.*");
 
-		if( !CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
+		if( !UserTypeEnum::SUPORTE->equals(auth()->user()->type) ){
 			$query->join("usuario_organizacao", function ($join) {
 				$join->on( "organizacao.id", "=","usuario_organizacao.id_organizacao")->where("usuario_organizacao.id_usuario", auth()->id());
 			});

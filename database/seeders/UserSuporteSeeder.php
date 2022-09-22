@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Bcampti\Larabase\Enums\CargoUsuarioEnum;
+use Bcampti\Larabase\Enums\UserTypeEnum;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,7 +20,7 @@ class UserSuporteSeeder extends Seeder
             'name'=>'Admin',
             'email'=>'suporte@mailinator.com',
             'password'=>Hash::make('password'),
-            'cargo'=>CargoUsuarioEnum::SUPORTE->value,
+            'type'=>UserTypeEnum::SUPORTE->value,
             'email_verified_at'=>now()
         ]);
     }

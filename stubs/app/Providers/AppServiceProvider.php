@@ -3,6 +3,7 @@ namespace App\Providers;
 
 use App\Models\User;
 use Bcampti\Larabase\Enums\CargoUsuarioEnum;
+use Bcampti\Larabase\Enums\UserTypeEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
 use OwenIt\Auditing\Models\Audit;
@@ -53,10 +54,10 @@ class AppServiceProvider extends ServiceProvider
             return hasPermission($permissao);
         });
         Blade::if('hasSuporte', function () {
-            return hasPermission(CargoUsuarioEnum::SUPORTE->name);
+            return UserTypeEnum::SUPORTE->equals(auth()->user()->cargo);
         });
         Blade::if('hasProprietario', function () {
-            return hasPermission(CargoUsuarioEnum::PROPRIETARIO->name);
+            return UserTypeEnum::PROPRIETARIO->equals(auth()->user()->cargo);
         });
 
         Blade::directive('moneyFormat', function ($valor) {

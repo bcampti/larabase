@@ -6,6 +6,7 @@ use App\Models\Admin\Companhia;
 use App\Models\Admin\TermoPolitica;
 use App\Repositories\Sistema\UsuarioAceiteManager;
 use Bcampti\Larabase\Enums\CargoUsuarioEnum;
+use Bcampti\Larabase\Enums\UserTypeEnum;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Spatie\Multitenancy\Models\Tenant;
@@ -22,7 +23,7 @@ class ChecarAceitesMiddleware
 	public function handle($request, Closure $next)
 	{
 		$user = Auth::user();
-		if( !CargoUsuarioEnum::SUPORTE->equals($user->tipo) && !Session::has('aceites') )
+		if( !UserTypeEnum::SUPORTE->equals($user->tipo) && !Session::has('aceites') )
 		{
 			$usuarioAceiteManager = new UsuarioAceiteManager();
 			//VALIDA O ACEITE DO TERMO DE USO

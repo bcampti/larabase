@@ -12,6 +12,7 @@ use App\Repositories\Tenant\OrganizacaoManager;
 use App\Repositories\Tenant\UsuarioOrganizacaoManager;
 use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Enums\StatusUsuarioEnum;
+use Bcampti\Larabase\Enums\UserTypeEnum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Multitenancy\Models\Tenant;
@@ -27,7 +28,7 @@ class OrganizacaoController extends Controller
 	
 	public function index(Request $request)
     {
-		if( !CargoUsuarioEnum::SUPORTE->equals(auth()->user()->cargo) ){
+		if( !UserTypeEnum::SUPORTE->equals(auth()->user()->type) ){
 			return redirect(route('auth.account.organizacao.index'));
 		}
 		$filtro = $this->organizacaoManager->paginate($request);
@@ -58,12 +59,12 @@ class OrganizacaoController extends Controller
 
 		$organizacao = $this->organizacaoManager->salvar($organizacao);
 
-		if( CargoUsuarioEnum::PROPRIETARIO->equals(auth()->user()->cargo) )
+		if( UserTypeEnum::PROPRIETARIO->equals(auth()->user()->type) )
 		{
 			$usuarioOrganizacao = new UsuarioOrganizacao();
 			$usuarioOrganizacao->id_usuario = auth()->user()->id;
 			$usuarioOrganizacao->id_organizacao = $organizacao->id;
-			$usuarioOrganizacao->cargo = CargoUsuarioEnum::PROPRIETARIO->value;
+			$usuarioOrganizacao->cargo = CargoUsuarioEnum::ADMIN ->value;
 			$usuarioOrganizacao->status = StatusUsuarioEnum::ATIVO->value;
 			$usuarioOrganizacao->id_usuario_criacao = auth()->user()->id;
 

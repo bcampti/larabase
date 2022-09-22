@@ -3,16 +3,14 @@ namespace Bcampti\Larabase\Enums;
 
 enum CargoUsuarioEnum:string
 {
-    case SUPORTE = 'Suporte';
-    case PROPRIETARIO = 'Proprietário';
+    case ADMIN = 'Administrador';
     case USUARIO = 'Usuário';
 
     public function color(): string
     {
         return match($this) 
         {
-            CargoUsuarioEnum::SUPORTE => 'dark',
-            CargoUsuarioEnum::PROPRIETARIO => 'info',
+            CargoUsuarioEnum::ADMIN => 'info',
             CargoUsuarioEnum::USUARIO => 'success',
         };
     }
@@ -24,24 +22,24 @@ enum CargoUsuarioEnum:string
     
     public static function validaPermissao( $permissao )
     {
-        switch (auth()->user()->cargo->name)
+        switch (auth()->user()->type->name)
         {
-            case CargoUsuarioEnum::SUPORTE->name:
+            case UserTypeEnum::SUPORTE->name:
                 return true;
 
-            case CargoUsuarioEnum::PROPRIETARIO->name:
+            case UserTypeEnum::PROPRIETARIO->name:
                 if( is_array($permissao) ){
-                    return in_array(auth()->user()->cargo->name, $permissao);
-                }else if( in_array($permissao, [CargoUsuarioEnum::PROPRIETARIO->name, CargoUsuarioEnum::USUARIO->name]) ){
+                    return in_array(auth()->user()->type->name, $permissao);
+                }else if( in_array($permissao, [UserTypeEnum::PROPRIETARIO->name, CargoUsuarioEnum::USUARIO->name]) ){
                     return true;
                 }
                 return false;
             
             default:
                 if( is_array($permissao) ){
-                    return in_array(auth()->user()->cargo->name, $permissao);
+                    return in_array(auth()->user()->type->name, $permissao);
                 }else{
-                    if( auth()->user()->cargo->name==$permissao ){
+                    if( auth()->user()->type->name==$permissao ){
                         return true;
                     }
                 }

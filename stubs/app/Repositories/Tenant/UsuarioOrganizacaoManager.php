@@ -3,10 +3,10 @@
 namespace App\Repositories\Tenant;
 
 use App\Filtro\Tenant\UsuarioOrganizacaoFiltro;
-use Bcampti\Larabase\Enums\CargoUsuarioEnum;
 use App\Models\Tenant\Organizacao;
 use App\Models\Tenant\Usuario;
 use App\Models\Tenant\UsuarioOrganizacao;
+use Bcampti\Larabase\Enums\UserTypeEnum;
 use Bcampti\Larabase\Repositories\PaginateInterface;
 use Bcampti\Larabase\Repositories\TenantManager;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -63,7 +63,7 @@ class UsuarioOrganizacaoManager extends TenantManager implements PaginateInterfa
 		if( is_empty($usuarioOrganizacao) )
 		{
 			$user = auth()->user();
-			if( CargoUsuarioEnum::SUPORTE->equals($user->cargo) )
+			if( UserTypeEnum::SUPORTE->equals($user->cargo) )
 			{
 				$organizacao = Organizacao::whereKey($id_organizacao)->first();
 				if( is_empty($organizacao) )
