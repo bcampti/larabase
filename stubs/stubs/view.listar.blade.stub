@@ -87,7 +87,7 @@
 								<tr class="{{$loop->odd?'odd':'even'}}">
 									<td>{{ ${{ modelVariable }}->id }}</td>
 									<td>{{ ${{ modelVariable }}->nome }}</td>
-									<td><x-model.status status="{{ ${{ modelVariable }}->status->value }}"/></td>
+									<td><x-model.status status="{{ ${{ modelVariable }}->status }}"/></td>
 									<td class="text-end pt-0 pb-0">
 									@hasPermission("cliente")
 										<a href="{{ route('{{ routeModelName }}.edit', ${{ modelVariable }}->id) }}" class="btn btn-sm btn-icon btn-warning" title="Alterar Registro"><i class="fa fa-pen-to-square"></i></a>

@@ -15,7 +15,7 @@ class PermissaoMiddleware
 	 */
 	public function handle($request, Closure $next, ...$permissao)
 	{
-		if ( !UserTypeEnum::SUPORTE->equals(auth()->user()->type->value) )
+		if ( !UserTypeEnum::SUPORTE->equals(auth()->user()->type->name) )
 		{
 			if( !hasPermission($permissao) ) {
 				if ($request->ajax ()) {

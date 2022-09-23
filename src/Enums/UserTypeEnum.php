@@ -17,8 +17,8 @@ enum UserTypeEnum:string
         };
     }
 
-    public function equals( $value ): bool
+    public function equals( $name ): bool
     {
-        return is_empty($value) ? false : $this->value == $value;
+        return is_empty($name) ? false : $this->name == $name;
     }
 }

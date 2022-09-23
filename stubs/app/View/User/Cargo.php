@@ -2,11 +2,12 @@
 
 namespace App\View\Cargo;
 
+use App\Enums\CargoUsuarioEnum;
 use Illuminate\View\Component;
 
 class Cargo extends Component
 {
-    public $cargo;
+    public CargoUsuarioEnum $cargo;
     /**
      * Create a new component instance.
      *

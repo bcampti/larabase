@@ -15,7 +15,7 @@ class CheckTenantConnection
     {
 		$tenant = auth()->user()->account;
 		if( is_empty($tenant) ){
-			if( UserTypeEnum::SUPORTE->equals(auth()->user()->type->value) ) {
+			if( UserTypeEnum::SUPORTE->equals(auth()->user()->type->name) ) {
 				return redirect(route('account.index'));
 			}
 			return redirect(route("auth.account.no.database"));

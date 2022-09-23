@@ -70,7 +70,7 @@ class LoginController extends Controller
     {
         $account = $this->accountManager->findOrFail($id);
 
-        if( UserTypeEnum::SUPORTE->equals(request()->user()->type->value) ){
+        if( UserTypeEnum::SUPORTE->equals(request()->user()->type->name) ){
             request()->user()->update(["id_account" => $account->id]);
             request()->user()->fresh();
         }
@@ -100,7 +100,7 @@ class LoginController extends Controller
 
     public function organizacaoSelect( $id_organizacao )
     {
-        if( UserTypeEnum::SUPORTE->equals(request()->user()->type->value) )
+        if( UserTypeEnum::SUPORTE->equals(request()->user()->type->name) )
         {
             $organizacao = $this->organizacaoManager->findOrFail($id_organizacao);
             $organizacao->makeCurrent();
@@ -115,7 +115,7 @@ class LoginController extends Controller
 
     public function logout($message = null)
 	{
-        if( auth()->check() && UserTypeEnum::SUPORTE->equals(auth()->user()->type->value) ){
+        if( auth()->check() && UserTypeEnum::SUPORTE->equals(auth()->user()->type->name) ){
             auth()->user()->update(['id_account'=>null]);
         }
 		Auth::logout();

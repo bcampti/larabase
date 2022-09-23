@@ -18,7 +18,7 @@ class EnsureUserHasSuporte
      */
     public function handle(Request $request, Closure $next)
     {
-        if( !UserTypeEnum::SUPORTE->equals(auth()->user()->type->value) ) {
+        if( !UserTypeEnum::SUPORTE->equals(auth()->user()->type->name) ) {
             abort(Response::HTTP_UNAUTHORIZED);
         }
         return $next($request);
