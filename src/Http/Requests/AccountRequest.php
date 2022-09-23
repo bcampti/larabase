@@ -28,7 +28,6 @@ class AccountRequest extends FormRequest
             "name" => [
                 "required",
                 "string",
-                Rule::unique('account'),
             ],
            /*  "status" => [
                 "required", 
