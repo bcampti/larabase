@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Tenant;
 
-use Bcampti\Larabase\Enums\CargoUsuarioEnum;
+use App\Enums\CargoUsuarioEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 

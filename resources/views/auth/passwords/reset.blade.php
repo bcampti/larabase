@@ -18,7 +18,7 @@
                 <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
                     <span class="required">E-mail</span>
                 </label>
-                <input type="email" name="email" value="{{ $email }}" autocomplete="off" class="form-control readonly" />
+                <input type="email" name="email" value="{{ $email }}" autocomplete="off" class="form-control" readonly/>
                 @error('email')
                 <div class="fv-plugins-message-container invalid-feedback">
                     <div>{{ $message }}</div>

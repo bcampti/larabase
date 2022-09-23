@@ -1,0 +1,1 @@
+<div class="badge badge-{{$type->color()}} fw-bold">{{ $type->label() }}</div>

@@ -56,9 +56,9 @@
 								<span class="required">Situação</span>
 							</label>
 							<select class="form-select form-select-sm" data-control="select2" name="status">
-								@foreach ( \Bcampti\Larabase\Enums\StatusAccountEnum::cases() as $status )
-									<option value="{{ $status->value }}" {{ optional($account->status)->value!=$status->value?:'selected' }}>{{ $status->value }}</option>
-								@endforeach
+							@foreach ( \Bcampti\Larabase\Enums\StatusAccountEnum::cases() as $status )
+								<option value="{{ $status->value }}" {{ $status->equals(optional($account->status)->value)?'selected':'' }}>{{ $status->label() }}</option>
+							@endforeach
 							</select>
 							@error('status')
 							<div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>

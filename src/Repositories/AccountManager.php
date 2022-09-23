@@ -3,7 +3,7 @@
 namespace Bcampti\Larabase\Repositories;
 
 use App\Models\User;
-use Bcampti\Larabase\Enums\CargoUsuarioEnum;
+use App\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Enums\StatusEnum;
 use Bcampti\Larabase\Exceptions\GenericMessage;
 use Bcampti\Larabase\Filtro\AccountFiltro;

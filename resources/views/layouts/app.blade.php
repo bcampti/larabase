@@ -13,7 +13,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     
     @include('layouts.partials.theme.styles')
-
+    <style>
+        .form-control:disabled, .form-control[readonly] {
+        color: var(--kt-input-disabled-color)!important;
+        background-color: var(--kt-input-disabled-bg)!important;
+        border-color: var(--kt-input-disabled-border-color)!important;
+        }
+    </style>
     @yield('css')
 
 </head>

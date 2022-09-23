@@ -3,8 +3,17 @@ namespace Bcampti\Larabase\Enums;
 
 enum StatusUsuarioEnum:string
 {
-    case ATIVO = 'Ativo';
-    case INATIVO = 'Inativo';
+    case ATIVO = 'ATIVO';
+    case INATIVO = 'INATIVO';
+
+    public function label(): string
+    {
+        return match($this) 
+        {
+            StatusUsuarioEnum::ATIVO => 'Ativo',
+            StatusUsuarioEnum::INATIVO => 'Inativo',
+        };
+    }
 
     public function color(): string
     {

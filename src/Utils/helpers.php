@@ -1,6 +1,6 @@
 <?php
 
-use Bcampti\Larabase\Enums\CargoUsuarioEnum;
+use App\Enums\CargoUsuarioEnum;
 use Illuminate\Database\Eloquent\Collection;
 
 if (!function_exists('is_empty')) {

@@ -2,7 +2,7 @@
 
 namespace App\Models\Tenant;
 
-use Bcampti\Larabase\Enums\CargoUsuarioEnum;
+use App\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Models\Model;
 use Bcampti\Larabase\Traits\HasUsuarioAlteracao;
 use Bcampti\Larabase\Traits\HasUsuarioCriacao;

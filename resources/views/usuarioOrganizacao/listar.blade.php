@@ -40,7 +40,7 @@
 										@forelse( $userInvitations as $invitation )
 										<tr class="{{$loop->odd?'odd':'even'}}">
 											<td>
-												<div class="fs-5 fw-bold mb-1">{{ $invitation->name }} <x-user.cargo cargo="{{ $invitation->cargo }}"/></div>
+												<div class="fs-5 fw-bold mb-1">{{ $invitation->name }} <x-user.cargo :cargo="$invitation->cargo"/></div>
 												<div class="text-gray-700 fs-7">{{ $invitation->email }}</div>
 												<div class="text-gray-700 fs-7">Enviado em {{ $invitation->created_at->format('d/m/Y H:i') }}</div>
 											</td>
@@ -198,7 +198,7 @@
 										<tr class="{{$loop->odd?'odd':'even'}}">
 											<td>{{ $usuarioOrganizacao->usuario->name }}</td>
 											<td>{{ $usuarioOrganizacao->usuario->email }}</td>
-											<td><x-user.cargo cargo="{{ $usuarioOrganizacao->cargo }}"/></td>
+											<td><x-user.cargo :cargo="$usuarioOrganizacao->cargo"/></td>
 											<td class="text-end pt-0 pb-0">
 										@hasPermission('PROPRIETARIO')
 											@if( auth()->id()==$usuarioOrganizacao->id_usuario )

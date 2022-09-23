@@ -2,8 +2,9 @@
 
 namespace Bcampti\Larabase\Http\Requests;
 
+use Bcampti\Larabase\Enums\StatusAccountEnum;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Enum;
 
 class AccountRequest extends FormRequest
 {
@@ -29,11 +30,11 @@ class AccountRequest extends FormRequest
                 "required",
                 "string",
             ],
-           /*  "status" => [
+            "status" => [
                 "required", 
                 "string",
                 new Enum(StatusAccountEnum::class)
-            ] */
+            ]
         ];
     }
 
@@ -58,6 +59,7 @@ class AccountRequest extends FormRequest
     {
         return [
             "name" => "Nome",
+            "status" => "Situação"
         ];
     }
 
