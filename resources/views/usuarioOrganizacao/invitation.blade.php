@@ -54,6 +54,10 @@
 								<span class="required">Cargo</span>
 							</label>
 							
+							@error('cargo')
+							<div class="fv-plugins-message-container invalid-feedback mb-5">{{ $message }}</div>
+							@enderror
+
 							<div class="d-flex fv-row">
 								<!--begin::Radio-->
 								<div class="form-check form-check-custom form-check-solid">
@@ -74,10 +78,10 @@
 								<!--begin::Radio-->
 								<div class="form-check form-check-custom form-check-solid">
 									<input class="form-check-input me-3" name="cargo" type="radio" id="role_option_2"
-										value="{{App\Enums\CargoUsuarioEnum::ADMIN->name}}"
-										{{App\Enums\CargoUsuarioEnum::ADMIN->equals($usuarioOrganizacao->cargo->name)? 'checked="checked"':''}}>
+										value="{{App\Enums\CargoUsuarioEnum::ADMIN->value}}"
+										{{App\Enums\CargoUsuarioEnum::ADMIN->equals($usuarioOrganizacao->cargo->value)? 'checked="checked"':''}}>
 									<label class="form-check-label" for="role_option_2">
-										<div class="fw-bold text-gray-800">{{App\Enums\CargoUsuarioEnum::ADMIN->value}}</div>
+										<div class="fw-bold text-gray-800">{{App\Enums\CargoUsuarioEnum::ADMIN->label()}}</div>
 										<div class="text-gray-600">Possui acesso para realizar cadastros, alterações e exclusão de registros do sistema.</div>
 										<div class="text-gray-600">Possui acesso a todos os recursos do sistema.</div>
 										<div class="text-gray-600">Pode genrenciar usuários, convidar, excluir e alterar cargo.</div>
@@ -86,11 +90,6 @@
 								<!--end::Radio-->
 							</div>
 
-							<div class="separator separator-dashed my-5"></div>
-
-							@error('status')
-							<div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-							@enderror
 						</div>
 					
 					</div>

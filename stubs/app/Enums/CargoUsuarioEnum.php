@@ -22,24 +22,24 @@ enum CargoUsuarioEnum:string
     
     public static function validaPermissao( $permissao )
     {
-        switch (auth()->user()->type->name)
+        switch (auth()->user()->type->value)
         {
-            case UserTypeEnum::SUPORTE->name:
+            case UserTypeEnum::SUPORTE->value:
                 return true;
 
-            case UserTypeEnum::PROPRIETARIO->name:
+            case UserTypeEnum::PROPRIETARIO->value:
                 if( is_array($permissao) ){
-                    return in_array(auth()->user()->type->name, $permissao);
-                }else if( in_array($permissao, [UserTypeEnum::PROPRIETARIO->name, CargoUsuarioEnum::USUARIO->name]) ){
+                    return in_array(auth()->user()->type->value, $permissao);
+                }else if( in_array($permissao, [UserTypeEnum::PROPRIETARIO->value, CargoUsuarioEnum::USUARIO->value]) ){
                     return true;
                 }
                 return false;
             
             default:
                 if( is_array($permissao) ){
-                    return in_array(auth()->user()->type->name, $permissao);
+                    return in_array(auth()->user()->type->value, $permissao);
                 }else{
-                    if( auth()->user()->type->name==$permissao ){
+                    if( auth()->user()->type->value==$permissao ){
                         return true;
                     }
                 }

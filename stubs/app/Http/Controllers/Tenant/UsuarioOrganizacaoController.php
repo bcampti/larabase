@@ -181,7 +181,7 @@ class UsuarioOrganizacaoController extends Controller
 		$usuarioOrganizacao = new UsuarioOrganizacao();
 		$usuarioOrganizacao->id_usuario = $usuario->id;
 		$usuarioOrganizacao->id_organizacao = $organizacao->id;
-		$usuarioOrganizacao->cargo = $userInvitation->cargo->name;
+		$usuarioOrganizacao->cargo = $userInvitation->cargo->value;
 		$usuarioOrganizacao->id_usuario_criacao = $usuario->id;
 
 		$usuarioOrganizacaoManager = new UsuarioOrganizacaoManager();
@@ -211,7 +211,7 @@ class UsuarioOrganizacaoController extends Controller
 			'name' => $inputs['name'],
 			'email' => $userInvitation->email,
 			'password' => Hash::make($inputs['password']),
-			'type' => UserTypeEnum::USUARIO->name,
+			'type' => UserTypeEnum::USUARIO->value,
 			'id_account'=>$userInvitation->id_account,
 		]);
 

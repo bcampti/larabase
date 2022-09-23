@@ -63,7 +63,7 @@ class AccountManager extends TenantManager implements PaginateInterface
         }
 
         if( $database->schemaExists($account->database) ){
-			if( UserTypeEnum::SUPORTE->equals(auth()->user()->type->name) ){
+			if( UserTypeEnum::SUPORTE->equals(auth()->user()->type->value) ){
 				throw new GenericMessage("A base de dados já esta criada");
 			}
             return $account;
