@@ -52,10 +52,10 @@ class AppServiceProvider extends ServiceProvider
             return hasPermission($permissao);
         });
         Blade::if('hasSuporte', function () {
-            return UserTypeEnum::SUPORTE->equals(auth()->user()->type->value);
+            return UserTypeEnum::SUPORTE->equals(auth()->user()->type->name);
         });
         Blade::if('hasProprietario', function () {
-            return UserTypeEnum::PROPRIETARIO->equals(auth()->user()->type->value);
+            return UserTypeEnum::PROPRIETARIO->equals(auth()->user()->type->name);
         });
 
         Blade::directive('moneyFormat', function ($valor) {

@@ -50,7 +50,7 @@ class OrganizacaoManager extends TenantManager implements PaginateInterface
 		$query = $this->getQuery()
 			->select("organizacao.*");
 
-		if( !UserTypeEnum::SUPORTE->equals(auth()->user()->type->value) ){
+		if( !UserTypeEnum::SUPORTE->equals(auth()->user()->type->name) ){
 			$query->join("usuario_organizacao", function ($join) {
 				$join->on( "organizacao.id", "=","usuario_organizacao.id_organizacao")->where("usuario_organizacao.id_usuario", auth()->id());
 			});

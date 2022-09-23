@@ -2,11 +2,12 @@
 
 namespace App\View\Account;
 
+use Bcampti\Larabase\Enums\StatusAccountEnum;
 use Illuminate\View\Component;
 
 class Status extends Component
 {
-    public $status;
+    public StatusAccountEnum $status;
     /**
      * Create a new component instance.
      *

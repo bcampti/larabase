@@ -22,6 +22,7 @@ return [
 	 */
     'controle' => 'cargo',
     
+    /* Configuracao de Routes */
     'prefix' => null,
     'middleware' => ['web'],
 ];

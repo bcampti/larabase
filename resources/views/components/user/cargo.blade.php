@@ -1,1 +1,1 @@
-<div class="badge badge-{{\Bcampti\Larabase\Enums\CargoUsuarioEnum::tryFrom($cargo)->color()}} fw-bold">{{ $cargo }}</div>
+<div class="badge badge-{{$cargo->color()}} fw-bold">{{ $cargo->value }}</div>

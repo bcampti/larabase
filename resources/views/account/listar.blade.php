@@ -88,7 +88,7 @@
 								<tr class="{{$loop->odd?'odd':'even'}}">
 									<td>{{ $account->id }}</td>
 									<td>{{ $account->name }}</td>
-									<td><x-account.status status="{{ $account->status->value }}"/></td>
+									<td><x-account.status status="{{ $account->status }}"/></td>
 									<td class="text-end pt-0 pb-0">
 									@hasSuporte
 										<a href="{{ route('auth.account.select', $account->id) }}" class="btn btn-sm fw-bold btn-info"><i class="bi bi-download"></i> Acessar</a>
