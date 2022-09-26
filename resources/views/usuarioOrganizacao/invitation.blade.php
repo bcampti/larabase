@@ -20,7 +20,7 @@
 				<div class="card-toolbar">
 				</div>
 			</div>
-		@hasPermission('PROPRIETARIO')
+			@hasPermission('ADMIN')
 			<form id="kt_usuarioOrganizacao_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('usuario.organizacao.invitation.store')}}" method="post">
 		@endhasPermission
 				@csrf
@@ -62,10 +62,10 @@
 								<!--begin::Radio-->
 								<div class="form-check form-check-custom form-check-solid">
 									<input class="form-check-input me-3" name="cargo" type="radio" id="role_option_1" 
-										value="{{App\Enums\CargoUsuarioEnum::USUARIO->name}}" 
-										{{App\Enums\CargoUsuarioEnum::USUARIO->equals($usuarioOrganizacao->cargo->name)? 'checked="checked"':''}}>
+										value="{{App\Enums\CargoUsuarioEnum::USUARIO->value}}" 
+										{{App\Enums\CargoUsuarioEnum::USUARIO->equals($userInvitation->cargo->value)? 'checked="checked"':''}}>
 									<label class="form-check-label" for="role_option_1">
-										<div class="fw-bold text-gray-800">{{App\Enums\CargoUsuarioEnum::USUARIO->value}}</div>
+										<div class="fw-bold text-gray-800">{{App\Enums\CargoUsuarioEnum::USUARIO->label()}}</div>
 										<div class="text-gray-600">Possui acesso para realizar cadastros, alterações e exclusão de registros do sistema.</div>
 									</label>
 								</div>
@@ -79,7 +79,7 @@
 								<div class="form-check form-check-custom form-check-solid">
 									<input class="form-check-input me-3" name="cargo" type="radio" id="role_option_2"
 										value="{{App\Enums\CargoUsuarioEnum::ADMIN->value}}"
-										{{App\Enums\CargoUsuarioEnum::ADMIN->equals($usuarioOrganizacao->cargo->value)? 'checked="checked"':''}}>
+										{{App\Enums\CargoUsuarioEnum::ADMIN->equals($userInvitation->cargo->value)? 'checked="checked"':''}}>
 									<label class="form-check-label" for="role_option_2">
 										<div class="fw-bold text-gray-800">{{App\Enums\CargoUsuarioEnum::ADMIN->label()}}</div>
 										<div class="text-gray-600">Possui acesso para realizar cadastros, alterações e exclusão de registros do sistema.</div>
@@ -97,7 +97,7 @@
 				</div>
 				<div class="card-footer">
 					<div class="d-flex justify-content-end">
-					@hasPermission('PROPRIETARIO')
+						@hasPermission('ADMIN')
 						<button type="submit" data-kt-contacts-type="submit" class="btn btn-primary btn-sm me-3">
 							<i class="fa fa-check"></i> 
 							<span class="indicator-label">Enviar</span>
@@ -119,7 +119,7 @@
 </div>
 <!--end::Content-->
 
-@hasPermission('PROPRIETARIO')
+@hasPermission('ADMIN')
 @if( !empty($usuarioOrganizacao->id) )
 <!--begin::ModalDelete-->
 <div class="modal fade" id="modaldelete" tabindex="-1" data-backdrop="static" data-keyboard="false" style="display: none;">

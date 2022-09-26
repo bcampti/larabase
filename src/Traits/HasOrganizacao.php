@@ -16,7 +16,7 @@ trait HasOrganizacao
         
         static::creating(function($model)
         {
-            if( is_empty($model->id_organizacao) && !session()->has("id_organizacao") )
+            if( is_empty($model->id_organizacao) && !Organizacao::currentId() )
             {
                 info(__CLASS__." - Model: ".$model::class);
                 throw ValidationException::withMessages(["Organização não identificada, recarregue e tente novamente."]);

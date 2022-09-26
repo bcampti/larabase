@@ -20,7 +20,7 @@
 				<div class="card-toolbar">
 				</div>
 			</div>
-		@hasPermission('PROPRIETARIO')
+		@hasPermission('ADMIN')
 			<form id="kt_usuarioOrganizacao_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('usuario.organizacao.update', $usuarioOrganizacao->id)}}" method="post">
 				@method("PUT")
 				@csrf
@@ -96,7 +96,7 @@
 				</div>
 				<div class="card-footer">
 					<div class="d-flex justify-content-end">
-					@hasPermission('PROPRIETARIO')
+					@hasPermission('ADMIN')
 						@if( !empty($usuarioOrganizacao->id) )
 						<a href="#" class="btn btn-sm btn-danger me-3" data-bs-toggle="modal" data-bs-target="#modaldelete" title="Excluir Registro"><i class="fa fa-trash-can"></i> Excluir</a>
 						@endif
@@ -121,7 +121,7 @@
 </div>
 <!--end::Content-->
 
-@hasPermission('PROPRIETARIO')
+@hasPermission('ADMIN')
 @if( !empty($usuarioOrganizacao->id) )
 <!--begin::ModalDelete-->
 <div class="modal fade" id="modaldelete" tabindex="-1" data-backdrop="static" data-keyboard="false" style="display: none;">

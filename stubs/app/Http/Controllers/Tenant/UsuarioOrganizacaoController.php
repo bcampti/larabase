@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Tenant;
 
+use App\Enums\CargoUsuarioEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Tenant\UserInvitationRequest;
 use App\Http\Requests\Tenant\UsuarioOrganizacaoRequest;
@@ -62,20 +63,24 @@ class UsuarioOrganizacaoController extends Controller
     {
 		$usuarioOrganizacao = $this->usuarioOrganizacaoManager->findOrFail($id);
 
-		$user = auth()->user();
-		$user->update([
-			"name"=>$request->name
-		]);
-
-		$usuario = $this->usuarioManager->findOrFail($user->id);
+		$usuario = $usuarioOrganizacao->usuario;
 		$usuario->update([
 			"name"=>$request->name
 		]);
-		$usuario = $this->usuarioManager->salvar($usuario);
+
+		$user = User::find($usuario->id);
+		$user->update([
+			"name"=>$request->name
+		]);
 		
 		$usuarioOrganizacao->fill($request->validated());
 
 		$usuarioOrganizacao = $this->usuarioOrganizacaoManager->salvar($usuarioOrganizacao);
+		
+		if( $usuarioOrganizacao->isCurrent() ){
+			$usuarioOrganizacao->forgetCurrent();
+			$usuarioOrganizacao->makeCurrent();
+		}
 		
 		return redirect(route("usuario.organizacao.edit", [$usuarioOrganizacao->id]))->with(GenericMessage::UPDATE_SUCCESS);
 	}
@@ -98,7 +103,10 @@ class UsuarioOrganizacaoController extends Controller
 
 	public function invitation()
 	{
-		return view("usuarioOrganizacao.invitation");
+		$userInvitation = new UserInvitation();
+		$userInvitation->cargo = CargoUsuarioEnum::USUARIO;
+
+		return view("usuarioOrganizacao.invitation", compact('userInvitation'));
 	}
 
 	public function storeInvitation(UserInvitationRequest $request)

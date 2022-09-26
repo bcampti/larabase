@@ -4,10 +4,14 @@ namespace Bcampti\Larabase\Traits;
 
 use Bcampti\Larabase\Exceptions\GenericMessage;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 trait KeepOnSession
 {
-	public abstract static function sessionKey();
+	public static function sessionKey()
+    {
+        return Str::snake(class_basename(__CLASS__)."_session_key");
+    }
     
     public function makeCurrent(): static
     {
@@ -55,7 +59,6 @@ trait KeepOnSession
     public function forget(): static
     {
         Session::forget(static::sessionKey());
-        Session::forget('id_organizacao');
 
         return $this;
     }
