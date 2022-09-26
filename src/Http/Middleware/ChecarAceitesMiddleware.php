@@ -22,7 +22,7 @@ class ChecarAceitesMiddleware
 	public function handle($request, Closure $next)
 	{
 		$user = Auth::user();
-		if( !UserTypeEnum::SUPORTE->equals($user->type->name) && !Session::has('aceites') )
+		if( !UserTypeEnum::SUPORTE->equals($user->type->value) && !Session::has('aceites') )
 		{
 			$usuarioAceiteManager = new UsuarioAceiteManager();
 			//VALIDA O ACEITE DO TERMO DE USO

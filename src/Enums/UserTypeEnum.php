@@ -3,9 +3,19 @@ namespace Bcampti\Larabase\Enums;
 
 enum UserTypeEnum:string
 {
-    case SUPORTE = 'Suporte';
-    case PROPRIETARIO = 'Proprietário';
-    case USUARIO = 'Usuário';
+    case SUPORTE = 'SUPORTE';
+    case PROPRIETARIO = 'PROPRIETARIO';
+    case USUARIO = 'USUARIO';
+
+    public function label(): string
+    {
+        return match($this) 
+        {
+            UserTypeEnum::SUPORTE => 'Suporte',
+            UserTypeEnum::PROPRIETARIO => 'Proprietário',
+            UserTypeEnum::USUARIO => 'Usuário',
+        };
+    }
 
     public function color(): string
     {
@@ -17,8 +27,8 @@ enum UserTypeEnum:string
         };
     }
 
-    public function equals( $name ): bool
+    public function equals( $value ): bool
     {
-        return is_empty($name) ? false : $this->name == $name;
+        return is_empty($value) ? false : $this->value == $value;
     }
 }

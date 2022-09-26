@@ -20,7 +20,7 @@ class UserSuporteSeeder extends Seeder
             'name'=>'Admin',
             'email'=>'suporte@mailinator.com',
             'password'=>Hash::make('password'),
-            'type'=>UserTypeEnum::SUPORTE->name,
+            'type'=>UserTypeEnum::SUPORTE->value,
             'email_verified_at'=>now()
         ]);
     }

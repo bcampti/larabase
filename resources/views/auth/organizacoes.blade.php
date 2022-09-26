@@ -79,7 +79,7 @@
 								<tr class="{{$loop->odd?'odd':'even'}}">
 									<td>{{ $organizacao->id }}</td>
 									<td>{{ $organizacao->nome }}</td>
-									<td><x-model.status status="{{ $organizacao->status }}"/></td>
+									<td><x-model.status :status="$organizacao->status"/></td>
 									<td class="text-end pt-0 pb-0">
                                         <a href="{{ route('auth.account.organizacao.select', $organizacao->id) }}" class="btn btn-sm fw-bold btn-info"><i class="bi bi-download"></i> Acessar</a>
                                     @hasSuporte

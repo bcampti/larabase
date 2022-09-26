@@ -3,10 +3,21 @@ namespace Bcampti\Larabase\Enums;
 
 enum StatusAccountEnum:string
 {
-	case NOVA = "Nova";
-	case TESTE = "Teste";
-    case ATIVO = 'Ativo';
-    case INATIVO = 'Inativo';
+	case NOVA = "NOVA";
+	case TESTE = "TESTE";
+    case ATIVO = 'ATIVO';
+    case INATIVO = 'INATIVO';
+
+    public function lable(): string
+    {
+        return match($this) 
+        {
+            StatusAccountEnum::NOVA => 'Nova',
+            StatusAccountEnum::TESTE => 'Teste',
+            StatusAccountEnum::ATIVO => 'Ativo',
+            StatusAccountEnum::INATIVO => 'Inativo',
+        };
+    }
 
     public function color(): string
     {

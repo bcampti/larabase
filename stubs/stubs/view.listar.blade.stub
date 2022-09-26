@@ -42,7 +42,7 @@
 								<select class="form-select form-select-sm" data-control="select2" name="{{ modelVariable }}[status]">
 									<option value="" {{ is_empty($filtro->{{ modelVariable }}->status)?'selected':'' }}>Todas</option>
 									@foreach ( \Bcampti\Larabase\Enums\StatusEnum::cases() as $status )
-										<option value="{{ $status->value }}" {{ optional($filtro->{{ modelVariable }}->status)->value!=$status->value?:'selected' }}>{{ $status->value }}</option>
+										<option value="{{ $status->value }}" {{ optional($filtro->{{ modelVariable }}->status)->value!=$status->value?:'selected' }}>{{ $status->label() }}</option>
 									@endforeach
 								</select>
 							</div>
@@ -87,7 +87,7 @@
 								<tr class="{{$loop->odd?'odd':'even'}}">
 									<td>{{ ${{ modelVariable }}->id }}</td>
 									<td>{{ ${{ modelVariable }}->nome }}</td>
-									<td><x-model.status status="{{ ${{ modelVariable }}->status }}"/></td>
+									<td><x-model.status :status="${{ modelVariable }}->status"/></td>
 									<td class="text-end pt-0 pb-0">
 									@hasPermission("cliente")
 										<a href="{{ route('{{ routeModelName }}.edit', ${{ modelVariable }}->id) }}" class="btn btn-sm btn-icon btn-warning" title="Alterar Registro"><i class="fa fa-pen-to-square"></i></a>

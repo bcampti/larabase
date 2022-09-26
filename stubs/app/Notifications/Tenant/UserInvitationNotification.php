@@ -38,15 +38,13 @@ class UserInvitationNotification extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
+    public function toMail($userInvitation)
     {
-        $url = URL::signedRoute('usuario.convite.aceitar', ['userInvitation' => $notifiable]);
+        $url = URL::signedRoute('usuario.convite.aceitar', ['userInvitation' => $userInvitation]);
 
         return (new MailMessage)
             ->subject('Convite '.config('app.name'))
-            ->greeting("Olá.")
-            ->line('Você foi convidado para o sistema '.config('app.name').'.')
-            ->action('Aceitar Convite', $url);
+            ->markdown('emails.verify', compact('userInvitation','url'));
     }
 
     /**

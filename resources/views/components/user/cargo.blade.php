@@ -1,1 +1,1 @@
-<div class="badge badge-{{$cargo->color()}} fw-bold">{{ $cargo->value }}</div>
+<div class="badge badge-{{$cargo->color()}} fw-bold">{{ $cargo->label() }}</div>

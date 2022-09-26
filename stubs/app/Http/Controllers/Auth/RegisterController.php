@@ -81,7 +81,7 @@ class RegisterController extends Controller
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
-                'type' => UserTypeEnum::PROPRIETARIO->name,
+                'type' => UserTypeEnum::PROPRIETARIO->value,
             ]);
 
             $account = Account::forceCreate([

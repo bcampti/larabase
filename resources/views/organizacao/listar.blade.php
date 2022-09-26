@@ -88,7 +88,7 @@
 								<tr class="{{$loop->odd?'odd':'even'}}">
 									<td>{{ $organizacao->id }}</td>
 									<td>{{ $organizacao->nome }}</td>
-									<td><x-model.status status="{{ $organizacao->status }}"/></td>
+									<td><x-model.status :status="$organizacao->status"/></td>
 									<td class="text-end pt-0 pb-0">
 									@hasProprietario
 										<a href="{{ route('organizacao.edit', $organizacao->id) }}" class="btn btn-sm btn-icon btn-warning" title="Alterar Registro"><i class="fa fa-pen-to-square"></i></a>

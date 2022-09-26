@@ -1,0 +1,1 @@
+<a href="{{$url}}" target="_blank" style="background-color:#50cd89; border-radius:6px;display:inline-block; padding:11px 19px; color: #FFFFFF; font-size: 14px; font-weight:500;">Verificar E-mail</a>

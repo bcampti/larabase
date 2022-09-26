@@ -10,7 +10,7 @@ use App\Models\Tenant\Organizacao;
 use App\Models\Tenant\UsuarioOrganizacao;
 use App\Repositories\Tenant\OrganizacaoManager;
 use App\Repositories\Tenant\UsuarioOrganizacaoManager;
-use Bcampti\Larabase\Enums\CargoUsuarioEnum;
+use App\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Enums\UserTypeEnum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -27,7 +27,7 @@ class OrganizacaoController extends Controller
 	
 	public function index(Request $request)
     {
-		if( !UserTypeEnum::SUPORTE->equals(auth()->user()->type->name) ){
+		if( !UserTypeEnum::SUPORTE->equals(auth()->user()->type->value) ){
 			return redirect(route('auth.account.organizacao.index'));
 		}
 		$filtro = $this->organizacaoManager->paginate($request);
@@ -58,7 +58,7 @@ class OrganizacaoController extends Controller
 
 		$organizacao = $this->organizacaoManager->salvar($organizacao);
 
-		if( UserTypeEnum::PROPRIETARIO->equals(auth()->user()->type->name) )
+		if( UserTypeEnum::PROPRIETARIO->equals(auth()->user()->type->value) )
 		{
 			$usuarioOrganizacao = new UsuarioOrganizacao();
 			$usuarioOrganizacao->id_usuario = auth()->user()->id;
