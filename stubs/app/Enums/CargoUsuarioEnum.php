@@ -1,10 +1,22 @@
 <?php
 namespace App\Enums;
 
+use App\Models\Tenant\UsuarioOrganizacao;
+use Bcampti\Larabase\Enums\UserTypeEnum;
+
 enum CargoUsuarioEnum:string
 {
-    case ADMIN = 'Administrador';
-    case USUARIO = 'Usuário';
+    case ADMIN = 'ADMIN';
+    case USUARIO = 'USUARIO';
+
+    public function label(): string
+    {
+        return match($this) 
+        {
+            CargoUsuarioEnum::ADMIN => 'Administrador',
+            CargoUsuarioEnum::USUARIO => 'Usuário',
+        };
+    }
 
     public function color(): string
     {
@@ -28,18 +40,13 @@ enum CargoUsuarioEnum:string
                 return true;
 
             case UserTypeEnum::PROPRIETARIO->value:
-                if( is_array($permissao) ){
-                    return in_array(auth()->user()->type->value, $permissao);
-                }else if( in_array($permissao, [UserTypeEnum::PROPRIETARIO->value, CargoUsuarioEnum::USUARIO->value]) ){
-                    return true;
-                }
-                return false;
-            
+                return true;
+    
             default:
                 if( is_array($permissao) ){
-                    return in_array(auth()->user()->type->value, $permissao);
+                    return in_array(UsuarioOrganizacao::current()->cargo->value, $permissao);
                 }else{
-                    if( auth()->user()->type->value==$permissao ){
+                    if( UsuarioOrganizacao::current()->cargo->equals($permissao) ){
                         return true;
                     }
                 }

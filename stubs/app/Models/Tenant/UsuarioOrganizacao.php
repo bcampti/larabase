@@ -6,6 +6,7 @@ use App\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Models\Model;
 use Bcampti\Larabase\Traits\HasUsuarioAlteracao;
 use Bcampti\Larabase\Traits\HasUsuarioCriacao;
+use Bcampti\Larabase\Traits\KeepOnSession;
 use Spatie\Multitenancy\Models\Concerns\UsesTenantConnection;
 
 class UsuarioOrganizacao extends Model
@@ -13,6 +14,7 @@ class UsuarioOrganizacao extends Model
     use UsesTenantConnection;
 	use HasUsuarioCriacao;
 	use HasUsuarioAlteracao;
+    use KeepOnSession;
     
     protected $table = "usuario_organizacao";
 

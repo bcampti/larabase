@@ -2,14 +2,11 @@
 namespace App\Providers;
 
 use Bcampti\Larabase\Enums\UserTypeEnum;
-use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Blade;
 use OwenIt\Auditing\Models\Audit;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
@@ -63,13 +60,6 @@ class AppServiceProvider extends ServiceProvider
 
         Blade::directive('moneyFormat', function ($valor) {
             return "<?php echo 'R$ ' . number_format($valor, 2, ',', '.'); ?>";
-        });
-
-        VerifyEmail::toMailUsing(function ($userInvitation) {
-            $url = URL::signedRoute('usuario.convite.aceitar', ['userInvitation' => $userInvitation]);
-            return (new MailMessage)
-                ->subject('Verificação de E-mail')
-                ->markdown('emails.verify', ['userInvitation'=>$userInvitation, 'url' => $url]);
         });
     }
 }

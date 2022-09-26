@@ -10,7 +10,7 @@
 
 		<div class="row">
 
-			@hasPermission('PROPRIETARIO')
+			@hasPermission('ADMIN')
 			<div class="col-4">
 				
 				<div class="card card-shadow" id="kt_usuarioOrganizacao_main">
@@ -200,7 +200,7 @@
 											<td>{{ $usuarioOrganizacao->usuario->email }}</td>
 											<td><x-user.cargo :cargo="$usuarioOrganizacao->cargo"/></td>
 											<td class="text-end pt-0 pb-0">
-										@hasPermission('PROPRIETARIO')
+										@hasPermission('ADMIN')
 											@if( auth()->id()==$usuarioOrganizacao->id_usuario )
 												<div class="badge badge-secondary fw-bold">Sua conexão</div>
 												<a href="{{ route('usuario.organizacao.edit', $usuarioOrganizacao->id) }}" class="btn btn-sm btn-icon btn-warning" title="Alterar Registro"><i class="fa fa-pen-to-square"></i></a>

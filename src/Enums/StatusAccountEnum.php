@@ -8,7 +8,7 @@ enum StatusAccountEnum:string
     case ATIVO = 'ATIVO';
     case INATIVO = 'INATIVO';
 
-    public function lable(): string
+    public function label(): string
     {
         return match($this) 
         {

@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\Tenant\Organizacao;
+use App\Models\Tenant\Usuario;
+use App\Models\Tenant\UsuarioOrganizacao;
 use Bcampti\Larabase\Repositories\AccountManager;
 use App\Repositories\Tenant\OrganizacaoManager;
+use App\Repositories\Tenant\UsuarioManager;
 use App\Repositories\Tenant\UsuarioOrganizacaoManager;
 use Bcampti\Larabase\Enums\UserTypeEnum;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -90,6 +93,7 @@ class LoginController extends Controller
         $disponiveis = $filtro->items->count();
 
         Organizacao::forgetCurrent();
+        UsuarioOrganizacao::forgetCurrent();
 
         if( $disponiveis == 1 && !$filtro->filtroAtivo ){
             return redirect(route("auth.account.organizacao.select", $filtro->items[0]->id));
@@ -102,6 +106,9 @@ class LoginController extends Controller
     {
         if( UserTypeEnum::SUPORTE->equals(request()->user()->type->value) )
         {
+            $usuarioManager = new UsuarioManager();
+            $usuarioManager->checkOrCreateUserSuporte(request()->user());
+
             $organizacao = $this->organizacaoManager->findOrFail($id_organizacao);
             $organizacao->makeCurrent();
         }
@@ -109,6 +116,7 @@ class LoginController extends Controller
         {
             $usuarioOrganizacao = $this->usuarioOrganizacaoManager->getUsuarioOrganizacao($id_organizacao);
             $usuarioOrganizacao->organizacao->makeCurrent();
+            $usuarioOrganizacao->makeCurrent();
         }
         return redirect()->intended($this->redirectPath());
     }
@@ -118,6 +126,10 @@ class LoginController extends Controller
         if( auth()->check() && UserTypeEnum::SUPORTE->equals(auth()->user()->type->value) ){
             auth()->user()->update(['id_account'=>null]);
         }
+
+        Organizacao::forgetCurrent();
+        UsuarioOrganizacao::forgetCurrent();
+        
 		Auth::logout();
 		request()->session()->invalidate();
 		request()->session()->regenerateToken();

@@ -41,7 +41,7 @@
                         </span>
                         <span class="menu-title">Home</span>
                     </a>
-                @hasProprietario
+                @hasPermission('ADMIN')
                     <a class="menu-link {{ request()->is('usuario/organizacao') ? 'active' : ''}}" href="{{ route('usuario.organizacao.index') }}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -54,7 +54,7 @@
                         </span>
                         <span class="menu-title">Usuários</span>
                     </a>
-                @endhasProprietario
+                @endhasPermission
 
                 </div>
 
