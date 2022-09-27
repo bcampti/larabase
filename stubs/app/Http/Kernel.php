@@ -70,11 +70,10 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
-        //'aceites' => \App\Http\Middleware\App\ChecarAceitesMiddleware::class,
-
-        'hasSuporte' => \Bcampti\Larabase\Http\Middleware\EnsureUserHasSuporte::class,
         'checkOrganizacao' => \Bcampti\Larabase\Http\Middleware\CheckOrganizacao::class,
-
-        //'hasPermissao' => \App\Http\Middleware\App\PermissaoMiddleware::class,
+        
+        'hasSuporte' => \Bcampti\Larabase\Http\Middleware\EnsureUserHasSuporte::class,
+        'hasProprietario' => \Bcampti\Larabase\Http\Middleware\EnsureUserHasProprietario::class,
+        'hasPermissao' => \Bcampti\Larabase\Http\Middleware\PermissaoMiddleware::class,
     ];
 }

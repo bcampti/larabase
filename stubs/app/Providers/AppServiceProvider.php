@@ -1,7 +1,6 @@
 <?php
 namespace App\Providers;
 
-use Bcampti\Larabase\Enums\UserTypeEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Blade;
 use OwenIt\Auditing\Models\Audit;
@@ -47,16 +46,6 @@ class AppServiceProvider extends ServiceProvider
         }
 
         Model::preventLazyLoading(!app()->isProduction());
-
-        Blade::if('hasPermission', function ($permissao) {
-            return hasPermission($permissao);
-        });
-        Blade::if('hasSuporte', function () {
-            return UserTypeEnum::SUPORTE->equals(auth()->user()->type->value);
-        });
-        Blade::if('hasProprietario', function () {
-            return UserTypeEnum::PROPRIETARIO->equals(auth()->user()->type->value);
-        });
 
         Blade::directive('moneyFormat', function ($valor) {
             return "<?php echo 'R$ ' . number_format($valor, 2, ',', '.'); ?>";
