@@ -20,12 +20,12 @@ return new class extends Migration
             $table->text("status")->default(StatusEnum::ATIVO->value);
 	        $table->foreignId('id_organizacao')->constrained('organizacao');
 	        $table->timestamp("created_at")->useCurrent();
-	        $table->foreignId('id_usuario_criacao')->constrained('users');
+	        $table->foreignId('id_usuario_criacao')->constrained('usuario');
 	        $table->timestamp("updated_at")->nullable();
-	        $table->foreignId('id_usuario_alteracao')->nullable()->constrained('users');
+	        $table->foreignId('id_usuario_alteracao')->nullable()->constrained('usuario');
 
-            $table->index(['id_organizacao','id']);
-            $table->index(['id_organizacao','nome']);
+            //$table->index(['id_organizacao','id']);
+            //$table->index(['id_organizacao','nome']);
         });
     }
 
