@@ -20,6 +20,7 @@ use Bcampti\Larabase\Commands\Multitenancy\AppMigrationCommand;
 use Bcampti\Larabase\Commands\Multitenancy\AppRollbackMigrationCommand;
 use Bcampti\Larabase\Commands\Multitenancy\TenantMigrationCommand;
 use Bcampti\Larabase\Commands\Multitenancy\TenantRollbackMigrationCommand;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 
 class LarabaseServiceProvider extends PackageServiceProvider
@@ -87,6 +88,8 @@ class LarabaseServiceProvider extends PackageServiceProvider
         
         $this->registerRoutes();
 
+        $this->registerBladesDirectives();
+
     }
     
     protected function registerRoutes()
@@ -102,6 +105,19 @@ class LarabaseServiceProvider extends PackageServiceProvider
             'prefix' => config('larabase.prefix'),
             'middleware' => config('larabase.middleware'),
         ];
+    }
+
+    protected function registerBladesDirectives()
+    {
+        Blade::if('hasPermission', function ($permissao) {
+            return hasPermission($permissao);
+        });
+        Blade::if('hasSuporte', function () {
+            return hasSuporte();
+        });
+        Blade::if('hasProprietario', function () {
+            return hasProprietario();
+        });
     }
 
 }

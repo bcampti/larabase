@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\CargoUsuarioEnum;
+use Bcampti\Larabase\Enums\UserTypeEnum;
 use Illuminate\Database\Eloquent\Collection;
 
 if (!function_exists('is_empty')) {
@@ -97,8 +98,31 @@ if( !function_exists('strUpper')) {
     }
 }
 
-if( !function_exists('hasPermission')) {
+if( !function_exists('hasSuporte')) {
+    /* 
+     * Verifica se o usuário logado é SUPORTE
+     */
+    function hasSuporte()
+    {
+        return UserTypeEnum::SUPORTE->equals(auth()->user()->type->value);
+	}
+}
 
+if( !function_exists('hasProprietario')) {
+    /* 
+     * Verifica se o usuário logado é PROPRIETARIO ou SUPORTE
+     */
+    function hasProprietario()
+    {
+        return UserTypeEnum::PROPRIETARIO->equals(auth()->user()->type->value) || UserTypeEnum::SUPORTE->equals(auth()->user()->type->value);
+	}
+}
+
+if( !function_exists('hasPermission')) {
+    /* 
+     * Valida se o usuário logado possui permissao para acessar um recurso especifico.
+     * considera a configuração 'larabase.controle' ('cargo','permissao')
+     */
     function hasPermission( $permissao )
     {
         if( config('larabase.controle') == 'cargo' ){
