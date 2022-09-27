@@ -24,14 +24,15 @@ class {{ factory }}Factory extends Factory
 
     /**
      * Define the model"s default state.
-     * DADOS FAKER https://faker.readthedocs.io/en/master/locales/pt_BR.html
+     * DADOS FAKER 
+     * https://fakerphp.github.io/locales/pt_BR/
+     * https://faker.readthedocs.io/en/master/locales/pt_BR.html
      * @return array
      */
     public function definition()
     {
-        $faker = \Faker\Factory::create("pt_BR");
         return [
-            "nome" => $faker->unique()->name(),
+            "nome" => fake()->unique()->name,
             "status" => StatusEnum::ATIVO->value,
         ];
     }
