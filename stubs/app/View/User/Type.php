@@ -1,12 +1,11 @@
 <?php
 
-namespace App\View\Cargo;
+namespace App\View\User;
 
-use App\Enums\CargoUsuarioEnum;
 use Bcampti\Larabase\Enums\UserTypeEnum;
 use Illuminate\View\Component;
 
-class Cargo extends Component
+class Type extends Component
 {
     public UserTypeEnum $type;
     /**

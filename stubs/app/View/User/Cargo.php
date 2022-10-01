@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Cargo;
+namespace App\View\User;
 
 use App\Enums\CargoUsuarioEnum;
 use Illuminate\View\Component;
