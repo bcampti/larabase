@@ -12,7 +12,7 @@ class AppMigrationCommand extends Command
      *
      * @var string
      */
-    protected $signature = "migrate:app {--force=false}";
+    protected $signature = "migrate:app {--force}";
 
     /**
      * The console command description.
@@ -29,17 +29,16 @@ class AppMigrationCommand extends Command
     public function handle()
     {
         $artisanCommand = 'migrate --database=landlord';
-        if( $this->option('force')=="true" ){
-            $artisanCommand = 'migrate --database=landlord --force"';
+        if( $this->hasOption('force') ){
+            $artisanCommand = 'migrate --database=landlord --force';
         }
 
         Artisan::call($artisanCommand, [], $this->output);
 
         $artisanCommand = 'migrate --path=database/migrations/landlord --database=landlord';
-        if( $this->option('force')=="true" ){
-            $artisanCommand = 'migrate --path=database/migrations/landlord --database=landlord --force"';
+        if( $this->hasOption('force') ){
+            $artisanCommand = 'migrate --path=database/migrations/landlord --database=landlord --force';
         }
-        
         Artisan::call($artisanCommand, [], $this->output);
     }
 }

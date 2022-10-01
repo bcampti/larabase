@@ -12,7 +12,7 @@ class TenantMigrationCommand extends Command
      *
      * @var string
      */
-    protected $signature = "migrate:tenant {--tenant=*} {--force=false}";
+    protected $signature = "migrate:tenant {--tenant=*} {--force}";
 
     /**
      * The console command description.
@@ -29,11 +29,9 @@ class TenantMigrationCommand extends Command
     public function handle()
     {
         $artisanCommand = 'tenants:artisan "migrate --path=database/migrations/tenant --database=tenant"';
-        
-        if( $this->option('force')=="true" ){
+        if( $this->hasOption('force') ){
             $artisanCommand = 'tenants:artisan "migrate --path=database/migrations/tenant --database=tenant --force"';
         }
-
         $tenant = $this->option('tenant');
         if( !is_empty($tenant) ){
             $artisanCommand.=" --tenant=".$tenant[0];
