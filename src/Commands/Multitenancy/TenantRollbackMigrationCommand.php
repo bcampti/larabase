@@ -28,7 +28,7 @@ class TenantRollbackMigrationCommand extends Command
      */
     public function handle()
     {
-        $artisanCommand = 'multitenancy:artisan "migrate:rollback --step=1 --path=database/migrations/tenant --database=tenant"';
+        $artisanCommand = 'tenants:artisan "migrate:rollback --step=1 --path=database/migrations/tenant --database=tenant"';
         
         $tenant = $this->option('tenant');
         if( !is_empty($tenant) ){
