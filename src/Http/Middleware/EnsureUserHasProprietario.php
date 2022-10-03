@@ -18,7 +18,7 @@ class EnsureUserHasProprietario
      */
     public function handle(Request $request, Closure $next)
     {
-        if( haspro !UserTypeEnum::PROPRIETARIO->equals(auth()->user()->type->value) ) {
+        if( !UserTypeEnum::PROPRIETARIO->equals(auth()->user()->type->value) ) {
             abort(Response::HTTP_UNAUTHORIZED);
         }
         return $next($request);
