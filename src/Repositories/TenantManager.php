@@ -60,12 +60,7 @@ abstract class TenantManager
 								$model->{$campo} = 0;
 							}
 							break;
-						default:
-							$model->{$campo} = null;
-							break;
 					}
-				}else{
-					$model->{$campo} = null;
 				}
 			}else{
 				if( $model->hasCast($campo))
