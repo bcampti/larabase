@@ -73,12 +73,28 @@ class GenericMessage extends Exception
 		];
 	}
 
+	public static function errorMessageJSON($message){
+		return ["mensagem" => [
+			"tipo" => GenericMessage::TIPO_ERRO,
+			"titulo" => "Atenção",
+			"mensagem" => $message
+		]];
+	}
+
 	public static function successMessage($message){
 		return [
 			"mensagem.tipo" => GenericMessage::TIPO_SUCESSO,
 			"mensagem.titulo" => "Atenção",
 			"mensagem.mensagem" => $message
 		];
+	}
+
+	public static function successMessageJSON($message){
+		return ["mensagem" => [
+			"tipo" => GenericMessage::TIPO_SUCESSO,
+			"titulo" => "Atenção",
+			"mensagem" => $message
+		]];
 	}
 
 	public static function notFoundMessage(){
