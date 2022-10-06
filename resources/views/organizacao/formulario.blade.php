@@ -121,7 +121,13 @@
 					</div>
 					<div class="d-flex flex-center flex-row-fluid">
 						<button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">Cancelar</button>
-						<button type="submit" class="btn btn-danger">Confirmar</button>
+						<button type="submit" class="btn btn-danger">
+							<i class="fa fa-check"></i> 
+							<span class="indicator-label">Confirmar</span>
+							<span class="indicator-progress">Aguarde...
+								<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+							</span>
+						</button>
 					</div>
 				</form>
 			</div>
