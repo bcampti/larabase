@@ -46,7 +46,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
-            'search_path' => 'default_app',
+            'search_path' => 'public',
             'sslmode' => 'prefer',
         ],
 
