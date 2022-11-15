@@ -52,7 +52,7 @@ As configurações padrão para o funcionamento do pacote serão adicionadas:
 * `config/database.php`, connections `landlord` para o schema principal e `tenant` para o schema de clientes.
 * `config/multitenancy.php`, `'tenant_database_connection_name' => 'tenant', 'landlord_database_connection_name' => 'landlord',`.
 
-> ### Verificar a necessidade de criar o `schema` padrão com o nome `'default_app'`. Este `schema` será o utilizado para autenticação dos usuários e liberação de acesso a base correta de cadas cliente.
+> ### Verificar a necessidade de criar o `schema` padrão com o nome `'public'`. Este `schema` será o utilizado para autenticação dos usuários e liberação de acesso a base correta de cadas cliente.
 
 Executar migração de banco de dados padrão. Este comando executará a migração para a base padrão do sistema.
 ```bash
