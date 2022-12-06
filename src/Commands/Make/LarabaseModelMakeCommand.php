@@ -2,11 +2,13 @@
 
 namespace Bcampti\Larabase\Commands\Make;
 
+use Bcampti\Larabase\Commands\Traits\Settings;
 use Illuminate\Foundation\Console\ModelMakeCommand as ConsoleModelMakeCommand;
 use Illuminate\Support\Str;
 
 class LarabaseModelMakeCommand extends ConsoleModelMakeCommand
 {
+    use Settings;
 
     /**
      * The console command name.
@@ -41,7 +43,7 @@ class LarabaseModelMakeCommand extends ConsoleModelMakeCommand
      */
     protected function replaceTable(&$stub, $name)
     {
-        $table = Str::snake(class_basename($this->argument('name')));
+        $table = $this->getTableName($this->argument('name'));
 
         $stub = str_replace('{{ table }}', $table, $stub);
 

@@ -15,10 +15,6 @@ trait KeepOnSession
     
     public function makeCurrent(): static
     {
-        if ($this->isCurrent()) {
-            return $this;
-        }
-
         static::forgetCurrent();
 
         Session::put(static::sessionKey(), $this);

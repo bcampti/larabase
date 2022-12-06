@@ -2,12 +2,15 @@
 
 namespace Bcampti\Larabase\Commands;
 
+use Bcampti\Larabase\Commands\Traits\Settings;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class LarabaseMakerCommand extends GeneratorCommand
 {
+    use Settings;
+
     /**
      * The name and signature of the console command.
      *
@@ -35,7 +38,7 @@ class LarabaseMakerCommand extends GeneratorCommand
 
         $commands->add("php artisan make:factory {$model}Factory  --model={$model}");
 
-        $table = Str::snake(class_basename($model));
+        $table = $this->getTableName(class_basename($model));
         $commands->add("php artisan make:migration create_{$table}_table --create={$table}");
 
         $commands->add("php artisan larabase:filtro {$model}Filtro --model={$model}");
