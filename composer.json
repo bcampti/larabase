@@ -22,7 +22,7 @@
         "laravellegends/pt-br-validator": "^9.0",
         "lucascudo/laravel-pt-br-localization": "^1.2",
         "owen-it/laravel-auditing": "^13.0",
-        "spatie/laravel-multitenancy": "^2.0",
+        "spatie/laravel-multitenancy": "^3.0",
         "spatie/laravel-package-tools": "^1.9.2"
     },
     "require-dev": {
