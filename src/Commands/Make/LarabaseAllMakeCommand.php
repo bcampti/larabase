@@ -2,11 +2,14 @@
 
 namespace Bcampti\Larabase\Commands\Make;
 
+use Bcampti\Larabase\Commands\Traits\Settings;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
 
 class LarabaseAllMakeCommand extends GeneratorCommand
 {
+    use Settings;
+
     /**
      * The name and signature of the console command.
      *
@@ -78,7 +81,7 @@ class LarabaseAllMakeCommand extends GeneratorCommand
      */
     protected function createMigration()
     {
-        $table = Str::snake(class_basename($this->argument('name')));
+        $table = $this->getTableName($this->argument('name'));
 
         $this->call('make:migration', [
             'name' => "create_{$table}_table",
